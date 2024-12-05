@@ -63,20 +63,26 @@
 \section{Introduction}
 
 The fundamental group is an important invariant that appears in algebraic topology and it is a natural question to ask if there is an analog in the algebro-geometric setting.
-Every scheme has an associated topological space, so one may naively apply the definitions from algebraic topology; however, the topology on schemes is generally too coarse for us to obtain anything of worth.
-A more fruitful approach which we will lay out instead uses the fundamental group's relation to theory of covers, of which there is a satisfactory schematic analog in finite \'etale covers.\\
+Every scheme has an associated topological space, so one may naively apply the definitions from algebraic topology; however, the topology on schemes is generally too coarse for us to obtain anything of value.
+A more fruitful approach instead uses the fundamental group's relation to theory of covers, of which there is a satisfactory schematic analog in finite \'etale covers which we lay out in Section 3.\\
 
-It turns out that the \'Etale fundamental group is intimately related to that of Galois theory for field extensions.
+What may not be immediately obvious is that the \'etale fundamental group is intimately related to that of Galois theory for field extensions. 
+In fact, as an easy corollary at the end of Section 3 we will prove \thref{grothendiecksformulation}, a (albeit slightly different) formulation of Krull's theorem for Galois extensions.
+Before, this however, we will establish some necessary foundation in Galois Theory and the topological fundamental group. 
+And although we may initially have cautioned against a relation between the topological and \'etale fundamental group, there are still contexts where one can say a lot about the other.
+Near the end, we will look at one possibility in \thref{RiemannExistence}, which relates the two in the case of finite type schemes over $\C$.\\
+
+\indent We will roughly follow \cite{Szamuely}, in particular during our construction of the \'etale fundamental group we will try and emphasize the similarity to the topological case.
+One may find many similar notions between Galois theory and both the \'etale and topological cases.
+These are adequately addressed in a more axiomatic treatment involving Galois categories, for which one may look at Grothendieck's original work (\cite{grothendieck}) or at \cite{Lenstra}.
 
 \section{Preliminaries}
-
-There is an intimate connection between Galois theory of field extensions and covering theory for topological spaces.
-With this in mind, we will first undergo a brief excursion into the two and develop the necessary knowledge before taking a look at the \'Etale Fundamental Group.
+We will first develop the notion of a profinite group, and extend our knowledge of Galois theory for finite extensions to the possibly infinite case.
 
 \subsection{Infinite Galois Theory}
 
-Following the notation of \cite{Szamuely} we will denote a field extension $k \subseteq K$ as $K|k$. 
-Now for finite Galois extensions $K|k$, there is an inclusion-reversing bijection between subfields $k \subseteq L \subseteq K$ and subgroups $H \subset \text{Gal}(K|k)$.
+Following the notation of \cite{Szamuely} we will denote a field extension $K \supseteq k$ as $K|k$. 
+Now for finite Galois extensions $K|k$, there is an inclusion-reversing bijection between subfields $K \supseteq L \supseteq k$ and subgroups $H \subset \text{Gal}(K|k)$.
 In particular, a subfield $L$ is assigned the subgroup $\text{Aut}(K|L) \subset \text{Gal}(K|k)$ fixing $L$ and a subgroup $H$ is assigned its fixed field $K^H$.
 Unfortunately, for infinite Galois extensions this correspondence breaks down.
 However, there is still a satisfactory correspondence which we will look at.\\
@@ -88,7 +94,7 @@ Call a partially ordered set $(\Lambda, \leq)$ \textit{directed} if for all $c_1
 	Let $\mc{C}$ be a category and $J$ a directed partially ordered set. A \textit{(filtered) inverse system} of $\mc{C}$ is a contravariant functor $F: J^{\text{op}} \to \mc{C}$.
 \end{definition}
 
-We will call the limit (if it exists) of am inverse system $F: J^{\text{op}} \to \mc{C}$ an \textit{inverse limit}.
+We will call the limit (if it exists) of an inverse system $F: J^{\text{op}} \to \mc{C}$ an \textit{inverse limit}.
 It will be denoted as $\varprojlim C_{j}$, where $\{C_j\}_{j \in J}$ are the objects in $\mc{C}$ indexed by $J$.
 When $\mc{C}$ is the category of groups, the limit always exists and it is the subgroup of $\prod_{j \in J} G_j$ consisting of sequences $(g_i)$ such that $Fk(g_i) = g_j$ if there is a morphism $k: i  \to j$ in $\Lambda$.
 
@@ -116,7 +122,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 \end{theorem}
 
 \begin{proof}
-	See \cite{Szamuely}, Theorem 1.3.11. 
+	For a complete proof see \cite{Szamuely}, Theorem 1.3.11. 
 	\todo{Add we might prove this later, and that Galois group is profinite}
 \end{proof}
 
@@ -143,7 +149,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 \end{proof}
 
 We finally end with the following theorem to consider 
-\begin{theorem}
+\begin{theorem}\thlabel{grothendiecksformulation}
 	Let $k$ be a field. 
 	Then the functor mapping a finite \'etale k-algebra $A$ to the finite set $\text{Hom}_k(A, k_s)$ gives an anti-equivalence between the category of finite sets with continouos (left) $\text{Gal}(k)$-action.
 	Here separable field extensions give rise to sets with transitive $\text{Gal}(k)$-action and Galois extensions to $\text{Gal}(k)$ -sets isomorphic to finite quotients of $\text{Gal}(k)$.
@@ -152,8 +158,7 @@ We finally end with the following theorem to consider
 
 \subsection{The Topological Fundamental Group}
 
-We now begin a brief journey into topology,
-\todo{Add a small intro}
+We now begin a brief journey into topology and define the topological fundamental group.
 From here on out we will refer to topological spaces as simple \textit{spaces} for brevity.
 
 \begin{definition}
@@ -405,10 +410,8 @@ With the notion of an action on the fibers of a cover, we have an analogous defi
  
 \end{theorem}
 
-\begin{proposition}
-	Let $K \supset k$ be an extension of algebraically closed fields, and let $X$ be a proper integral scheme over $k$.
-	Then the natural map $\pi_1(X_L, \overline{x}_K) \to \pi_1(X, \overline{x})$ is an isomorphism for all geometric points $\overline{x}$ of $X$.
-\end{proposition} 
+We now prove 
+
 
 \section{The Riemann Existence Theorem}
 
@@ -424,9 +427,15 @@ Begin talking about uses
 	Let $X$ be a connected scheme of finite type iver $\C$.
 	Then the functor $(Y \to X) \mapsto (Y^{\text{an}} \to X^{\text{an}}))$ induces an equivalence between the categories of finite \'etale covers of $X$ and finite topological covers of $X^{\text{an}}$.
 	As a result, for every $\C$ point $\overline{x}: \text{Spec}(\C) \to X$ this functor induces an isomorphism
-	\[\widetilde{\pi_1^{\text{top}}(X^{\text{an}}, \overline{x})} \xrightarrow{\sim} \pi_1(X, \overline{x})\]
+	\[\widehat{\pi_1^{\text{top}}(X^{\text{an}}, \overline{x})} \xrightarrow{\sim} \pi_1(X, \overline{x})\]
 
 \subsection{Characteristic Zero}
+\begin{proposition}
+	Let $K \supset k$ be an extension of algebraically closed fields, and let $X$ be a proper integral scheme over $k$.
+	Then the natural map $\pi_1(X_L, \overline{x}_K) \to \pi_1(X, \overline{x})$ is an isomorphism for all geometric points $\overline{x}$ of $X$.
+\end{proposition} 
+
+
 
 \subsection{Finite Characteristic}
 \end{theorem}
