@@ -9,37 +9,29 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{quiver}
 \usetikzlibrary{matrix}
 \usepackage[most]{tcolorbox}
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage{colonequals}
+\usepackage{todonotes}
+
+\newtheorem{theorem}{Theorem}[section]
 
 \theoremstyle{definition}
-\newtheorem{example}{Example}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{examples}[theorem]{Examples}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
-\newtcbtheorem{theo}%
-	{Theorem}{colback = blue!5!white,colframe = blue!50!black!50!}{theorem}
-	
-\newtcbtheorem{lemm}%
-	{Lemma}{colback = green!5!white,colframe = green!50!black!50!}{lemma}
-
-\newtcbtheorem{clai}%
-{Claim}{colback = blue!5!white,colframe = blue!50!black!50!}{claim}
-
-\newtcbtheorem{coroll}%
-	{Corollary}{colback = purple!5!white,colframe = purple!50!black!50!}{corollary}    
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{claim}[theorem]{Claim}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -66,10 +58,290 @@
 
 \section{Introduction}
 
+The fundamental group is an important invariant that comes up in Algebraic Topology. 
+\todo{Come up with an intro}
+
 \section{Preliminaries}
-\subsection{Galois Theory}
+
+There is an intimate connection between Galois theory of field extensions and covering theory for topological spaces.
+With this in mind, we will first undergo a brief excursion into the two and develop the necessary knowledge before taking a look at the \'Etale Fundamental Group.
+
+\subsection{Infinite Galois Theory}
+
+Following the notation of \cite{Szamuely} we will denote a field extension $k \subseteq K$ as $K|k$. 
+Now for finite Galois extensions $K|k$, there is an inclusion-reversing bijection between subfields $k \subseteq L \subseteq K$ and subgroups $H \subset \text{Gal}(K|k)$.
+In particular, a subfield $L$ is assigned the subgroup $\text{Aut}(K|L) \subset \text{Gal}(K|k)$ fixing $L$ and a subgroup $H$ is assigned its fixed field $K^H$.
+Unfortunately, for infinite Galois extensions this correspondence breaks down.
+However, there is still a satisfactory correspondence which we will look at.\\
+
+First note that any partially ordered set $(\Lambda, \leq)$ can be viewed as a category where the objects are elements of $\Lambda$, and there is a morphism between $a,b \in \Lambda$ if and only if $a \leq b$.
+Call a partially ordered set $(\Lambda, \leq)$ \textit{directed} if for all $c_1, c_2 \in \Lambda$ there exists a $d \in \Lambda$ such that $c_1 \leq d, c_2 \leq d$.
+
+\begin{definition}
+	Let $\mc{C}$ be a category and $J$ a directed partially ordered set. A \textit{(filtered) inverse system} of $\mc{C}$ is a contravariant functor $F: J^{\text{op}} \to \mc{C}$.
+\end{definition}
+
+We will call the limit (if it exists) of am inverse system $F: J^{\text{op}} \to \mc{C}$ an \textit{inverse limit}.
+It will be denoted as $\varprojlim C_{j}$, where $\{C_j\}_{j \in J}$ are the objects in $\mc{C}$ indexed by $J$.
+When $\mc{C}$ is the category of groups, the limit always exists and it is the subgroup of $\prod_{j \in J} G_j$ consisting of sequences $(g_i)$ such that $Fk(g_i) = g_j$ if there is a morphism $k: i  \to j$ in $\Lambda$.
+
+\begin{definition}
+	A profinite group is the inverse limit of an inverse system whose objects are all finite groups.
+\end{definition}
+
+\begin{examples} \text{}
+\begin{enumerate}
+	\item For a group $G$, the set of finite quotients is naturally an inverse system.
+		In particular, there is a partial order on the set of normal subgroups of finite index where $H_1 \leq H_2 \Longleftrightarrow H_1 \subset H_2$, and natural maps $H$
+\end{enumerate}
+\todo{Finish this example}
+\end{examples}
+
+\begin{remark}
+	There is a natural topology on any profinite group.
+	\todo{Finish this remark}
+\end{remark}
+
+\begin{theorem}[Krull]
+	Let $K | k$ be a Galois extension.
+	If $k \subseteq L \subseteq K$ is a subestension, then $\text{Gal}(K|L)$ is a closed subgroup of $\text{Gal}(K|k)$.
+	In particular, for subextensions $L$ and closed subgroups $H \subset \text{Gal}(K|k)$ the maps $H \to K^H$ and $L \to \text{Gal}(K|L)$ form an inclusion reversing bijection.
+\end{theorem}
+
+\begin{proof}
+	See \cite{Szamuely}, Theorem 1.3.11. 
+	\todo{Add we might prove this later, and that Galois group is profinite}
+\end{proof}
+
+
+\begin{remark}
+	Of course, to show that this differs from the theory in the case of finite extensions, we need to show that not all subgroups of a Galois group must be closed.
+	\todo{Finish remark, start talking about Grothendieck's formuation}
+\end{remark}
+
+\begin{definition}
+	A finite-dimensional $k$-algebra $A$ is \textit{\'etale} (over $k$) if it is isomorphic to the finite direct product of separable extensions of $k$.
+\end{definition}
+
+\begin{proposition}
+	Let $A$ be a finite dimensional $k$-algebra.
+	Then the following conditions are equivalent:
+	\begin{enumerate}
+		\item $A$ is \'etale
+		\item $A \otimes_k \overline{k}$ is isomorphic to a finite direct product of copies of $\overline{k}$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	The proof is quite involved, see \cite{Szamuely}, Proposition 1.5.6.
+\end{proof}
+
+We finally end with the following theorem to consider 
+\begin{theorem}
+	Let $k$ be a field. 
+	Then the functor mapping a finite \'etale k-algebra $A$ to the finite set $\text{Hom}_k(A, k_s)$ gives an anti-equivalence between the category of finite sets with continouos (left) $\text{Gal}(k)$-action.
+	Here separable field extensions give rise to sets with transitive $\text{Gal}(k)$-action and Galois extensions to $\text{Gal}(k)$ -sets isomorphic to finite quotients of $\text{Gal}(k)$.
+\end{theorem}
+
 
 \subsection{The Topological Fundamental Group}
 
+We now begin a brief journey into topology,
+\todo{Add a small intro}
+From here on out we will refer to topological spaces as simple \textit{spaces} for brevity.
 
+\begin{definition}
+	Let $X$ be a topological space. 
+	A \textit{path} in $X$ is a continuous map $s: [0,1] \to X$ from the unit interval.
+	The two endpoints are $s(0)$ and $s(1)$, and if they coincide we may also call the path a \textit{loop}.
+\end{definition}
+
+We will call two paths $f,g: [0,1] \to X$ \textit{homotopic} if $f(0) = g(0), f(1), g(1)$ and there exists a continuous map $h: [0,1] \times [0,1] \to X$ such that $h(0,t) = f(t), h(1,t) = g(t), h(t,0) = f(0)$ and $g(t,1) = f(1)$ for all $t \in [0,1]$.
+Intuitively, we may think of a homotopy between two paths $f$ and $g$ as a continuous deformation moving $f$ to $g$ in $X$, keeping the endpoints fixed. 
+It is straightforward to check that homotopies define an equivalence relation on the set of paths in $X$.\\
+\indent Additionally, for any two paths $f,g: [0,1] \to X$ where $f(1) = g(0)$ we can define their composition $f \circ g: [0,1] \to X$ where $(f \circ g )(t) = f(t)$ for $0 \leq t \leq \frac{1}{2}$ and $(f \circ g)(t) = g(2t - 1)$ for $ \frac{1}{2} < t \leq 1$ which we may think of as concatenating the two paths.
+In particular, any two loops starting and ending at the same point can be composed.
+
+\begin{proposition}
+	For a topological space $X$ and a choice of a basepoint $x \in X$, concatenation of loops which start and end at $x$ forms a group when restricted to homotopy classes.
+\end{proposition}
+
+This is a straightforward check. 
+In particular, the identity is the homotopy class of the constant loop $s: [0,1] \to x \in X$ and the inverse of a homotopy class of the loop $s: [0,1] \to X$ is the homotopy class of the "backwards" path $s(1-t)$.
+
+\begin{definition}
+	For a space $X$ 	
+\end{definition}
+
+\begin{examples} \text{}
+	\begin{enumerate}
+		\item The circle $S^1$ has fundamental group $\Z$.
+		\item $\R^n$ has trivial fundamental group, such spaces are called \textit{simply connected}.
+	\end{enumerate}
+	
+\end{examples}
+
+\begin{definition}[Covering Spaces]
+	A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that satisfies the following property. 
+	For all $x \in X$ there exists an open neighborhood $U$ of $x$ where $p^{-1}(U)$ decomposes into a nonempty disjoint union of open subsets $V_i$ of $X$ such that each map homeomorphically onto $U$ under $p$.
+\end{definition}
+
+Under the above conditions we may also call $Y$ a \textit{covering} or \textit{covering space} of $X$.
+Note that some authors require a covering space to be connected, we will not follow this convention and will explicitly state whenever $Y$ is connected.\\
+
+\begin{example} Suppose that a topological group $G$ acts discretely on a space $Y$, that is, every $y \in Y$ has an open neighborhood $V$ such that the open sets $gV$ are pairwise disjoint for all $g  \in G$.
+	Then the natural projection $Y \to G/Y$ under this action is a projection.
+	For example, $\Z$ acts on $\R$ discretely by translation via the map $\Z \times \R \to \R$ sending $(n,r) \to n+r$.
+	The corresponding cover $\R \to \R/\Z$ is a covering of $\R/\Z$ which is homeomorphic to $S^1$.
+\end{example}
+
+\indent A map between two covers $p_1: Y_1 \to X, p_2: Y_2 \to X$ is a continuous map $f: Y_1 \to Y_2$ making the below diagram commute.
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJZXzEiXSxbMiwwLCJZXzIiXSxbMSwxLCJYIl0sWzAsMiwicF8xIl0sWzEsMiwicF8yIiwyXSxbMCwxLCJmIl1d
+\[\begin{tikzcd}
+	{Y_1} && {Y_2} \\
+	& X
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["{p_1}", from=1-1, to=2-2]
+	\arrow["{p_2}"', from=1-3, to=2-2]
+\end{tikzcd}\]
+From the commutativity, we see that for any $x \in X$ the map $f$ restricts to map between the fibers $p_1^{-1}(x)$ and $p_2^{-1}(x)$.\\
+\indent Now these maps along with the objects consisting of covers over $X$ defines a category.
+Hence for each cover $p:Y \to X$ there is a group of automorphisms consisting of the maps $f: Y \to Y$ such that $f = f \circ p$.
+We will denote this group as $\text{Aut}(Y|X)$ from now on, and call its elements \textit{deck transformations} following \cite{FomenkoFuchs}.
+Now deck transformations must map fibers $p$ bijectively onto each other, which leads us to consider the following types of covers.
+
+\begin{definition}[Galois Covers]
+	A connected cover $p: Y \to X$ is \textit{Galois} if the group of deck transformations acts transitively on each fiber.
+\end{definition}
+
+We will not immediately make use of this definition, but keep it in mind for now.
+The following lemma is very useful.
+
+\begin{proposition}[Lifting Paths and Homotopies]	
+	Let $p: Y \to X$ be a covering. 
+	For any $\widetilde{x} \in Y$, and path $s: [0,1] \to X$ such that $s(0) = x = p(\widetilde{x})$, there exists a unique path $\widetilde{s}:[0,1] \to Y$ such that $\widetilde{s}(0) = \widetilde{x}$ and $p \circ \widetilde{s} = s$.
+	In addition, if $s_1, s_2$ are two homotopic paths in $X$, their lifts $\widetilde{s_1}$ and $\widetilde{s_2}$ are homotopic in $Y$.
+\end{proposition}
+
+\begin{proof}
+	See \cite{FomenkoFuchs}, Lecture 6.5.
+\end{proof}
+		
+Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$ an element of the fiber $p^{-1}(x)$.
+	For any path $s$ representing a class $[\alpha] \in \pi_1(X,x)$ there is a unique lift $\widetilde{s}$ from the previous proposition.
+	Define an action of $\pi_1(X,x)$ on the set $p^{-1}(x)$ by letting $[\alpha] \circ y = \widetilde{s}(1)$.
+	Since $\widetilde{s}(1)$ is the same for homotopic paths, this action is well-defined by the last part of the previous proposition.
+	We will call this (left) continuous action on $p^{-1}(x)$ the \textit{monodromy action}.\\
+
+There is then a category of 
+\begin{theorem}
+	There is an equivalence of categories between covers and $\pi(X,x)$-sets.
+\end{theorem}
+
+
+\todo{This theorem may not be unnecessary}
+\begin{theorem}
+	Finite covers correspond to $\widetilde{\pi(X.x)}$ sets
+\end{theorem}
+\begin{proof}
+	We will actually prove this.
+\end{proof}
+
+
+\section{The \'Etale Fundamental Group}
+
+We are now in the world of schemes.
+
+\subsection{Finite \'Etale Covers}
+The correct notion of covering is as follows.
+\begin{definition}[Finite morphisms]
+	A morphism, (mention properness?)
+\end{definition}
+
+\begin{definition}[Locally free morphisms]
+	A morphism
+\end{definition}
+
+\begin{definition}[Finite \'etale morphisms]
+	A finite \'etale moprhism or cover
+\end{definition}
+
+\todo{This may not be necessary, checl}
+\begin{remark}
+Finite \'etale morphisms are closed under base change and composition
+\end{remark}
+
+\begin{proposition}
+	The image of a finite \'etale morphism is open and closed
+\end{proposition}
+
+\begin{example}
+	Trivial covers
+\end{example}
+
+\begin{definition}[Geometric Points/Fibres]
+	F
+\end{definition}
+
+\begin{proposition}
+	Proposition 5.7.? (Analogy of covering)
+\end{proposition}
+
+\begin{lemma}
+	Lemma 5.3.2
+\end{lemma}
+
+\begin{corollary}
+	Corollary 5.3.3/5.3.4
+\end{corollary}
+
+\begin{definition}[Finite \'etale Galois cover]
+	F
+\end{definition}
+
+\begin{proposition}
+	Proposition 5.7.9 (don't prove)
+\end{proposition}
+
+\subsection{The Algebraic Fundamental Group}
+
+Talk about the fiber functor
+
+\begin{definition}
+	The algebraic fundamental group
+\end{definition}
+
+\begin{definition}[Pro-representable functors]
+	d
+\end{definition}
+
+\begin{proposition}
+	Proposition 5,.4.6
+\end{proposition}
+
+\begin{corollary}
+	Corollary 5,.4.7
+\end{corollary}
+
+\begin{corollary}
+	Corollary 5,.4.8
+\end{corollary}
+
+\begin{theorem}
+	Theorem 5.4.7
+\end{theorem}
+
+\begin{proposition}
+	Proposition 5.6.7
+\end{proposition}
+
+\section{The Riemann Existence Theorem}
+
+\begin{definition}[Associated Analytic Space]
+	df
+\end{definition}
+
+Begin talking about uses
+
+\bibliographystyle{plain}
+\bibliography{lib}
 \end{document}
