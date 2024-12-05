@@ -17,6 +17,10 @@
 \usepackage{array}
 \usepackage{colonequals}
 \usepackage{todonotes}
+\usepackage{theoremref}
+
+\font\maljapanese=dmjhira at 2.5ex
+\newcommand{\yo}{\textrm{\!\maljapanese\char"48}}
 
 \newtheorem{theorem}{Theorem}[section]
 
@@ -58,8 +62,11 @@
 
 \section{Introduction}
 
-The fundamental group is an important invariant that comes up in Algebraic Topology. 
-\todo{Come up with an intro}
+The fundamental group is an important invariant that appears in algebraic topology and it is a natural question to ask if there is an analog in the algebro-geometric setting.
+Every scheme has an associated topological space, so one may naively apply the definitions from algebraic topology; however, the topology on schemes is generally too coarse for us to obtain anything of worth.
+A more fruitful approach which we will lay out instead uses the fundamental group's relation to theory of covers, of which there is a satisfactory schematic analog in finite \'etale covers.\\
+
+It turns out that the \'Etale fundamental group is intimately related to that of Galois theory for field extensions.
 
 \section{Preliminaries}
 
@@ -168,8 +175,9 @@ In particular, any two loops starting and ending at the same point can be compos
 This is a straightforward check. 
 In particular, the identity is the homotopy class of the constant loop $s: [0,1] \to x \in X$ and the inverse of a homotopy class of the loop $s: [0,1] \to X$ is the homotopy class of the "backwards" path $s(1-t)$.
 
-\begin{definition}
-	For a space $X$ 	
+\begin{definition}[Fundamental Group]
+	For a space $X$ with basepoint $x$, the \textit{Fundamental Group} $\pi_1(X,x)$	is the group of homotopy classes of loops with origin in $x$.
+	The group operation is the same composition of loops defined previously.
 \end{definition}
 
 \begin{examples} \text{}
@@ -185,8 +193,9 @@ In particular, the identity is the homotopy class of the constant loop $s: [0,1]
 	For all $x \in X$ there exists an open neighborhood $U$ of $x$ where $p^{-1}(U)$ decomposes into a nonempty disjoint union of open subsets $V_i$ of $X$ such that each map homeomorphically onto $U$ under $p$.
 \end{definition}
 
-Under the above conditions we may also call $Y$ a \textit{covering} or \textit{covering space} of $X$.
-Note that some authors require a covering space to be connected, we will not follow this convention and will explicitly state whenever $Y$ is connected.\\
+Under the above conditions we may also call $Y$ a \textit{covering} of $X$.
+If in addition, if the fibers $p^{-1}(x)$ of a cover are finite for all $x \in X$ we may call $Y$ a \textit{finite cover} or \textit{finite covering} of $X$.
+Note that some authors require a covering space to be connected, we will not follow this convention and will explicitly state whenever $Y$ is connected.
 
 \begin{example} Suppose that a topological group $G$ acts discretely on a space $Y$, that is, every $y \in Y$ has an open neighborhood $V$ such that the open sets $gV$ are pairwise disjoint for all $g  \in G$.
 	Then the natural projection $Y \to G/Y$ under this action is a projection.
@@ -232,115 +241,195 @@ Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$
 	Since $\widetilde{s}(1)$ is the same for homotopic paths, this action is well-defined by the last part of the previous proposition.
 	We will call this (left) continuous action on $p^{-1}(x)$ the \textit{monodromy action}.\\
 
-There is then a category of 
+	
 \begin{theorem}
 	There is an equivalence of categories between covers and $\pi(X,x)$-sets.
 \end{theorem}
 
 
-\todo{This theorem may not be unnecessary}
 \begin{theorem}
-	Finite covers correspond to $\widetilde{\pi(X.x)}$ sets
+	For a space $X$ with base point $x$, the functor $\text{Fib}_x$ induces an equivalence between the category of finite covers of $X$ and the category of finite continuous left $\widetilde{\pi_1(X,s)}$-sets.
+	Connected covers correspond to finite $\widetilde{\pi_1(X,s)}$-sets with transitive action and Galois covers correspond to space of open normal subgroups.
 \end{theorem}
 \begin{proof}
-	We will actually prove this.
+	See \cite{Szamuely}
 \end{proof}
 
+\todo{Talk about Galois categories}
+
+For an approach which builds everything up using Galois Categories, see either \cite{grothendieck} or \cite{Lenstra}.
+
+\todo{Talk about locally constant sheaves?}
 
 \section{The \'Etale Fundamental Group}
 
-We are now in the world of schemes.
-
+We can now start defining the scheme analogue of the fundamental group. 
 \subsection{Finite \'Etale Covers}
-The correct notion of covering is as follows.
-\begin{definition}[Finite morphisms]
-	A morphism, (mention properness?)
+The correct notion of covering is much more subtle in the case of schemes 
+\begin{definition}[Finite morphism]
+	An affine morphism $f: X \to Y$ of schemes is called \textit{finite} if for some affine open cover $\{U_i\}_{i \in I}  = \{\text{Spec}(A_i)\}_{i \in I}$ where $f^{-1}(U_i) = \text{Spec}(B_i)$, the natural ring homomorphism $A_i \to B_i$ exhibits $B_i$ as a finitely generated $A_i$-module.
 \end{definition}
 
-\begin{definition}[Locally free morphisms]
-	A morphism
-\end{definition}
-
-\begin{definition}[Finite \'etale morphisms]
-	A finite \'etale moprhism or cover
-\end{definition}
-
-\todo{This may not be necessary, checl}
-\begin{remark}
-Finite \'etale morphisms are closed under base change and composition
-\end{remark}
+\begin{example}
+	A closed immersion is finite as closed immersions are affine and the induced maps $\text{Spec}(A) \to \text{Spec}(A/I)$ are induced by surjective ring maps.
+\end{example}
 
 \begin{proposition}
-	The image of a finite \'etale morphism is open and closed
+	Finite morphisms are proper.
 \end{proposition}
+\begin{proof}
+	\todo{Use Valuative criterion}
+\end{proof}
+
+For a map $f: X \to Y$ of schemes the map $f^{\flat}: \mc{O}_Y \to f_*\mc{O}_X$ exhibits the direct image sheaf $f_* \mc{O}_X$ as an $\mc{O}_Y$-algebra.
+In particular, $f_* \mc{O}_X$ is also an $\mc{O}_Y$-module.
+This allows us to make the next definition.
+
+\begin{definition}[Locally free morphism]	
+	A finite morphism $f: X \to S$ is \textit{locally free} if the direct image sheaf $f_* \mc{O}_X$ is locally free of finite rank.   
+\end{definition}
+
+\begin{definition}[Finite \'etale morphism]
+	A locally free morphism $f$ where for each $s \in S$, the fiber $X_s$ is a finite \'etale $\kappa(s)$-algebra is called a \textit{finite \'etale morphism}.
+	If $f$ is also surjective (on space) we may call $f$ a \textit{finite \'etale cover}.
+\end{definition}
+
+
+\todo{This may not be necessary, check}
+\begin{proposition}
+Finite \'etale morphisms are closed under base change and composition
+\end{proposition}
+
+\begin{proposition}
+	The image of a finite and locally free morphism $f$ (in particular a finite \'etale cover) is both open and closed.
+\end{proposition}
+
+\begin{proof}
+	The image is closed because a finite morphism is proper and hence a closed immersion.
+	To show that it is open, consider a
+	\todo{Finish proof}
+\end{proof}
 
 \begin{example}
 	Trivial covers
 \end{example}
 
-\begin{definition}[Geometric Points/Fibres]
-	F
+\begin{definition}[Geometric Point]
+	Let $X$ be a scheme and consider a map $\overline{x}: \text{Spec}(k) \to X$ for $k$ a field.
+	Denote $x \in X$ the image of the unique point of $\text{Spec}(k)$ under $\overline{x}$.
+	We say $\overline{x}$ is a \textit{geometric point} if the field extension $\kappa(x) \supset k$ is a separable closure of $k$.
 \end{definition}
 
+\begin{definition}[Geometric Fiber]
+	Let $S$ be a scheme. 
+	Given a morphism $f: X \to S$ and a geometric point $\overline{x}: \text{Spec}(k) \to X$ the \textit{geometric fiber} $X_{\overline{x}}$ is the fiber product $\text{Spec}(k) \times_S X$ induced by $f$ and $\overline{x}$.
+\end{definition}
+
+
 \begin{proposition}
-	Proposition 5.7.? (Analogy of covering)
+	Let $S$ be a connected scheme, and $f\colon X \to S$ an affine surjective morphism.
+	Then $f$ is a finite \'etale cover if and only if there is a finite, locally free and surjective morphism $g: Y \to S$ such that $X \times_S Y$ is a trivial cover of $Y$.
 \end{proposition}
 
 \begin{lemma}
-	Lemma 5.3.2
+	Let $f\colon X \to S$ and $G: Y \to X$ be morphisms of schemes. 
+	Then 
+	\begin{enumerate}
+		\item If $f \circ g$ is finite and $f$ is separated, then $g$ is finite.
+		\item If in addition both $f \circ g$ and $g$ are finite \'etale, then so is $g$.
+	\end{enumerate}
+	
+\end{lemma}
+
+\begin{proof}
+	\todo{Cancellation Lemma}
+\end{proof}
+
+\begin{lemma}
+	Let $X, Z$ be two $S$-schemes where $Z$ is connected and $X$ finite \'etale (over $S$). 
+	If $f_1, f_2: Z \to X$ are two $S$-scheme morphisms and $\overline{z}$ a geometric point of $Z$  such that $f_1 \circ \overline{z} = f_2 \circ \overline{z}$ then $f_1 = f_2$.
 \end{lemma}
 
 \begin{corollary}
-	Corollary 5.3.3/5.3.4
+	If $f: X \to S$ is a connected finite \'etale cover, then nontrivial elements of $\text{Aut}(X|S)$ act without any fixed points on any geometric fiber.
+	In particular, $\text{Aut}(X|S)$ is finite.
 \end{corollary}
 
+\begin{proof}
+	\todo{Previous lemma as well}
+\end{proof}
+
+With the notion of an action on the fibers of a cover, we have an analogous definition to that in the topological case.
+
 \begin{definition}[Finite \'etale Galois cover]
-	F
+	A connected finite \'etale cover $X \to S$ is called \textit{Galois} if $\text{Aut}(X|S)$ acts transitively on every geometric fiber.
 \end{definition}
 
 \begin{proposition}
-	Proposition 5.7.9 (don't prove)
+	Let $f: X \to S$ be a connected finite \'etale cover. 
+	There is a morphism $\pi: P \to X$ such that $f \circ \pi: P \to S$ is a finite \'etale Galois cover, and moreover every $S-$scheme morphism from a Galois cover to $X$ factors through $\pi$.
 \end{proposition}
 
 \subsection{The Algebraic Fundamental Group}
 
-Talk about the fiber functor
+\todo{Talk about the fiber functor}
 
-\begin{definition}
-	The algebraic fundamental group
+\begin{definition}[The Algebraic Fundamental Group]
+	For a scheme $S$ and a geometric point $\widetilde{s}: \text{Spec}(K) \to S$, we define the \textit{algebraic fundamental group} $\pi_1(S, \widetilde{s})$ as the automorphism group of the fiber functor from $\text{Fet}_{S}$ to $\text{Fib}_{\widetilde{s}}$.
 \end{definition}
 
 \begin{definition}[Pro-representable functors]
-	d
-\end{definition}
+	Let $C$ be a category and $F: C \to \text{Set}$ a set-valued functor.
+	We will say that $F$ is \textit{pro-representable} if it is the limit of an inverse system in the category $\text{Set}^C$ of set valued-functors with indexing objects representable presheaves.
+\end{definition} 
 
 \begin{proposition}
-	Proposition 5,.4.6
+	Let $X$ be a finite \'etale $S$-scheme and $\overline{s}$ a geometric point of $S$.
+	Then the fiber functor $\text{Fib}_{\overline{s}}$ is pro-representable.
 \end{proposition}
 
 \begin{corollary}
-	Corollary 5,.4.7
+	Every automorphism of the functor $\text{Fib}_{\overline{s}}$ comes from a unique automorphism of the inverse system constructed in the above proof.
 \end{corollary}
 
 \begin{corollary}
-	Corollary 5,.4.8
+	The automorphism groups $\text{Aut}(X_i)^{\text{op}}$ form an inverse system whose limit is isomorphic to $\pi_1(S, \overline{s})$.
 \end{corollary}
 
-\begin{theorem}
-	Theorem 5.4.7
+\begin{theorem}[Grothendieck]
+	Let $S$ be a connected scheme, and $\widetilde{s}: \text{Spec}(K) \to S$ a geometric point. Then \begin{enumerate} 
+		\item The group $\pi_1(S, \overline{s})$ is profinite, and its action on $\text{Fib}){\overline{s}}(X)$ is continuous for all $X$.\\
+		\item The functor $\text{Fib}_{\overline{s}}$ induces an equivalence between $\text{Fet}_S$ and the category of finite continuous (left) $\pi_1(S, \overline{s})$-sets.	In addition, connected covers correspond to sets with transitive action, and Galois covers to finite quotients of $\pi_1(S, \overline{s})$.
+ \end{enumerate}
+
+ 
 \end{theorem}
 
 \begin{proposition}
-	Proposition 5.6.7
-\end{proposition}
+	Let $K \supset k$ be an extension of algebraically closed fields, and let $X$ be a proper integral scheme over $k$.
+	Then the natural map $\pi_1(X_L, \overline{x}_K) \to \pi_1(X, \overline{x})$ is an isomorphism for all geometric points $\overline{x}$ of $X$.
+\end{proposition} 
 
 \section{The Riemann Existence Theorem}
 
+\todo{Learn a lot..}
 \begin{definition}[Associated Analytic Space]
 	df
 \end{definition}
 
 Begin talking about uses
+
+
+\begin{theorem}[Riemann Existence]\thlabel{RiemannExistence}
+	Let $X$ be a connected scheme of finite type iver $\C$.
+	Then the functor $(Y \to X) \mapsto (Y^{\text{an}} \to X^{\text{an}}))$ induces an equivalence between the categories of finite \'etale covers of $X$ and finite topological covers of $X^{\text{an}}$.
+	As a result, for every $\C$ point $\overline{x}: \text{Spec}(\C) \to X$ this functor induces an isomorphism
+	\[\widetilde{\pi_1^{\text{top}}(X^{\text{an}}, \overline{x})} \xrightarrow{\sim} \pi_1(X, \overline{x})\]
+
+\subsection{Characteristic Zero}
+
+\subsection{Finite Characteristic}
+\end{theorem}
 
 \bibliographystyle{plain}
 \bibliography{lib}
