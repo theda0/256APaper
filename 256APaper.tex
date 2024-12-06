@@ -70,7 +70,7 @@ What may not be immediately obvious is that the \'etale fundamental group is int
 In fact, as an easy corollary at the end of Section 3 we will prove \thref{grothendiecksformulation}, a (albeit slightly different) formulation of Krull's theorem for Galois extensions.
 Before, this however, we will establish some necessary foundation in Galois Theory and the topological fundamental group. 
 And although we may initially have cautioned against a relation between the topological and \'etale fundamental group, there are still contexts where one can say a lot about the other.
-Near the end, we will look at one possibility in \thref{RiemannExistence}, which relates the two in the case of finite type schemes over $\C$.\\
+Near the end, we will look at one possibility in \thref{RiemannExistence}, which relates the two in the case of finite type schemes over $\C$ and see some immediate uses.\\
 
 \indent We will roughly follow \cite{Szamuely}, in particular during our construction of the \'etale fundamental group we will try and emphasize the similarity to the topological case.
 One may find many similar notions between Galois theory and both the \'etale and topological cases.
@@ -144,7 +144,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	A finite-dimensional $k$-algebra $A$ is \textit{\'etale} (over $k$) if it is isomorphic to the finite direct product of separable extensions of $k$.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \thlabel{etalealgebra}
 	Let $A$ be a finite dimensional $k$-algebra.
 	Then the following conditions are equivalent:
 	\begin{enumerate}
@@ -153,7 +153,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	\end{enumerate}
 \end{proposition}
 \begin{proof}
-	The proof is quite involved, see \cite{Szamuely}, Proposition 1.5.6.
+	The proof requires some machinery, for a proof see \cite{Szamuely}, Proposition 1.5.6.
 \end{proof}
 
 We finally leave the reader with the below formulation of Krull's theorem, it will be proven as a consequence of our theory for \'etale fundamental groups in Section 3.
@@ -170,6 +170,7 @@ We finally leave the reader with the below formulation of Krull's theorem, it wi
 We now begin a brief journey into topology and define the topological fundamental group.
 From here on out we will refer to topological spaces as simple \textit{spaces} for brevity.
 
+\todo{Fill in some exposition, maybe add pictures}
 \begin{definition}
 	Let $X$ be a topological space. 
 	A \textit{path} in $X$ is a continuous map $s: [0,1] \to X$ from the unit interval.
@@ -236,7 +237,7 @@ Now deck transformations must map fibers $p$ bijectively onto each other, which 
 	A connected cover $p: Y \to X$ is \textit{regular} if the group of deck transformations acts transitively on each fiber.
 \end{definition}
 
-We will not immediately make use of this definition, but keep it in mind for now.
+We will not immediately make use of this definition, but it will be handy to keep in mind.
 The following lemma is very useful.
 
 \begin{proposition}[Lifting Paths and Homotopies]	
@@ -257,7 +258,7 @@ Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$
 
 	\begin{theorem}\thlabel{coverfunctor}
 	For a space $X$ with base point $x$, the functor $\text{Fib}_x$ induces an equivalence between the category of finite covers of $X$ and the category of finite continuous left $\widehat{\pi_1(X,s)}$-sets.
-	Connected covers correspond to finite $\widetilde{\pi_1(X,s)}$-sets with transitive action and Galois covers correspond to space of open normal subgroups.
+	Connected covers correspond to finite $\widehat{\pi_1(X,s)}$-sets with transitive action and Galois covers correspond to space of open normal subgroups.
 \end{theorem}
 \begin{proof}
 	See \cite{Szamuely}
@@ -284,9 +285,13 @@ For an approach which builds everything up using Galois Categories, see either \
 
 \section{The \'Etale Fundamental Group}
 
-We can now start defining the scheme analogue of the fundamental group. 
+We can now start defining the scheme analogue of the fundamental group.
+Setting up the correct notion of a finite cover for schemes requires a lot of care which we will start to go through.
+
 \subsection{Finite \'Etale Covers}
-The correct notion of covering is much more subtle in the case of schemes 
+
+We being with some preliminary definitions.
+
 \begin{definition}[Finite morphism]
 	An affine morphism $f: X \to Y$ of schemes is called \textit{finite} if for some affine open cover $\{U_i\}_{i \in I}  = \{\text{Spec}(A_i)\}_{i \in I}$ where $f^{-1}(U_i) = \text{Spec}(B_i)$, the natural ring homomorphism $A_i \to B_i$ exhibits $B_i$ as a finitely generated $A_i$-module.
 \end{definition}
@@ -322,12 +327,26 @@ Finite \'etale morphisms are closed under base change and composition
 \end{proposition}
 
 \begin{proposition}
-	The image of a finite and locally free morphism $f$ (in particular a finite \'etale cover) is both open and closed.
+	Let $f\colon X \to S$ and $G: Y \to X$ be morphisms of schemes. 
+	Then 
+	\begin{enumerate}
+		\item If $f \circ g$ is finite and $f$ is separated, then $g$ is finite.
+		\item If in addition both $f \circ g$ and $g$ are finite \'etale, then so is $g$.
+	\end{enumerate}
+	
 \end{proposition}
 
 \begin{proof}
-	The image is closed because a finite morphism is proper and hence a closed immersion.
-	To show that it is open, consider a
+	\todo{Cancellation Lemma}
+\end{proof}
+
+\begin{proposition}
+	The image of a finite and locally free morphism $f: X \to Y$ (in particular a finite \'etale cover) is both open and closed.
+\end{proposition}
+
+\begin{proof}
+	The image is closed because a finite morphism is proper and hence closed.
+	To show that it is open, consider any point $y$ in the image of $f$.
 	\todo{Finish proof}
 \end{proof}
 
@@ -346,31 +365,25 @@ Finite \'etale morphisms are closed under base change and composition
 	Given a morphism $f: X \to S$ and a geometric point $\overline{x}: \text{Spec}(k) \to X$ the \textit{geometric fiber} $X_{\overline{x}}$ is the fiber product $\text{Spec}(k) \times_S X$ induced by $f$ and $\overline{x}$.
 \end{definition}
 
+\begin{remark}
+As a result of \thref{etalealgebra} for finite dimensional \'etale algebras over a field, the geometric fiber of a finite \'etale morphism $f: X \to S$ for a geometric point $\overline{s} : \text{Spec}(\Omega) \to S $ is isomorphic to the finite disjoint union $\text{Spec}(\Omega \times \dots \times \Omega)$ of copies of $\text{Spec}(\Omega)$, which one may view as analogous to the finite fibers in the topological case.
+\end{remark}
 
+In pursuit of this connection, one could similarly define the group $\text{Aut}(X|S)$ as the set of automorphisms of $X$ 
+
+\todo{Finish exposition}
 \begin{proposition}
 	Let $S$ be a connected scheme, and $f\colon X \to S$ an affine surjective morphism.
 	Then $f$ is a finite \'etale cover if and only if there is a finite, locally free and surjective morphism $g: Y \to S$ such that $X \times_S Y$ is a trivial cover of $Y$.
 \end{proposition}
 
-\begin{lemma}
-	Let $f\colon X \to S$ and $G: Y \to X$ be morphisms of schemes. 
-	Then 
-	\begin{enumerate}
-		\item If $f \circ g$ is finite and $f$ is separated, then $g$ is finite.
-		\item If in addition both $f \circ g$ and $g$ are finite \'etale, then so is $g$.
-	\end{enumerate}
-	
-\end{lemma}
-
-\begin{proof}
-	\todo{Cancellation Lemma}
-\end{proof}
 
 \begin{lemma}
 	Let $X, Z$ be two $S$-schemes where $Z$ is connected and $X$ finite \'etale (over $S$). 
 	If $f_1, f_2: Z \to X$ are two $S$-scheme morphisms and $\overline{z}$ a geometric point of $Z$  such that $f_1 \circ \overline{z} = f_2 \circ \overline{z}$ then $f_1 = f_2$.
 \end{lemma}
 
+\todo{Include relations to local triviality}
 \begin{corollary}
 	If $f: X \to S$ is a connected finite \'etale cover, then nontrivial elements of $\text{Aut}(X|S)$ act without any fixed points on any geometric fiber.
 	In particular, $\text{Aut}(X|S)$ is finite.
@@ -424,7 +437,10 @@ With the notion of an action on the fibers of a cover, we have an analogous defi
  \end{enumerate} 
 \end{theorem}
 
-We now prove 
+As a corollary we now give the promised proof of \thref{grothendiecksformulation}.
+Let $S = \text{Spec}(k)$, a finite \'etale cover corresponds to a finite dimensional \;etale $k$-algebra $L$.
+Then for the corresponding geometric point $\text{Spec}(k^s) \to S$, 
+
 
 
 \section{The Riemann Existence Theorem}
@@ -436,7 +452,7 @@ In order to transition from the \'etale context to the topological context, we w
 It follows $U$ is of the form $\text{Spec}(\C[x_1, \dots, x_n]/(f_1, \dots, f_n))$, of which the closed points correspond to the common zeros of $f_1, \dots, f_n$ in $\C^n$, which when viewed a subspace allows us to equip it with a natural analytic topology.
 In the same way a cover of affine opens glue together to form $X$, so do their associated subspaces, giving us an associated analytic subspace $X^{\text{an}}$.
 And as a map $X \to Y$ finite type schemes over $\C$ preserve closed points (the set of which is in fact a representable functor, \todo{cite}), it induces a corresponding map $X^{\text{an}} \to Y^{\text{an}}$.
-This already allows us to give state the Riemann Existence Theorem.
+This already allows us to state the Riemann Existence Theorem.
 
 
 \begin{theorem}[Riemann Existence]\thlabel{RiemannExistence}\thlabel{riemannexistence}
@@ -452,7 +468,7 @@ This already allows us to give state the Riemann Existence Theorem.
 \end{proof}
 
 Just working from the definition of the \'etale fundamental group, it is very difficult to figure out how to even begin computing such groups, even for simple schemes. 
-As we saw at the end of the previous section, for maps of field valued points given by field extensions it is equivalent to computing Galois groups!
+As we saw at the end of the previous section that even for simple maps of field valued points given by field extensions, it is equivalent to computing their corresponding Galois groups!
 However, \thref{riemannexistence} now introduces the ability to immediately begin computing certain \'etale fundamental groups using their topological analogue as we will highlight.
 
 \begin{examples} \text{}
@@ -469,14 +485,33 @@ However, \thref{riemannexistence} now introduces the ability to immediately begi
 \end{enumerate}
 \end{examples}
 
-While it appears this will only give us examples for schemes over $\C$, the below allows us to immediately extend any such results 
+And while we have only give examples for schemes over $\C$, the below result allows us to extend it to a slightly larger class of schemes. 
 \begin{proposition}
 	Let $K \supset k$ be an extension of algebraically closed fields, and let $X$ be a proper integral scheme over $k$.
 	Then the natural map $\pi_1(X_L, \overline{x}_K) \to \pi_1(X, \overline{x})$ is an isomorphism for all geometric points $\overline{x}$ of $X$.
 \end{proposition} 
 
+\begin{proof}
+	See \cite{Szamuely}, Proposition 5.6.7.
+\end{proof}
+
+\begin{remark}
+	As a general application if results about the \'etale fundamental group holds for schemes over $\C$ they hold over any field  $k$ of characteristic zero.
+	To do this one would apply the above proposition for the field extensions $\overline{\Q} \hookrightarrow \C$ and then $\overline{\Q} \hookrightarrow k$ to obtain the desired isomorphism.
+	For example, our previous examples for $\textbf{P}_{\C}^n$ hold whenever $\C$ is replaced with $k$ as projective space is proper and integral over a base field.
+\end{remark}
 
 \subsection{Positive Characteristic}
+
+So far we have only made progress in the case of characteristic zero.
+Certain groups, such as those interested in number theory, may wish to see if we can extend such results
+to the positive characteristic case.
+Thankfully results are certainly possible, albeit more difficult to formulate.
+We will outline one due to Grothendieck, \todo{cite source} which for certain schemes over a field of characteristic $p \geq 0$ gives us information on the "non-$p$" part of the \'etale fundamental group by relating it to the characteristic 0 case, where one may use results such as the ones previously outlined.\\
+
+\indent We will be interested in a discrete valuation ring $A$, whose field of fractions $K$ is of characteristic 0 but whose residue field $\kappa$ is of characteristic $p \geq 0$.
+Following the notation in \cite{Szamuely} let $S$ be the affine scheme $\text{Spec}(A)$, with $\eta \colon \text{Spec}(K) \to S$ and $s \colon: \text{Spec}(\kappa) \to S$ be the generic and closed points of $S$ respectively.
+Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective points.
 
 \begin{theorem}[Grothendieck]
 	Let $S$ be as above, and let $f: X \to S$ be a proper morphism.
@@ -489,6 +524,11 @@ While it appears this will only give us examples for schemes over $\C$, the belo
 	
 \end{theorem}
 
+ \begin{proof}
+	 Hard, \todo{cite} reference
+ \end{proof}
+ 
+ The main result we have for relating the two contexts depends on a specialization map \todo{Fill in details}
 
 \begin{theorem}[Grothendieck]
 	Keep the same notations and assumptions as above.
@@ -499,6 +539,12 @@ While it appears this will only give us examples for schemes over $\C$, the belo
 	
 \end{theorem}
 
+ \begin{proof}
+	 \todo{Try and give a proof?}
+ \end{proof}
+ 
+
+ Now Grothendieck's main result is given below, which we will outline.
 \begin{theorem}
 	Let $k$ be an algebraically closed field of characterstic $p \geq 0$, and let $X$ be an integral proper normal curve of genus $g$ over $k$.
 	For every geometric point $\overline{x}$ of $X$, the group $\pi_1(X, \overline{x})$ has its maximal prime to $p$-quotient $\pi_1(X, \overline{x})^{(p')}$ is isomorphic to the profinite $p'$-compleiton of the group
@@ -506,7 +552,13 @@ While it appears this will only give us examples for schemes over $\C$, the belo
 	where $[a_i, b_i]$ denotes the commutator $a_i b_i a_i^{-1} b_i^{-1}$.
 \end{theorem}
 
+\begin{proof}
+	\todo{Give outline}
+\end{proof}
 
+
+
+\newpage
 \bibliographystyle{plain}
 \bibliography{lib}
 \end{document}
