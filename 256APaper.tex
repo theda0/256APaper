@@ -77,7 +77,7 @@ One may find many similar notions between Galois theory and both the \'etale and
 These are adequately addressed in a more axiomatic treatment involving Galois categories, for which one may look at Grothendieck's original work (\cite{grothendieck}) or at \cite{Lenstra}.
 
 \section{Preliminaries}
-We will first develop the notion of a profinite group, and extend our knowledge of Galois theory for finite extensions to the possibly infinite case.
+We will first develop the important notion of a profinite group, and extend our knowledge of Galois theory for finite extensions to the possibly infinite case.
 
 \subsection{Infinite Galois Theory}
 
@@ -102,18 +102,27 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	A profinite group is the inverse limit of an inverse system whose objects are all finite groups.
 \end{definition}
 
-\begin{examples} \text{}
+\begin{example} \text{}
 \begin{enumerate}
 	\item For a group $G$, the set of finite quotients is naturally an inverse system.
-		In particular, there is a partial order on the set of normal subgroups of finite index where $H_1 \leq H_2 \Longleftrightarrow H_1 \subset H_2$, and natural maps $H$
+		In particular, there is a partial order on the set of normal subgroups of finite index where $H_1 \leq H_2 \Longleftrightarrow H_1 \subset H_2$, and corresponding quotient maps between the associated groups $G/H_1 \to G/H_2$.
+		The inverse limit of this system is called the \textit{profinite completion} of $G$ which we will denote as $\widehat{G}$.	
+		The natural projection maps $G \to G/H_i$ commute with the system, and hence define a canonical map $G \to \widehat{G}$ from the property of limits.
+	\item The Galois group for any field extension $K|k$ is a profinite group, as we will prove below.
 \end{enumerate}
-\todo{Finish this example}
-\end{examples}
+\end{example}
+\begin{proposition}
+	If $K|k$ is a Galois field extension then $\text{Gal}(K|k)$ is a profinite group.
+	In particular, it is the inverse limit of an inverse system consisting of the groups $\text{Gal}(L|k)$ for finite Galois subextensions $K \supset L \supset k$.
+\end{proposition}
+\begin{proof}
+	\todo{Fill in}
+\end{proof}
 
-\begin{remark}
-	There is a natural topology on any profinite group.
-	\todo{Finish this remark}
-\end{remark}
+	There is a natural topology on any profinite group which we will need to define the Galois correspondence for infinite extensions.
+	If $G$ a profinite group which is the inverse system of finite groups $\{G_i\}_{i \in I}$ we may give each $G_j$ the discrete topology.
+	These define a product topology on $\prod_{i \in I} G_i$, and so $G$ viewed as a subgroup can be equipped with the natural subspace topology.
+
 
 \begin{theorem}[Krull]
 	Let $K | k$ be a Galois extension.
@@ -123,10 +132,9 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 
 \begin{proof}
 	For a complete proof see \cite{Szamuely}, Theorem 1.3.11. 
-	\todo{Add we might prove this later, and that Galois group is profinite}
 \end{proof}
 
-
+\todo{Include an example}
 \begin{remark}
 	Of course, to show that this differs from the theory in the case of finite extensions, we need to show that not all subgroups of a Galois group must be closed.
 	\todo{Finish remark, start talking about Grothendieck's formuation}
@@ -148,11 +156,12 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	The proof is quite involved, see \cite{Szamuely}, Proposition 1.5.6.
 \end{proof}
 
-We finally end with the following theorem to consider 
+We finally leave the reader with the below formulation of Krull's theorem, it will be proven as a consequence of our theory for \'etale fundamental groups in Section 3.
+
 \begin{theorem}\thlabel{grothendiecksformulation}
 	Let $k$ be a field. 
-	Then the functor mapping a finite \'etale k-algebra $A$ to the finite set $\text{Hom}_k(A, k_s)$ gives an anti-equivalence between the category of finite sets with continouos (left) $\text{Gal}(k)$-action.
-	Here separable field extensions give rise to sets with transitive $\text{Gal}(k)$-action and Galois extensions to $\text{Gal}(k)$ -sets isomorphic to finite quotients of $\text{Gal}(k)$.
+	Then the functor mapping a finite \'etale k-algebra $A$ to the finite set $\text{Hom}_k(A, k_s)$ gives an anti-equivalence between the category of finite sets with continuous (left) $\text{Gal}(k)$-action.
+	Here separable field extensions give rise to sets with transitive $\text{Gal}(k^s|l)$-action and Galois extensions to $\text{Gal}(k^s|k)$ -sets isomorphic to finite quotients of $\text{Gal}(k^s|k)$.
 \end{theorem}
 
 
@@ -223,8 +232,8 @@ Hence for each cover $p:Y \to X$ there is a group of automorphisms consisting of
 We will denote this group as $\text{Aut}(Y|X)$ from now on, and call its elements \textit{deck transformations} following \cite{FomenkoFuchs}.
 Now deck transformations must map fibers $p$ bijectively onto each other, which leads us to consider the following types of covers.
 
-\begin{definition}[Galois Covers]
-	A connected cover $p: Y \to X$ is \textit{Galois} if the group of deck transformations acts transitively on each fiber.
+\begin{definition}[Regular Covers]
+	A connected cover $p: Y \to X$ is \textit{regular} if the group of deck transformations acts transitively on each fiber.
 \end{definition}
 
 We will not immediately make use of this definition, but keep it in mind for now.
@@ -244,23 +253,30 @@ Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$
 	For any path $s$ representing a class $[\alpha] \in \pi_1(X,x)$ there is a unique lift $\widetilde{s}$ from the previous proposition.
 	Define an action of $\pi_1(X,x)$ on the set $p^{-1}(x)$ by letting $[\alpha] \circ y = \widetilde{s}(1)$.
 	Since $\widetilde{s}(1)$ is the same for homotopic paths, this action is well-defined by the last part of the previous proposition.
-	We will call this (left) continuous action on $p^{-1}(x)$ the \textit{monodromy action}.\\
+	We will call this (left) continuous action on $p^{-1}(x)$ the \textit{monodromy action}.
 
-	
-\begin{theorem}
-	There is an equivalence of categories between covers and $\pi(X,x)$-sets.
-\end{theorem}
-
-
-\begin{theorem}
-	For a space $X$ with base point $x$, the functor $\text{Fib}_x$ induces an equivalence between the category of finite covers of $X$ and the category of finite continuous left $\widetilde{\pi_1(X,s)}$-sets.
+	\begin{theorem}\thlabel{coverfunctor}
+	For a space $X$ with base point $x$, the functor $\text{Fib}_x$ induces an equivalence between the category of finite covers of $X$ and the category of finite continuous left $\widehat{\pi_1(X,s)}$-sets.
 	Connected covers correspond to finite $\widetilde{\pi_1(X,s)}$-sets with transitive action and Galois covers correspond to space of open normal subgroups.
 \end{theorem}
 \begin{proof}
 	See \cite{Szamuely}
 \end{proof}
 
-\todo{Talk about Galois categories}
+Compare this with \thref{grothendiecksformulation}.
+One may already conjecture the below relations
+\begin{center}
+\begin{tabular}{ |c c c| } 
+\hline
+	Absolute Galois Groups & $\Longleftrightarrow$ & $\widehat{\text{Fundamental Group}}$ \\
+ 
+	Galois Extensions & $\Longleftrightarrow$ & Regular Coverings\\
+ 
+	Separable Extensions & $\Longleftrightarrow$ & Connected Coverings\\
+ \hline
+\end{tabular}
+\end{center}
+
 
 For an approach which builds everything up using Galois Categories, see either \cite{grothendieck} or \cite{Lenstra}.
 
@@ -280,7 +296,7 @@ The correct notion of covering is much more subtle in the case of schemes
 \end{example}
 
 \begin{proposition}
-	Finite morphisms are proper.
+	Finite morphisms are proper  
 \end{proposition}
 \begin{proof}
 	\todo{Use Valuative criterion}
@@ -401,13 +417,11 @@ With the notion of an action on the fibers of a cover, we have an analogous defi
 	The automorphism groups $\text{Aut}(X_i)^{\text{op}}$ form an inverse system whose limit is isomorphic to $\pi_1(S, \overline{s})$.
 \end{corollary}
 
-\begin{theorem}[Grothendieck]
+\begin{theorem}[Grothendieck]\thlabel{etalefunctor}
 	Let $S$ be a connected scheme, and $\widetilde{s}: \text{Spec}(K) \to S$ a geometric point. Then \begin{enumerate} 
-		\item The group $\pi_1(S, \overline{s})$ is profinite, and its action on $\text{Fib}){\overline{s}}(X)$ is continuous for all $X$.\\
+		\item The group $\pi_1(S, \overline{s})$ is profinite, and its action on $\text{Fib}){\overline{s}}(X)$ is continuous for all $X$.
 		\item The functor $\text{Fib}_{\overline{s}}$ induces an equivalence between $\text{Fet}_S$ and the category of finite continuous (left) $\pi_1(S, \overline{s})$-sets.	In addition, connected covers correspond to sets with transitive action, and Galois covers to finite quotients of $\pi_1(S, \overline{s})$.
- \end{enumerate}
-
- 
+ \end{enumerate} 
 \end{theorem}
 
 We now prove 
@@ -415,30 +429,83 @@ We now prove
 
 \section{The Riemann Existence Theorem}
 
-\todo{Learn a lot..}
-\begin{definition}[Associated Analytic Space]
-	df
-\end{definition}
+As promised in the introduction, we will introduce the Riemann Existence Theorem and begin to explore some of its uses and consequences.
+In order to transition from the \'etale context to the topological context, we will need a "nice enough" associated space to some scheme.\\
 
-Begin talking about uses
+\indent If $X$ is a finite type scheme over $\C$ then for an affine open $U$ of $X$, $\Gamma(\mc{O}_X, U)$ is a finite type $\C$-algebra and so can be expressed of the form $\C[x_1, \dots, x_n]/(f_1, \dots, f_n)$ for polynomials $f_1, \dots, f_n$.
+It follows $U$ is of the form $\text{Spec}(\C[x_1, \dots, x_n]/(f_1, \dots, f_n))$, of which the closed points correspond to the common zeros of $f_1, \dots, f_n$ in $\C^n$, which when viewed a subspace allows us to equip it with a natural analytic topology.
+In the same way a cover of affine opens glue together to form $X$, so do their associated subspaces, giving us an associated analytic subspace $X^{\text{an}}$.
+And as a map $X \to Y$ finite type schemes over $\C$ preserve closed points (the set of which is in fact a representable functor, \todo{cite}), it induces a corresponding map $X^{\text{an}} \to Y^{\text{an}}$.
+This already allows us to give state the Riemann Existence Theorem.
 
 
-\begin{theorem}[Riemann Existence]\thlabel{RiemannExistence}
-	Let $X$ be a connected scheme of finite type iver $\C$.
+\begin{theorem}[Riemann Existence]\thlabel{RiemannExistence}\thlabel{riemannexistence}
+	Let $X$ be a connected scheme of finite type over $\C$.
 	Then the functor $(Y \to X) \mapsto (Y^{\text{an}} \to X^{\text{an}}))$ induces an equivalence between the categories of finite \'etale covers of $X$ and finite topological covers of $X^{\text{an}}$.
 	As a result, for every $\C$ point $\overline{x}: \text{Spec}(\C) \to X$ this functor induces an isomorphism
 	\[\widehat{\pi_1^{\text{top}}(X^{\text{an}}, \overline{x})} \xrightarrow{\sim} \pi_1(X, \overline{x})\]
+\end{theorem}
 
-\subsection{Characteristic Zero}
+\begin{proof}
+	We will not go over the proof of the first statement, the more difficult part is in the essential surjectivity of the functor, this is overcome in $\cite{grothendieck}$ with the help of tools such as resolution of singularities.
+	The relation between the two fundamental groups is an immediate application of \thref{coverfunctor}, \thref{etalefunctor}.
+\end{proof}
+
+Just working from the definition of the \'etale fundamental group, it is very difficult to figure out how to even begin computing such groups, even for simple schemes. 
+As we saw at the end of the previous section, for maps of field valued points given by field extensions it is equivalent to computing Galois groups!
+However, \thref{riemannexistence} now introduces the ability to immediately begin computing certain \'etale fundamental groups using their topological analogue as we will highlight.
+
+\begin{examples} \text{}
+	\begin{enumerate} 	\item Consider $\textbf{A}_{\C}^1 - \{0\} \cong \text{Spec}(\C[x^{\pm 1}])$. 
+		It's associated analytic space is simply $\C - \{0\}$, which has fundamental group $\Z$ for any choice of basepoint, so for any geometric point $\overline{x}$ of $\textbf{A}_{\C}^1 - \{0\}$ we conclude
+		\[\pi_1(\textbf{A}_{\C}^1 - \{0\}, \overline{x}) \cong \widehat{\Z}\]
+		This generalizes easily for $\textbf{A}_{\C}^n$  and localizations across more than one maximal ideal. 
+		\item For $\textbf{P}_{\C}^n$, we have that its associated analytic space is just the topological complex projective space $\C P^n$.
+	One may see this from the former description as gluing copies of $\textbf{A}_{\C}^n$ and the analogous set of charts on $\C P^n$.
+	The topological theory gives us that 
+	\[\pi_1^{\text{top}}(\C P^n, x) = 0\]
+	so we conclude the same for $\pi_1(\textbf{P}_{\C}^n, \overline{x})$.
+\item  \todo{Add complex surfaces of genus g }
+\end{enumerate}
+\end{examples}
+
+While it appears this will only give us examples for schemes over $\C$, the below allows us to immediately extend any such results 
 \begin{proposition}
 	Let $K \supset k$ be an extension of algebraically closed fields, and let $X$ be a proper integral scheme over $k$.
 	Then the natural map $\pi_1(X_L, \overline{x}_K) \to \pi_1(X, \overline{x})$ is an isomorphism for all geometric points $\overline{x}$ of $X$.
 \end{proposition} 
 
 
+\subsection{Positive Characteristic}
 
-\subsection{Finite Characteristic}
+\begin{theorem}[Grothendieck]
+	Let $S$ be as above, and let $f: X \to S$ be a proper morphism.
+	Fix geometric points $\overline{x}$ and $\overline{y}$ of $X_{\overline{\eta}}$ and $X_s$ respectively.
+	\begin{enumerate}
+		\item The natural map $\pi_1(X_s, \overline{y}) \to \pi_1(X, \overline{y})$ induced by the map $X_2 \to X$ is an isomorphism.
+		\item Assume moreover that $k$ is algebraically closed, $\phi$ is flat, and the geometric fibers $X_{\overline{\eta}}, X_{\overline{s}}$  are reduced.
+			Then the natural map $\pi_1(X_{\overline{\eta}}, \overline{x}) \to \pi_1(X, \overline{x})$
+	\end{enumerate}
+	
 \end{theorem}
+
+
+\begin{theorem}[Grothendieck]
+	Keep the same notations and assumptions as above.
+	Assume that $f$ is proper and smooth with geometrically connected fibers.
+	Then the specialization map induces an isomorphism 
+	\[\pi_1(X_{\overline{\eta}}, \overline{x})^{p'} \xrightarrow{\sim} \pi_1(X_{\overline{s}}, \overline{y})^{p'}\]
+	where the superscripts $(p')$ denote the maximal prime-to-p quotients of the profinite groups involved.
+	
+\end{theorem}
+
+\begin{theorem}
+	Let $k$ be an algebraically closed field of characterstic $p \geq 0$, and let $X$ be an integral proper normal curve of genus $g$ over $k$.
+	For every geometric point $\overline{x}$ of $X$, the group $\pi_1(X, \overline{x})$ has its maximal prime to $p$-quotient $\pi_1(X, \overline{x})^{(p')}$ is isomorphic to the profinite $p'$-compleiton of the group
+	\[G = \langle a_1, b_1, \dots, a_g, b_g \,|\, [a_1,b_1], \dots, [a_g, b_g] = 1\rangle\]
+	where $[a_i, b_i]$ denotes the commutator $a_i b_i a_i^{-1} b_i^{-1}$.
+\end{theorem}
+
 
 \bibliographystyle{plain}
 \bibliography{lib}
