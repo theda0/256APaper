@@ -94,7 +94,7 @@ Call a partially ordered set $(\Lambda, \leq)$ \textit{directed} if for all $c_1
 	Let $\mc{C}$ be a category and $J$ a directed partially ordered set. A \textit{(filtered) inverse system} of $\mc{C}$ is a contravariant functor $F: J^{\text{op}} \to \mc{C}$.
 \end{definition}
 
-We will call the limit (if it exists) of an inverse system $F: J^{\text{op}} \to \mc{C}$ an \textit{inverse limit}.
+If the limit of an inverse system $F: J^{\text{op}} \to \mc{C}$ exists, we will call it an \textit{inverse limit}.
 It will be denoted as $\varprojlim C_{j}$, where $\{C_j\}_{j \in J}$ are the objects in $\mc{C}$ indexed by $J$.
 When $\mc{C}$ is the category of groups, the limit always exists and it is the subgroup of $\prod_{j \in J} G_j$ consisting of sequences $(g_i)$ such that $Fk(g_i) = g_j$ if there is a morphism $k: i  \to j$ in $\Lambda$.
 
@@ -105,7 +105,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 \begin{example} \text{}
 \begin{enumerate}
 	\item For a group $G$, the set of finite quotients is naturally an inverse system.
-		In particular, there is a partial order on the set of normal subgroups of finite index where $H_1 \leq H_2 \Longleftrightarrow H_1 \subset H_2$, and corresponding quotient maps between the associated groups $G/H_1 \to G/H_2$.
+		In particular, there is a partial order on the set of normal subgroups of finite index where $H_1 \leq H_2 \Longleftrightarrow H_1 \supseteq H_2$, and corresponding quotient maps between the associated groups $G/H_1 \to G/H_2$.
 		The inverse limit of this system is called the \textit{profinite completion} of $G$ which we will denote as $\widehat{G}$.	
 		The natural projection maps $G \to G/H_i$ commute with the system, and hence define a canonical map $G \to \widehat{G}$ from the property of limits.
 	\item The Galois group for any field extension $K|k$ is a profinite group, as we will prove below.
@@ -124,7 +124,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	These define a product topology on $\prod_{i \in I} G_i$, and so $G$ viewed as a subgroup can be equipped with the natural subspace topology.
 
 
-\begin{theorem}[Krull]
+\begin{theorem}[Krull]\thlabel{Krull}
 	Let $K | k$ be a Galois extension.
 	If $k \subseteq L \subseteq K$ is a subestension, then $\text{Gal}(K|L)$ is a closed subgroup of $\text{Gal}(K|k)$.
 	In particular, for subextensions $L$ and closed subgroups $H \subset \text{Gal}(K|k)$ the maps $H \to K^H$ and $L \to \text{Gal}(K|L)$ form an inclusion reversing bijection.
@@ -134,13 +134,20 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	For a complete proof see \cite{Szamuely}, Theorem 1.3.11. 
 \end{proof}
 
+\begin{example}
+	
 \todo{Include an example}
+
+\end{example}
+
+
 \begin{remark}
-	Of course, to show that this differs from the theory in the case of finite extensions, we need to show that not all subgroups of a Galois group must be closed.
-	\todo{Finish remark, start talking about Grothendieck's formuation}
+	\todo{Remark about difference between finite case}
 \end{remark}
 
-\begin{definition}
+We will rephrase \thref{Krull} in a more useful form by putting it in a categorical context, the next notion will be important in this regard, as well as in the construction of the \'etale fundamental group.
+
+\begin{definition} \thlabel{etalealgebra}
 	A finite-dimensional $k$-algebra $A$ is \textit{\'etale} (over $k$) if it is isomorphic to the finite direct product of separable extensions of $k$.
 \end{definition}
 
@@ -153,10 +160,16 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	\end{enumerate}
 \end{proposition}
 \begin{proof}
-	The proof requires some machinery, for a proof see \cite{Szamuely}, Proposition 1.5.6.
+	The proof requires some algebraic machinery, see \cite{Szamuely}, Proposition 1.5.6.
 \end{proof}
 
-We finally leave the reader with the below formulation of Krull's theorem, it will be proven as a consequence of our theory for \'etale fundamental groups in Section 3.
+Now let $k^s \subset \overline{k}$ be the some separable closure of $k$ lying in an algebraically closed field $\overline{k}$.
+We may view a finite separable extension $L|k$ as a $k$-algebra homomorphism $L \hookrightarrow \overline{k}$. Since any separable extension must lie in $k^s$, we may think of $k^s$ as the "largest" possible Galois extension.
+In particular, finite separable extensions $L|k$ have a natural correspondence to the finite set $k$-algebra homomorphisms $\text{Hom}_k(L, k^s)$
+ which defines a contravariant functor from the category of finite separable field extensions of $k$.
+ Even more can be said though, the absolute Galois group $\text{Gal}(k^s|k)$ has a natural action on $k^s$, and thus define on action on each object $\text{Hom}_k(L, k^s)$, which for any $\lambda \in \text{Gal}(k^s|k)$ and $\phi \in \text{Hom}_k(L, k^s)$ acts by sending $\phi \to \lambda \circ \phi$.
+ Hence, $\text{Hom}_k(_, k^s)$ is in fact a functor to the category of $\text{Gal}(k^s|k)$-sets.\\
+\indent In fact, in lieu of \thref{etalealgebra} the functor $\text{Hom}_k(_,k^s)$ extends to the category of finite \'etale $k$-algebras, which gives us the following reformulation.
 
 \begin{theorem}\thlabel{grothendiecksformulation}
 	Let $k$ be a field. 
@@ -164,6 +177,10 @@ We finally leave the reader with the below formulation of Krull's theorem, it wi
 	Here separable field extensions give rise to sets with transitive $\text{Gal}(k^s|l)$-action and Galois extensions to $\text{Gal}(k^s|k)$ -sets isomorphic to finite quotients of $\text{Gal}(k^s|k)$.
 \end{theorem}
 
+\begin{proof}
+	We will prove this later as a consequence of \thref{etalefunctor}. 
+	However, an elementary proof is already in reach, a reader who wishes to see this may consult \cite{Szamuely}, Chapter 1.
+\end{proof}
 
 \subsection{The Topological Fundamental Group}
 
@@ -290,7 +307,7 @@ Setting up the correct notion of a finite cover for schemes requires a lot of ca
 
 \subsection{Finite \'Etale Covers}
 
-We being with some preliminary definitions.
+We being with some preliminary definitions and start to familiarize ourselves with some important properties.
 
 \begin{definition}[Finite morphism]
 	An affine morphism $f: X \to Y$ of schemes is called \textit{finite} if for some affine open cover $\{U_i\}_{i \in I}  = \{\text{Spec}(A_i)\}_{i \in I}$ where $f^{-1}(U_i) = \text{Spec}(B_i)$, the natural ring homomorphism $A_i \to B_i$ exhibits $B_i$ as a finitely generated $A_i$-module.
@@ -301,10 +318,40 @@ We being with some preliminary definitions.
 \end{example}
 
 \begin{proposition}
-	Finite morphisms are proper  
+	A finite morphism $f: X \to Y$ is proper. 
 \end{proposition}
 \begin{proof}
-	\todo{Use Valuative criterion}
+	We make use of the valuative criterion. \todo{give citation}
+	Finite morphisms are automatically of finite type, and since they are affine they are also quasi-separated.
+	Hence it suffices to show that for any valuation ring $R$ with field of fractions $K$ and commutative diagram
+	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXHRleHR7U3BlY30oUikiXSxbMCwwLCJcXHRleHR7U3BlY30oSykiXSxbMSwwLCJYIl0sWzEsMSwiWSJdLFsxLDJdLFswLDNdLFsyLDNdLFsxLDBdXQ==
+\[\begin{tikzcd}
+	{\text{Spec}(K)} & X \\
+	{\text{Spec}(R)} & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}\]
+that there exists a unique lift $\ell: \text{Spec}(R) \to X$ commuting with the diagram.
+Denote $y \in Y$ the image of the generic point of $\text{Spec}(R)$, and consider an affine open $\text{Spec}(A)$ containing $y$.
+It must also contain the closure of $y$ and hence the entire image of $\text{Spec}(R)$.
+And letting $\text{Spec}(B) = f^{-1}(\text{Spec}(A))$, the above says that any lift $\ell$ must factor through the inclusion of $\text{Spec}(B)$.
+In addition, any lift to $\text{Spec}(B)$ that commute with its map to $\text{Spec}(A)$ defines a lift of $f$, hence we may assume that $X$ and $Y$ are affine.
+Then if $X = \text{Spec}(B'), Y = \text{Spec}(A')$, it suffices to show there is a unique ring homomorphism making the following diagram commute.
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJSIl0sWzAsMCwiSyJdLFsxLDEsIkEnIl0sWzEsMCwiQiciXSxbMCwxLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDAsImMiXSxbMywxLCJkIiwyXSxbMiwzLCJmJyIsMl0sWzMsMCwiXFxwaGkiLDFdXQ==
+\[\begin{tikzcd}
+	K & {B'} \\
+	R & {A'}
+	\arrow["d"', from=1-2, to=1-1]
+	\arrow["\phi"{description}, from=1-2, to=2-1]
+	\arrow[hook, from=2-1, to=1-1]
+	\arrow["{f'}"', from=2-2, to=1-2]
+	\arrow["c", from=2-2, to=2-1]
+\end{tikzcd}\]
+Since $f'$ exhibits $B'$ as a finitely generated $A'$-module, every element of $B'$ is integral over $A'$.
+However, since $R$ is a valuation ring it is closed in its field of fractions $K$, hence the image of $B'$ under $d$ must be contained in $R$.
+This precisely says that $d$ factors through the inclusion $R \hookrightarrow K$, giving us our desired unique map.
 \end{proof}
 
 For a map $f: X \to Y$ of schemes the map $f^{\flat}: \mc{O}_Y \to f_*\mc{O}_X$ exhibits the direct image sheaf $f_* \mc{O}_X$ as an $\mc{O}_Y$-algebra.
@@ -315,29 +362,45 @@ This allows us to make the next definition.
 	A finite morphism $f: X \to S$ is \textit{locally free} if the direct image sheaf $f_* \mc{O}_X$ is locally free of finite rank.   
 \end{definition}
 
+We can now define our main morphism of interest.
+Immediately afterward we will record some basic properties we would expect.
 \begin{definition}[Finite \'etale morphism]
 	A locally free morphism $f$ where for each $s \in S$, the fiber $X_s$ is a finite \'etale $\kappa(s)$-algebra is called a \textit{finite \'etale morphism}.
 	If $f$ is also surjective (on space) we may call $f$ a \textit{finite \'etale cover}.
 \end{definition}
 
 
-\todo{This may not be necessary, check}
-\begin{proposition}
+\begin{proposition}\thlabel{basechangecomp}
 Finite \'etale morphisms are closed under base change and composition
 \end{proposition}
+
+\begin{proof}
+	\todo{Prove or cite}
+\end{proof}
+
+\begin{proposition}\thlabel{etalediagonal}
+	If $f: X \to S$ is an \'etale morphism, then ths diagonal morphism $X \to X \times_S X$ induced by $f$ is an isomorphism of $f$ onto an open and closed subscheeme of $X \times_S X$.
+\end{proposition}
+
+\begin{proof}
+	See \cite{Szamuely}, Proposition 5.2.7.
+\end{proof}
 
 \begin{proposition}
 	Let $f\colon X \to S$ and $G: Y \to X$ be morphisms of schemes. 
 	Then 
 	\begin{enumerate}
 		\item If $f \circ g$ is finite and $f$ is separated, then $g$ is finite.
-		\item If in addition both $f \circ g$ and $g$ are finite \'etale, then so is $g$.
+		\item If in addition both $f \circ g$ and $f$ are finite \'etale, then so is $g$.
 	\end{enumerate}
 	
 \end{proposition}
 
-\begin{proof}
-	\todo{Cancellation Lemma}
+\begin{proof}	
+	For the first statement, since $f$ is separated, it diagonal $\Delta_f$ is a closed immersion, and so also finite. 
+	Since finite morphisms are closed under composition and base change, the Cancellation Lemma \todo{cite} gives us that $g$ must be finite as well.\\
+	The second proposition follows similarly, since $f$ is finite \'etale \thref{etalediagonal} tells us that its diagonal $\Delta_f$ is an immersion onto on open and closed subscheme, which is also finite \'etale.
+As \thref{basechangecomp} tells us that finite 'etale morphisms are closed under composition and basechange, the Cancellation Lemma tells us that $g$ is also finite \'etale.
 \end{proof}
 
 \begin{proposition}
@@ -529,6 +592,9 @@ Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective
  \end{proof}
  
  The main result we have for relating the two contexts depends on a specialization map \todo{Fill in details}
+
+ We first need a lemma
+
 
 \begin{theorem}[Grothendieck]
 	Keep the same notations and assumptions as above.
