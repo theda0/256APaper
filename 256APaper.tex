@@ -142,7 +142,8 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 
 
 \begin{remark}
-	\todo{Remark about difference between finite case}
+	One may note just from the statement of the above theorem that this will only differs from the case with finite extensions if there exist nonclosed subgroups for some Galois group.
+	The first one to construct such an example is \todo{cite Krull and finish}, which in fact 
 \end{remark}
 
 We will rephrase \thref{Krull} in a more useful form by putting it in a categorical context, the next notion will be important in this regard, as well as in the construction of the \'etale fundamental group.
@@ -185,7 +186,7 @@ In particular, finite separable extensions $L|k$ have a natural correspondence t
 \subsection{The Topological Fundamental Group}
 \todo{Fill in some exposition in this section, maybe add pictures}
 We now begin a brief journey into topology and define the topological fundamental group.
-From here on out we will refer to topological spaces as simple \textit{spaces} for brevity.
+From here on out we will refer to topological spaces as simply \textit{spaces} for brevity.
 
 
 \begin{definition}
@@ -215,11 +216,17 @@ In particular, the identity is the homotopy class of the constant loop $s: [0,1]
 \begin{examples} \text{} \todo{clarify examples}
 	\begin{enumerate}
 		\item The circle $S^1$ has fundamental group $\Z$. 
-		\item $\R^n$ has trivial fundamental group, such spaces are called \textit{simply connected}.
+			Picking a basepoint of $S^1$ the identification $\pi_1^{\text{top}}(S^1,x)$ identifies a loop with the number of times it winds around.
+			Which loops correspond to positive numbers or negative correspond to a choice of orientation of $S^1$ (an identification of clockwise or counterclockwise).
+		\item For any $n$, $\R^n$ has trivial fundamental group, such spaces are called \textit{simply connected}.
+			Indeed, any loop $s: [0,1] \to \R^n$ with end $x $can be "drawn in" to $x$ by the homotopy $s_t(y) = (1-t)s(y) + tx$.
 	\end{enumerate}
 	
 \end{examples}
 
+The fundamental group is intimately connected to the theory of covering spaces. 
+
+\todo{Clarify}
 \begin{definition}[Covering Spaces]
 	A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that satisfies the following property. 
 	For all $x \in X$ there exists an open neighborhood $U$ of $x$ where $p^{-1}(U)$ decomposes into a nonempty disjoint union of open subsets $V_i$ of $X$ such that each map homeomorphically onto $U$ under $p$.
@@ -273,6 +280,7 @@ Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$
 	Since $\widetilde{s}(1)$ is the same for homotopic paths, this action is well-defined by the last part of the previous proposition.
 	We will call this (left) continuous action on $p^{-1}(x)$ the \textit{monodromy action}.\\
 	\indent There is then a functor $\text{Fib}_x$, which takes a cover $Y \to X$ to the finite fiber $p^{-1}(x)$ of the basepoint.
+The culmination of the work in this section is to describe the following theorem, which one should compare with.
 
 	\begin{theorem}\thlabel{coverfunctor}
 	For a space $X$ with base point $x$, the functor $\text{Fib}_x$ induces an equivalence between the category of finite covers of $X$ and the category of finite continuous left $\widehat{\pi_1(X,s)}$-sets.
@@ -282,8 +290,8 @@ Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$
 	See \cite{Szamuely}
 \end{proof}
 
-Compare with \thref{grothendiecksformulation}.
-One may already conjecture the below relations
+
+In comparison with \thref{grothendiecksformulation}, one may already conjecture the below relations
 \begin{center}
 \begin{tabular}{ |c c c| } 
 \hline
