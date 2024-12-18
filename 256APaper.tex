@@ -135,7 +135,8 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 \end{proof}
 
 \begin{example}
-	
+	Let $\mathbb{F}_p$ be a field of characteristic $p$.
+
 \todo{Include an example}
 
 \end{example}
@@ -396,7 +397,7 @@ Finite \'etale morphisms are closed under base change and composition
 	See \cite{Szamuely}, Proposition 5.2.7.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{cancellation}
 	Let $f\colon X \to S$ and $G: Y \to X$ be morphisms of schemes. 
 	Then 
 	\begin{enumerate}
@@ -425,7 +426,7 @@ As \thref{basechangecomp} tells us that finite 'etale morphisms are closed under
 \end{proof}
 
 \begin{example}
-	Trivial covers \todo{Fit example somewhere}
+	A \textit{trivial cover} of a scheme $X$ consists of the disjoint union of copies of $\coprod_{i \in I} U$, and the natural map $p: \coprod_{i \in I} U \to U$ which when restricted to each $U$ is the identity.
 \end{example}
 
 \begin{definition}[Geometric Point]
@@ -477,7 +478,9 @@ As $\lambda$ is an isomorphism, so is the induced map on the geometric fiber $\t
 	\todo{Fill in}
 \end{proof}
 
-\begin{corollary}
+It is an easily-proven theorem that automorphisms of covering spaces in the topological case are uniquely determined by the image of a single point; this is due to certain lifting properties \todo{cite}.
+In this spirit,we obtain as a corollary of the above that automorphisms of connected finite \'etale covers are determined uniquely by their images on geometric points.
+\begin{corollary}\thlabel{finitepoints}
 	If $f: X \to S$ is a connected finite \'etale cover, then nontrivial elements of $\text{Aut}(X|S)$ act without any fixed points on any geometric fiber.
 	In particular, $\text{Aut}(X|S)$ is finite.
 \end{corollary}
@@ -498,51 +501,97 @@ With the notion of an action on the fibers of a cover, we have an analogous defi
 
 We are now in a similar situation as when we defined the topological fundamental group.
 Let $\text{Fet}_S$ denote the category of finite \'etale covers of $S$.
-Fix a geometric point $\overline{s}$ of $S$, there is a natural functor to the category of finite sets \textbf{Fin} by taking the geometric fiber over $\overline{s}$. 
+Fix a geometric point $\overline{s}$ of $S$, there is a natural functor to the category of finite sets \textbf{FinSet} by taking the geometric fiber over $\overline{s}$. 
 The analogy of the monodromy action, on the other hand, is not immediately obvious.
 Instead consider the following.
 
 \begin{definition}[The \'Etale Fundamental Group]
-	For a scheme $S$ and a geometric point $\widetilde{s}: \text{Spec}(K) \to S$, we define the \textit{\'etale fundamental group} $\pi_1(S, \widetilde{s})$ as the automorphism group of the fiber functor from $\text{Fet}_{S}$ to $\textbf{Fin}$.
+	For a scheme $S$ and a geometric point $\widetilde{s}: \text{Spec}(K) \to S$, we define the \textit{\'etale fundamental group} $\pi_1(S, \widetilde{s})$ as the automorphism group of the fiber functor $\text{Fib}_{\overline{s}}$ from $\text{Fet}_{S}$ to $\textbf{FinSet}$.
 \end{definition}
 
-Here we are viewing the fiber functor as an object of the category consisting of functors from $\text{Fet}_S$ to $\textbf{Fin}$.
+Here we are viewing the fiber functor as an object of the category consisting of functors from $\text{Fet}_S$ to $\textbf{Fin}$ in which case automorphisms consist of natural isomorphisms of functors.\\
+
+We now give a vital proposition, which is an analog of the fact that every finite separable field extension is embedded into some finite Galois extension.  
 
 
-\begin{proposition}
+\begin{proposition}\thlabel{unigal}
 	Let $f: X \to S$ be a connected finite \'etale cover. 
-	There is a morphism $\pi: P \to X$ such that $f \circ \pi: P \to S$ is a finite \'etale Galois cover, and moreover every $S-$scheme morphism from a Galois cover to $X$ factors through $\pi$.
+	There is a morphism $\pi: P \to X$ such that $f \circ \pi: P \to S$ is a finite \'etale Galois cover, and moreover for every $S-$scheme morphism $\phi:K  \to X$ where $K$ is Galois factors through $\pi$.
 \end{proposition}
 
 \begin{proof}
-	\todo{Put in if space permits}
+	See \cite{Szamuely}, Proposition 5.3.9
 \end{proof}
 
 \begin{definition}[Pro-representable functors]
 	Let $C$ be a category and $F: C \to \text{Set}$ a set-valued functor.
-	We will say that $F$ is \textit{pro-representable} if it is the limit of an inverse system in the category $\text{Set}^C$ of set valued-functors with indexing objects representable presheaves.
+	We will say that $F$ is \textit{pro-representable} if it is the colimit of an inverse system $(P_{\alpha}, \phi_{\alpha \beta})$ in the category $\text{Set}^C$ of set valued-functors with indexing objects representable presheaves, in which case we will write 
+	\[F \cong \varinjlim \text{Hom}(P_{\alpha}, _)\]
 \end{definition} 
 
+Note that as opposed to an inverse limit, we are instead taking the colimit as opposed to the limit.
+Since the colimit takes values in presheaves, it is in fact defined termwise.
+This says that for any object $C$, restricting the functors to $C$ preserves colimits; we know what colimits look like in Set, they are the disjoint union of sets in the diagram, modulo the equivalence where two elements are identified if they are mapped to some common element in the diagram. 
+With this in mind we now begin to develop some necessary background regarding the \'etale fundamental group.
+
 \todo{Fill in below proofs}
-\begin{proposition}
+\begin{proposition}\thlabel{prorepresentation}
 	Let $X$ be a finite \'etale $S$-scheme and $\overline{s}$ a geometric point of $S$.
 	Then the fiber functor $\text{Fib}_{\overline{s}}$ is pro-representable.
 \end{proposition}
+
+\begin{proof}
+	We will give a detailed outline of the proof.
+	There is a partially ordered set consisting of all finite \'etale Galois covers $P_{\alpha} \to S$, and where we let $P_{\alpha} \leq P_{\beta}$ if there is a morphism of covers $P_{\beta} \to P_{\alpha}$, one can show it is directed by constructing a map using \thref{unigal}.\\
+	\indent There is no immediate choice of maps in our inverse system.
+	However, if for every $P_{\alpha}$ in our partially ordered set we fix an element $p_{\alpha}$ in the geometric fiber $\text{Fib}_{\overline{s}}(P_{\alpha})$ there are such maps.
+	In particular, since the covers are Galois and automorphisms act transitively on the fibers, if $P_{\alpha} \leq P_{\beta}$ there exists a unique map $\phi_{\alpha \beta}: P_{\beta} \to P_{\alpha}$ such that $\text{Fib}_{\overline{s}}(\phi_{\alpha \beta})(p_{\beta}) = p_{\alpha}$, so the maps respect the chosen geometric points.
+	Then for any finite \'etale cover $P_{\alpha}$, there exists by Yoneda Lemma a unique natural transformation $\text{Hom}(P_{\alpha}, -)$ to $\text{Fib}_{\overline{s}}$ sending $\text{id}_{P_{\alpha}} \in \text{Hom}(P_{\alpha}, P_{\alpha})$ to $p_{\alpha} \in \text{Fib}_{\overline{s}}(P_{\alpha})$.
+	By the uniqueness of these natural transformations, they must commute with the natural transformations $\text{Hom}(P_{\alpha}, -) \to \text{Hom}(P_{\beta}, -)$ given by pre-composing with $\phi_{\alpha \beta}$, and hence define a natural transformation
+	\[\varinjlim \text{Hom}(P_{\alpha}, -) \to \text{Fib}_{\overline{s}}\]
+	To define the inverse natural transformation, for any finite \'etale cover $X \to S$ and $x \in \text{Fib}_{\overline{s}}(X)$ we consider the promised finite \'etale Galois cover $P$ from \thref{unigal}.
+	Since $P$ is Galois it is some $P_{\delta}$ in our inverse system and so in addition there exists a unique map $\varphi: P \to X$ mapping $p_{\delta}$ to $x$.
+The inverse map sends $x$ back to the representative of $\varphi$ in $\varinjlim \text{Hom}(P_{\alpha}, X)$.
+
+\end{proof}
+
+Notice that in the above proof, in order to specify the maps defining the inverse system of any pro-representation we had to choose geometric points for each object in our system, but is unique afterwards.
+In fact, note that a natural isomorphism of $\text{Fib}_{\overline{s}}$ under the its pro-representation above must map the system of elements $p_{\alpha}$ to another system of elements $p'_{\alpha}$ consisting automorphisms for each $P_{\alpha}$.
+As each $P_{\alpha}$ is Galois over $S$, there is a unique $ \lambda \in \text{Aut}(P_{\alpha}|S)$ such that $\text{Fib}_{\overline{s}}(\lambda)(p_a) = p'_a$.
+By uniqueness these then also form an inverse system and so define a pro-representation of $\text{Fib}_{\overline{s}}$ giving us the following corollary.
 
 \begin{corollary}
 	Every automorphism of the functor $\text{Fib}_{\overline{s}}$ comes from a unique automorphism of the inverse system constructed in the above proof.
 \end{corollary}
 
+With this in hand, we can finally get our hands on a somewhat more concrete description of the \'etale fundamental group.
+
 \begin{corollary}
-	The automorphism groups $\text{Aut}(X_i)^{\text{op}}$ form an inverse system whose limit is isomorphic to $\pi_1(S, \overline{s})$.
+	The automorphism groups $\text{Aut}(P_{\alpha})^{\text{op}}$ form an inverse system whose limit is isomorphic to $\pi_1(S, \overline{s})$.
 \end{corollary}
 
+\begin{proof}
+	
+	If $\alpha \leq \beta$, consider the corresponding map $\phi_{\alpha \beta}: P_{\beta} \to P_{\alpha}$; it is also finite \'etale by \thref{cancellation}.
+	Any automorphism $\lambda \in \text{Aut}(P_{\beta}|S)$ determines some unique element in $\text{Fib}_{\overline{s}}(P_{\beta})$ as $P$ is Galois, and hence an unique element in $\text{Fib}_{\overline{s}}(P_{\alpha})$ from the natural map induced by $\phi_{\alpha \beta}$.
+By the same argument this corresponds to a unique element in $\text{Aut}(P_{\alpha}|S)$, as this respects composition of automorphisms there is thus a natural group homomorphism $\text{Aut}(P_{\alpha}|S) \to \text{Aut}(P_{\beta}|S)$.
+Now from the previous corollary, automorphisms of the fiber functor correspond to systems of elements in the fiber.
+But these are precisely elements in the profinite group $\varprojlim P_{\alpha}$ from its explicit description.
+Since our pro-representation was represented by $\text{Hom}(P_{\alpha}, -)$, the actions of the automorphism are naturally viewed from the right, hence the opposite on the acting groups.
+\end{proof}
+
 \begin{theorem}[Grothendieck]\thlabel{etalefunctor}
-	Let $S$ be a connected scheme, and $\widetilde{s}: \text{Spec}(K) \to S$ a geometric point. Then \begin{enumerate} 
+	Let $S$ be a connected scheme, and $\overline{s}: \text{Spec}(K) \to S$ a geometric point. Then \begin{enumerate} 
 		\item The group $\pi_1(S, \overline{s})$ is profinite, and its action on $\text{Fib}_{\overline{s}}(X)$ is continuous for all $X$.
 		\item The functor $\text{Fib}_{\overline{s}}$ induces an equivalence between $\text{Fet}_S$ and the category of finite continuous (left) $\pi_1(S, \overline{s})$-sets.	In addition, connected covers correspond to sets with transitive action, and Galois covers to finite quotients of $\pi_1(S, \overline{s})$.
  \end{enumerate} 
 \end{theorem}
+
+\begin{proof}
+	There is a pro-representation by a system $(P_{\alpha}, \phi_{\alpha \beta})$  by \thref{prorepresentation}.
+	As we showed that automorphism groups are finite from \thref{finitepoints}, the previous corollary gives us that $\pi_1(S, \overline{s})$ is profinite from definition.
+To show that the action is continuous, note that  
+\end{proof}
 
 As a corollary we now give the promised proof of \thref{grothendiecksformulation}.
 Let $S = \text{Spec}(k)$ for $k$ a field; a finite \'etale cover corresponds to the affine scheme of a finite dimensional \;etale $k$-algebra $L$.
@@ -551,7 +600,12 @@ Since the image of every map must lie in the separable closure of $k$ within $\O
 \[\text{Fib}_{\overline{s}}(\text{Spec}(L)) \cong \text{Hom}_k(L, k^s)\]
 and so we must have $\pi_1(S, \overline{s}) \cong \text{Gal}(k^s|k)$.
 
-
+The topological fundamental group is functorial in that base-point preserving maps of topological spaces induce corresponding maps of their fundmantal groups, the same is in fact true in the \'etale case.
+If $S, S'$ are connected schemes with $\overline{s}, \overline{s'}$ respective geometric points, a morphism $\phi: S' \to S$ such that $\phi \circ \overline{s'} = \overline{s}$ induces a functor
+\[\text{BaseChange}: \text{Fet}_S \to \text{Get}_{\overline{S}}\]
+sending a cover $X$ to its basechange $X \times_S S'$, as well as morphisms $X \to Y$ to the natural morphisms $X \times_S S' \to Y \times_S S'$.
+Since $\phi \circ \overline{s'} = \overline{s}$, we have $\text{Fib}_{\overline{s}} = \text{BaseChange} \circ \text{Fib}_{\overline{s'}}$, in which case every automorphism of $\text{Fib}_{\overline{s'}}$ induces an automorphism of $\text{Fib}_{\overline{s}}$ by pre-composition with BaseChange.
+This gives us our natural map $\pi_1(S', \overline{s'}) \to \pi_1(S, \overline{s})$ induced by $\phi$.
 
 \section{The Riemann Existence Theorem}
 
@@ -591,7 +645,10 @@ However, \thref{riemannexistence} now introduces the ability to immediately begi
 	The topological theory gives us that 
 	\[\pi_1^{\text{top}}(\C P^n, x) = 0\]
 	so we conclude the same for $\pi_1(\textbf{P}_{\C}^n, \overline{x})$.
-\item  \todo{Add complex surfaces of genus g }
+\item Topologically, complex surfaces of genus $g$ are homeomorphic to a sphere with $g$ "handles" attached.
+	Using accessible tools such as a CW decomposition of the space, we can calculate the fundamental group as (see \cite{FomenkoFuchs} Lecture 7.6)
+	\[\langle a_1, b_1, \dots, a_g, b_g \,|\, [a_1,b_1], \dots, [a_g,b_g] = 1\rangle \]
+	with $2g$ generators, and the only relations that the commutators $[a_i, b_i] = a_i b_i a_i^{-1} b_i^{-1}$ is trivial.
 \end{enumerate}
 \end{examples}
 
@@ -669,6 +726,8 @@ Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective
 	\todo{Give an outline}
 \end{proof}
 
+Just as above, one often finds that in the characteristic $p$ case that the "non-$p$" part is the same as in the charateristic zero.
+We give the reader a taste of more results in this area (a good exposition can be found in  \cite{abhyankar}), but whose explanations are out of scope of this paper, 
 
 
 \newpage
