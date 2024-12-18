@@ -102,6 +102,11 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	A profinite group is the inverse limit of an inverse system whose objects are all finite groups.
 \end{definition}
 
+	There is a natural topology on any profinite group which we will need to define the Galois correspondence for infinite extensions.
+	If $G$ a profinite group which is the inverse system of finite groups $\{G_i\}_{i \in I}$ we may give each $G_j$ the discrete topology.
+	These define a product topology on $\prod_{i \in I} G_i$, and so $G$ viewed as a subgroup can be equipped with the natural subspace topology.
+	\todo{maybe add some facts}
+	
 \begin{example} \text{}
 \begin{enumerate}
 	\item For a group $G$, the set of finite quotients is naturally an inverse system.
@@ -109,19 +114,27 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 		The inverse limit of this system is called the \textit{profinite completion} of $G$ which we will denote as $\widehat{G}$.	
 		The natural projection maps $G \to G/H_i$ commute with the system, and hence define a canonical map $G \to \widehat{G}$ from the property of limits.
 	\item The Galois group for any field extension $K|k$ is a profinite group, as we will prove below.
-\end{enumerate}
+		\end{enumerate}
 \end{example}
+
+
 \begin{proposition}
 	If $K|k$ is a Galois field extension then $\text{Gal}(K|k)$ is a profinite group.
 	In particular, it is the inverse limit of an inverse system consisting of the groups $\text{Gal}(L|k)$ for finite Galois subextensions $K \supset L \supset k$.
 \end{proposition}
 \begin{proof}
-	\todo{Fill in}
+	The inverse system consists of the Galois groups $\text{Gal}(L|k)$ for $L$ a finite subextension of $K|k$.
+	There are homomorphisms $\phi_{L_1L_2}: \text{Gal}(L_1|k) \to \text{Gal}(L_2|k)$ for subextensions $L_1 \supset L_2 \supset k$ obtained by restricting the $k$ automorphisms of $L_2$ to $L_1$; this system is directed as the compositum $L_1 L_2$ of Galois extensions is also Galois.\\
+\indent We construct the isomorphisms as follows.
+There is a map $\phi: \text{Gal}(K|k) \to \prod \text{Gal}(L|k)$ over all finite Galois extensions $L|k$, which for any $k$-automorphism of $\text{Gal}(K|k)$ sends it to the direct product of its restrictions to the indexing subfields.
+Note firstly that $\phi$ is injective, as if an automorphism $\sigma$ of $K|k$ does not fix an element $x$ of $K$, then it does not fix some finite Galois subextenion containing $x$ (say the splitting field of its minimal polynomial).
+Now the image of $\phi$ must lie in $\varprojlim \text{Gal}(L|k)$ as  $\sigma_{L_2} = \text{\phi}_{L_1 L_2} \sigma_{L_1}$ as both simply restrict $\sigma$ to $L_2$.
+Finally, we show that the map is surjective.
+For any $(\sigma_L) \in \varprojlim \text{Gal}(L|k)$ we can form a $k$-automorphism  $\sigma$ of $k$ by letting $\sigma(x) = \sigma_L(x)$ for a finite Galois subextension $L$ containing $x$. 
+This is well-defined as $(\sigma_L)$ is by assumption a compatible system, and hence there is a $\sigma$ such that $\phi(\sigma) = (\sigma_L)$ as we want to show.
 \end{proof}
 
-	There is a natural topology on any profinite group which we will need to define the Galois correspondence for infinite extensions.
-	If $G$ a profinite group which is the inverse system of finite groups $\{G_i\}_{i \in I}$ we may give each $G_j$ the discrete topology.
-	These define a product topology on $\prod_{i \in I} G_i$, and so $G$ viewed as a subgroup can be equipped with the natural subspace topology.
+
 
 
 \begin{theorem}[Krull]\thlabel{Krull}
@@ -136,7 +149,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 
 \begin{example}
 	Let $\mathbb{F}_p$ be a field of characteristic $p$.
-
+	Denote 
 \todo{Include an example}
 
 \end{example}
@@ -226,7 +239,7 @@ In particular, the identity is the homotopy class of the constant loop $s: [0,1]
 \end{examples}
 
 The fundamental group is intimately connected to the theory of covering spaces. 
-
+When we eventually try and 
 \todo{Clarify}
 \begin{definition}[Covering Spaces]
 	A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that satisfies the following property. 
