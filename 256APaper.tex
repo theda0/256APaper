@@ -323,6 +323,7 @@ Note that some authors require a covering space to be connected, we will not fol
 
 \caption*{A covering the figure eight space [\cite{FomenkoFuchs}, \textbf{Fig. 29}]}
 \end{figure}
+
 \begin{example} Suppose that a topological group $G$ acts discretely on a space $Y$, that is, every $y \in Y$ has an open neighborhood $V$ such that the open sets $gV$ are pairwise disjoint for all $g  \in G$.
 	Then the natural projection $Y \to G/Y$ under this action is a projection.
 	For example, $\Z$ acts on $\R$ discretely by translation via the map $\Z \times \R \to \R$ sending $(n,r) \to n+r$.
@@ -421,11 +422,12 @@ We being with some preliminary definitions and start to familiarize ourselves wi
 	A closed immersion is finite as closed immersions are affine and the induced maps $\text{Spec}(A) \to \text{Spec}(A/I)$ are induced by surjective ring maps.
 \end{example}
 
+The most important aspect of finite morphisms for us is as follows.
 \begin{proposition}
 	A finite morphism $f: X \to Y$ is proper. 
 \end{proposition}
 \begin{proof}
-	We make use of the valuative criterion. \todo{cite criterion}
+	We make use of the valuative criterion (\cite{stacks-project}, \textbf{29.42}).
 	Finite morphisms are automatically of finite type, and since they are affine they are also quasi-separated.
 	Hence it suffices to show that for any valuation ring $R$ with field of fractions $K$ and commutative diagram
 	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXHRleHR7U3BlY30oUikiXSxbMCwwLCJcXHRleHR7U3BlY30oSykiXSxbMSwwLCJYIl0sWzEsMSwiWSJdLFsxLDJdLFswLDNdLFsyLDNdLFsxLDBdXQ==
