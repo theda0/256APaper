@@ -9,6 +9,7 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{tikz}
+\usetikzlibrary{decorations.markings,calc}
 \usepackage{tikz-cd}
 \usepackage{quiver}
 \usetikzlibrary{matrix}
@@ -51,6 +52,10 @@
 \newcommand\size{1}% distance of nodes from center
 
 \usepackage{microtype}
+
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}%
+
 \begin{document}
 
 
@@ -139,7 +144,6 @@ Since the maps $U \to gU$ are continuous for any topological group, each left co
 Since they partition $G$, $U$ must also be closed as its complement is a union of its open left cosets.
 Since $G$ is compact there must only be finitely many such cosets.
 Conversely, by similar reasoning a closed group of finite index has its complement a finite union of closed cosets, and so is open.
-
 \end{proof}
 	
 \end{proposition}
@@ -172,6 +176,12 @@ For any $(\sigma_L) \in \varprojlim \text{Gal}(L|k)$ we can form a $k$-automorph
 This is well-defined as $(\sigma_L)$ is by assumption a compatible system, and hence there is a $\sigma$ such that $\phi(\sigma) = (\sigma_L)$ as we want to show.
 \end{proof}
 
+\begin{example}
+	Let $\mathbb{F}_p$ be a field of characteristic $p$.
+	Denote 
+\todo{Could be nontrivial example}
+
+\end{example}
 We may give the statement of Krull's theorem, which covers the case of infinite Galois extensions.
 The bijection from the finite case fails as not all subgroups arise as one fixing a subextension, but thankfully the set of such subgroups has a nice description using the topology on the Galois group.
 \begin{theorem}[Krull]\thlabel{Krull}
@@ -181,15 +191,8 @@ The bijection from the finite case fails as not all subgroups arise as one fixin
 \end{theorem}
 
 \begin{proof}
-	For a complete proof see \cite{Szamuely}, Theorem 1.3.11. 
+	For a proof see \cite{Szamuely}, Theorem 1.3.11. 
 \end{proof}
-
-\begin{example}
-	Let $\mathbb{F}_p$ be a field of characteristic $p$.
-	Denote 
-\todo{Include an example}
-
-\end{example}
 
 
 \begin{remark}
@@ -221,12 +224,12 @@ In particular, finite separable extensions $L|k$ have a natural correspondence t
  which defines a contravariant functor from the category of finite separable field extensions of $k$.
  Even more can be said though, the absolute Galois group $\text{Gal}(k^s|k)$ has a natural action on $k^s$, and thus define on action on each object $\text{Hom}_k(L, k^s)$, which for any $\lambda \in \text{Gal}(k^s|k)$ and $\phi \in \text{Hom}_k(L, k^s)$ acts by sending $\phi \to \lambda \circ \phi$.
  Hence, $\text{Hom}_k(_, k^s)$ is in fact a functor to the category of $\text{Gal}(k^s|k)$-sets.\\
-\indent In fact, in lieu of \thref{etalealgebra} the functor $\text{Hom}_k(_,k^s)$ extends to the category of finite \'etale $k$-algebras, which gives us the following reformulation.
+\indent In fact, in lieu of \thref{etalealgebra} the functor $\text{Hom}_k(-,k^s)$ extends to the category of finite \'etale $k$-algebras, which gives us the following reformulation.
 
 \begin{theorem}\thlabel{grothendiecksformulation}
 	Let $k$ be a field. 
 	Then the functor mapping a finite \'etale k-algebra $A$ to the finite set $\text{Hom}_k(A, k_s)$ gives an anti-equivalence between the category of finite sets with continuous (left) $\text{Gal}(k)$-action.
-	Here separable field extensions give rise to sets with transitive $\text{Gal}(k^s|l)$-action and Galois extensions to $\text{Gal}(k^s|k)$ -sets isomorphic to finite quotients of $\text{Gal}(k^s|k)$.
+	Here separable field extensions give rise to sets with transitive $\text{Gal}(k^s|k)$-action and Galois extensions to $\text{Gal}(k^s|k)$ -sets isomorphic to finite quotients of $\text{Gal}(k^s|k)$.
 \end{theorem}
 
 \begin{proof}
@@ -248,6 +251,31 @@ From here on out we will refer to topological spaces as simply \textit{spaces} f
 We will call two paths $f,g: [0,1] \to X$ \textit{homotopic} if $f(0) = g(0), f(1), g(1)$ and there exists a continuous map $h: [0,1] \times [0,1] \to X$ such that $h(0,t) = f(t), h(1,t) = g(t), h(t,0) = f(0)$ and $g(t,1) = f(1)$ for all $t \in [0,1]$.
 Intuitively, we may think of a homotopy between two paths $f$ and $g$ as a continuous deformation moving $f$ to $g$ in $X$, keeping the endpoints fixed. 
 It is straightforward to check that homotopies define an equivalence relation on the set of paths in $X$.\\
+
+\begin{figure}[!h]
+	\centering
+\begin{tikzpicture}
+	  [decoration={markings,mark=at position 0.5 with {\arrow{>}}},
+   witharrow/.style={postaction={decorate}},
+   dot/.style={draw,fill,circle,inner sep=1.5pt,minimum width=0pt}
+  ]
+
+
+  % ellipse
+  \begin{scope}[shift={(5,0)}]
+    \node[dot,label={[left] }] (a3) at (5,0) {};
+    \node[dot,label={[right]}] (b3) at (9,0) {};
+    \draw[thick,witharrow] (a3) to[out=50,in=150]node[above]{$f$} (b3);
+    \foreach \o/\i in {40/160,30/170,20/180,10/190,-10/200}
+       \draw (a3) to[out=\o,in=\i]  (b3);
+		\draw[thick,witharrow] (a3) to[out=-20,in=-144]node[below]{$f$} (b3);
+		
+  \end{scope}
+
+\end{tikzpicture}
+\caption{Picturing a homotopy between two paths $f$ and $g$.}
+\end{figure}
+
 \indent Additionally, for any two paths $f,g: [0,1] \to X$ where $f(1) = g(0)$ we can define their composition $f \circ g: [0,1] \to X$ where $(f \circ g )(t) = f(t)$ for $0 \leq t \leq \frac{1}{2}$ and $(f \circ g)(t) = g(2t - 1)$ for $ \frac{1}{2} < t \leq 1$ which we may think of as concatenating the two paths.
 Of particular interest to us, any two paths starting and ending at the same point can be composed.
 
@@ -267,7 +295,7 @@ This already allows us to define the topological fundamental group.
 	\begin{enumerate}
 		\item The circle $S^1$ has fundamental group $\Z$. 
 			Picking a basepoint of $S^1$ the identification $\pi_1^{\text{top}}(S^1,x)$ identifies a loop with the number of times it winds around.
-			Which loops correspond to positive numbers or negative correspond to a choice of orientation of $S^1$ (an identification of clockwise or counterclockwise). \todo{picture?}
+			Which loops correspond to positive numbers or negative correspond to a choice of orientation of $S^1$ (an identification of clockwise or counterclockwise). 
 		\item For any $n$, $\R^n$ has trivial fundamental group, such spaces are called \textit{simply connected}.
 			Indeed, any loop $s: [0,1] \to \R^n$ with end $x $can be "drawn in" to $x$ by the homotopy $s_t(y) = (1-t)s(y) + tx$.
 	\end{enumerate}
@@ -282,13 +310,19 @@ A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that sa
 	For all $x \in X$ there exists an open neighborhood $U$ of $x$ where $p^{-1}(U)$ decomposes into a nonempty disjoint union of open subsets $V_i$ of $X$ such that each map homeomorphically onto $U$ under $p$.
 \end{definition}
 
-\todo{add picture}
 Under the above conditions we may also call $Y$ a \textit{covering} of $X$.
 We will be interested in the case when the fibers $p^{-1}(x)$ of a cover are finite for all $x \in X$ which we will call $Y$ a \textit{finite cover} or \textit{finite covering} of $X$.
 A \textit{trivial cover} of $X$ is the natural projection $X \times I \to X$ for $I$ a discrete set, which looks like multiple copies of $X$ each mapping homeomorphically onto $X$.
 With this in mind, the condition in the definition of Covering Spaces may be phrased as locally trivial, in that the map when restricted to a small enough neighborhood looks like a trivial cover.
 Note that some authors require a covering space to be connected, we will not follow this convention and will explicitly state whenever $Y$ is connected.
 
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=50mm]{CoveringSpace.png}
+
+\caption*{A covering the figure eight space [\cite{FomenkoFuchs}, \textbf{Fig. 29}]}
+\end{figure}
 \begin{example} Suppose that a topological group $G$ acts discretely on a space $Y$, that is, every $y \in Y$ has an open neighborhood $V$ such that the open sets $gV$ are pairwise disjoint for all $g  \in G$.
 	Then the natural projection $Y \to G/Y$ under this action is a projection.
 	For example, $\Z$ acts on $\R$ discretely by translation via the map $\Z \times \R \to \R$ sending $(n,r) \to n+r$.
