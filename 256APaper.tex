@@ -102,9 +102,11 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	A profinite group is the inverse limit of an inverse system whose objects are all finite groups.
 \end{definition}
 
+\begin{remark}
 	There is a natural topology on any profinite group which we will need to define the Galois correspondence for infinite extensions.
 	If $G$ a profinite group which is the inverse system of finite groups $\{G_i\}_{i \in I}$ we may give each $G_j$ the discrete topology.
 	These define a product topology on $\prod_{i \in I} G_i$, and so $G$ viewed as a subgroup can be equipped with the natural subspace topology.
+\end{remark}
 	\todo{maybe add some facts}
 	
 \begin{example} \text{}
@@ -128,7 +130,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 \indent We construct the isomorphisms as follows.
 There is a map $\phi: \text{Gal}(K|k) \to \prod \text{Gal}(L|k)$ over all finite Galois extensions $L|k$, which for any $k$-automorphism of $\text{Gal}(K|k)$ sends it to the direct product of its restrictions to the indexing subfields.
 Note firstly that $\phi$ is injective, as if an automorphism $\sigma$ of $K|k$ does not fix an element $x$ of $K$, then it does not fix some finite Galois subextenion containing $x$ (say the splitting field of its minimal polynomial).
-Now the image of $\phi$ must lie in $\varprojlim \text{Gal}(L|k)$ as  $\sigma_{L_2} = \text{\phi}_{L_1 L_2} \sigma_{L_1}$ as both simply restrict $\sigma$ to $L_2$.
+Now the image of $\phi$ must lie in $\varprojlim \text{Gal}(L|k)$ as  $\sigma_{L_2} = \phi_{L_1 L_2} \sigma_{L_1}$ as both simply restrict $\sigma$ to $L_2$.
 Finally, we show that the map is surjective.
 For any $(\sigma_L) \in \varprojlim \text{Gal}(L|k)$ we can form a $k$-automorphism  $\sigma$ of $k$ by letting $\sigma(x) = \sigma_L(x)$ for a finite Galois subextension $L$ containing $x$. 
 This is well-defined as $(\sigma_L)$ is by assumption a compatible system, and hence there is a $\sigma$ such that $\phi(\sigma) = (\sigma_L)$ as we want to show.
@@ -239,7 +241,7 @@ In particular, the identity is the homotopy class of the constant loop $s: [0,1]
 \end{examples}
 
 The fundamental group is intimately connected to the theory of covering spaces. 
-When we eventually try and 
+When we eventually try and  
 \todo{Clarify}
 \begin{definition}[Covering Spaces]
 	A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that satisfies the following property. 
@@ -689,8 +691,7 @@ to the positive characteristic case.
 Thankfully results are certainly possible, albeit more difficult to formulate.
 We will outline one due to Grothendieck, which for certain schemes over a field of characteristic $p \geq 0$ gives us information on the "non-$p$" part of the \'etale fundamental group by relating it to the characteristic 0 case, where one may use results such as the ones previously outlined.\\
 
-\indent We will be interested in a discrete valuation ring $A$, whose field of fractions $K$ is of characteristic 0 but whose residue field $\kappa$ is of characteristic $p \geq 0$.
-Following the notation in \cite{Szamuely} let $S$ be the affine scheme $\text{Spec}(A)$, with $\eta \colon \text{Spec}(K) \to S$ and $s \colon: \text{Spec}(\kappa) \to S$ be the generic and closed points of $S$ respectively.
+\indent Following the notation in \cite{Szamuely} let $S$ be the affine scheme $\text{Spec}(A)$, with $\eta \colon \text{Spec}(K) \to S$ and $s \colon: \text{Spec}(\kappa) \to S$ be the generic and closed points of $S$ respectively.
 Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective points.
 
 \begin{theorem}[Grothendieck]
@@ -707,27 +708,31 @@ Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective
  \begin{proof}
 	 Hard, \todo{cite} reference
  \end{proof}
- 
- The main result we have for relating the two contexts depends on a specialization map \todo{Fill in details}
 
- We first need a lemma
+ With the same notation as above there exists a \textit{specialization map} associated to the morphism $\phi$.
+ Still assuming that $k$ is algebraically closed and that $s = \overline{s}$, then there is a composite map
+ \[\textit{sp}: \pi_1(X_{\overline{\eta}}, \overline{x}) \to \pi_1(X, \overline{x}) \xrightarrow{\sim} \pi_1(X, \overline{y}) \xrightarrow{\sim} \pi_1(X_{\overline{s}}, \overline{y})\]
 
+ The first map is from part (2) of the above theorem, the middle isomorphism coming from \todo{Paths}, and the last one is the inverse of the isomorphisms from part (1) of the theorem above.
+Although there is a involved for the middle isomorphism, the resulting is still unique up to an inner automorphism.
+This gives us a map relating the two fibers above a discrete valuation ring, its main use is in the below proof.
 
 \begin{theorem}[Grothendieck]
 	Keep the same notations and assumptions as above.
 	Assume that $f$ is proper and smooth with geometrically connected fibers.
 	Then the specialization map induces an isomorphism 
 	\[\pi_1(X_{\overline{\eta}}, \overline{x})^{p'} \xrightarrow{\sim} \pi_1(X_{\overline{s}}, \overline{y})^{p'}\]
-	where the superscripts $(p')$ denote the maximal prime-to-p quotients of the profinite groups involved.
+	where the superscripts $(p')$ denote the maximal prime-to-$p$ quotients of the profinite groups involved.
 	
 \end{theorem}
 
  \begin{proof}
+	 Here the maximal prime-to-$p$ quotient refers to \todo{definition}
 	 Also long and involved \todo{Try and give a proof?}
  \end{proof}
  
 
- Now Grothendieck's main result is given below, which we will outline.
+ We now outline the proof of Grothendieck's main result below.
 \begin{theorem}
 	Let $k$ be an algebraically closed field of characterstic $p \geq 0$, and let $X$ be an integral proper normal curve of genus $g$ over $k$.
 	For every geometric point $\overline{x}$ of $X$, the group $\pi_1(X, \overline{x})$ has its maximal prime to $p$-quotient $\pi_1(X, \overline{x})^{(p')}$ is isomorphic to the profinite $p'$-compleiton of the group
@@ -736,7 +741,11 @@ Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective
 \end{theorem}
 
 \begin{proof}
-	\todo{Give an outline}
+	\begin{enumerate}
+		\item We first construct a complete discrete valuation ring $A$ whose fie
+		\item 
+	\end{enumerate}
+	
 \end{proof}
 
 Just as above, one often finds that in the characteristic $p$ case that the "non-$p$" part is the same as in the charateristic zero.
