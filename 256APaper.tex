@@ -26,6 +26,7 @@
 
 \theoremstyle{definition}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{definition}[theorem]{Definition}
@@ -73,21 +74,22 @@ And although we may initially have cautioned against a relation between the topo
 Near the end, we will look at one possibility in \thref{RiemannExistence}, which relates the two in the case of finite type schemes over $\C$ and see some immediate uses.\\
 
 \indent We will roughly follow \cite{Szamuely}, in particular during our construction of the \'etale fundamental group we will try and emphasize the similarity to the topological case.
-One may find many similar notions between Galois theory and both the \'etale and topological cases.
+One may find many similar notions between Galois theory and both the \'etale and topological cases which we will point out.
 These are adequately addressed in a more axiomatic treatment involving Galois categories, for which one may look at Grothendieck's original work (\cite{grothendieck}) or at \cite{Lenstra}.
 
 \section{Preliminaries}
-We will first develop the important notion of a profinite group, and extend our knowledge of Galois theory for finite extensions to the possibly infinite case.
+We will first go over some important concepts that we will be necessary in our development.
+Here we go over the important notion of a profinite group, and extend our knowledge of Galois theory for finite extensions to the possibly infinite case.
 
 \subsection{Infinite Galois Theory}
 
 Following the notation of \cite{Szamuely} we will denote a field extension $K \supseteq k$ as $K|k$. 
-Now for finite Galois extensions $K|k$, there is an inclusion-reversing bijection between subfields $K \supseteq L \supseteq k$ and subgroups $H \subset \text{Gal}(K|k)$.
+Now as we know, for finite Galois extensions $K|k$ there is an inclusion-reversing bijection between subfields $K \supseteq L \supseteq k$ and subgroups $H \subset \text{Gal}(K|k)$.
 In particular, a subfield $L$ is assigned the subgroup $\text{Aut}(K|L) \subset \text{Gal}(K|k)$ fixing $L$ and a subgroup $H$ is assigned its fixed field $K^H$.
 Unfortunately, for infinite Galois extensions this correspondence breaks down.
 However, there is still a satisfactory correspondence which we will look at.\\
 
-First note that any partially ordered set $(\Lambda, \leq)$ can be viewed as a category where the objects are elements of $\Lambda$, and there is a morphism between $a,b \in \Lambda$ if and only if $a \leq b$.
+For preliminaries, first note that any partially ordered set $(\Lambda, \leq)$ can be viewed as a category where the objects are elements of $\Lambda$, and there is a morphism between $a,b \in \Lambda$ if and only if $a \leq b$.
 Call a partially ordered set $(\Lambda, \leq)$ \textit{directed} if for all $c_1, c_2 \in \Lambda$ there exists a $d \in \Lambda$ such that $c_1 \leq d, c_2 \leq d$.
 
 \begin{definition}
@@ -103,21 +105,54 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 \end{definition}
 
 \begin{remark}
-	There is a natural topology on any profinite group which we will need to define the Galois correspondence for infinite extensions.
-	If $G$ a profinite group which is the inverse system of finite groups $\{G_i\}_{i \in I}$ we may give each $G_j$ the discrete topology.
+	There is a fundamental topology on any profinite group which we will make use of in the statement of Krull's theorem.
+	In particular, if $G$ is a profinite group which is the inverse system of finite groups $\{G_i\}_{i \in I}$ we may give each $G_j$ the discrete topology.
 	These define a product topology on $\prod_{i \in I} G_i$, and so $G$ viewed as a subgroup can be equipped with the natural subspace topology.
+	We give some facts about this topology below.
 \end{remark}
-	\todo{maybe add some facts}
 	
-\begin{example} \text{}
+\begin{proposition}
+	Let $G = \varprojlim G_i$ be a profinite group and consider the topology mentioned above.
+	Then the following hold:
+	\begin{enumerate}
+		\item $G$ is a closed subgroup of $\prod G_i$.
+		\item $G$ is compact and totally disconnected.
+		\item Open subgroups of $G$ are precisely closed subgroups of finite index.
+	\end{enumerate}
+	
+	\begin{proof}
+		We first show that $G$ is closed in $\prod G_i$.
+		Let $G$ be the inverse limit of groups $\{G_i\}_{i \in I}$ with maps $\phi_{\alpha \beta}: G_{\beta} \to G_{\alpha}$. 
+		If $x \notin G$, then it is a sequence $(g_i)_{i \in I} \subset \prod G_i$ such that $\phi_{\alpha \beta} (g_{\beta}) \neq g_{\alpha}$for some finite groups $G_{\alpha}$ and $G_{\beta}$.
+Then consider the following subset of $\prod G_i$
+\[S  = \{(h_i) \,|\, h_{\beta} = g_{\beta}, h_{\alpha} \neq g_{\alpha}\}\]
+If $\pi_{\alpha}$ and $\pi_{\beta}$ are the natural projections of $\prod G_i$ onto $G_{\alpha}$ and $G_{\beta}$, $S$ is the intersection of $\pi_{\alpha}^{-1}(G_{\alpha} - g_{\alpha})$ and $\pi_{\beta}^{-1}(g_{\beta})$, which are open by continuity of the projection maps and the discrete topology on each $G_i$.
+Hence $S$ is an open subset containing $x$ but not intersecting $G$, hence $G$ is closed.\\
+\indent For the second statement, since each $G_i$ is finite, it is compact with the discrete topology.
+By Tychonoff's theorem $\prod G_i$ is also compact, hence $G$ is compact being a closed subset of a compact space.
+To show that $G$ is totally disconnected, consider any two distinct points $(f_i)_{i \in I}, (g_i)_{i \in I} \in \prod G_i$.
+Then $f_{\alpha} \neq g_{\alpha}$ for some $\alpha \in I$.
+Using the same notation as in the first part of the proof, $\pi_{\alpha}^{-1}(f_{\alpha})$ and $\pi_{\alpha}^{-1}(G_{\alpha} - f_{\alpha})$ are both open and closed by the discrete topology on $G_{\alpha}$, which separate both $(f_i)_{i \in I}$ and $(g_i)_{i \in I}$.
+Therefore any subset with more than 2 elements cannot be disconnected, hence the only connected subsets must trivially be the singeletons, hence $G$ is totally disconnected.\\
+\indent Finally, we prove the third statement.
+Since the maps $U \to gU$ are continuous for any topological group, each left coset $gU$ is open in $G$.
+Since they partition $G$, $U$ must also be closed as its complement is a union of its open left cosets.
+Since $G$ is compact there must only be finitely many such cosets.
+Conversely, by similar reasoning a closed group of finite index has its complement a finite union of closed cosets, and so is open.
+
+\end{proof}
+	
+\end{proposition}
+
+\begin{examples} \text{}
 \begin{enumerate}
-	\item For a group $G$, the set of finite quotients is naturally an inverse system.
-		In particular, there is a partial order on the set of normal subgroups of finite index where $H_1 \leq H_2 \Longleftrightarrow H_1 \supseteq H_2$, and corresponding quotient maps between the associated groups $G/H_1 \to G/H_2$.
+	\item For any group $G$, the set of finite quotients is naturally an inverse system.
+		In particular, there is a partial order on the set of normal subgroups of finite index where we let $H_1 \leq H_2$ if $H_1 \supseteq H_2$, and corresponding quotient maps between the associated groups $G/H_1 \to G/H_2$.
 		The inverse limit of this system is called the \textit{profinite completion} of $G$ which we will denote as $\widehat{G}$.	
 		The natural projection maps $G \to G/H_i$ commute with the system, and hence define a canonical map $G \to \widehat{G}$ from the property of limits.
 	\item The Galois group for any field extension $K|k$ is a profinite group, as we will prove below.
 		\end{enumerate}
-\end{example}
+\end{examples}
 
 
 \begin{proposition}
@@ -125,20 +160,20 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	In particular, it is the inverse limit of an inverse system consisting of the groups $\text{Gal}(L|k)$ for finite Galois subextensions $K \supset L \supset k$.
 \end{proposition}
 \begin{proof}
-	The inverse system consists of the Galois groups $\text{Gal}(L|k)$ for $L$ a finite subextension of $K|k$.
-	There are homomorphisms $\phi_{L_1L_2}: \text{Gal}(L_1|k) \to \text{Gal}(L_2|k)$ for subextensions $L_1 \supset L_2 \supset k$ obtained by restricting the $k$ automorphisms of $L_2$ to $L_1$; this system is directed as the compositum $L_1 L_2$ of Galois extensions is also Galois.\\
+	The inverse system consists of the Galois groups $\text{Gal}(L|k)$ for $L$ finite Galois subextensions of $K|k$.
+	There are homomorphisms $\phi_{L_1L_2}: \text{Gal}(L_1|k) \to \text{Gal}(L_2|k)$ for subextensions whenever $L_1 \supset L_2 \supset k$ obtained by restricting the $k$ automorphisms of $L_2$ to $L_1$; this system is directed as the compositum $L_1 L_2$ of Galois extensions is also Galois.\\
 \indent We construct the isomorphisms as follows.
-There is a map $\phi: \text{Gal}(K|k) \to \prod \text{Gal}(L|k)$ over all finite Galois extensions $L|k$, which for any $k$-automorphism of $\text{Gal}(K|k)$ sends it to the direct product of its restrictions to the indexing subfields.
-Note firstly that $\phi$ is injective, as if an automorphism $\sigma$ of $K|k$ does not fix an element $x$ of $K$, then it does not fix some finite Galois subextenion containing $x$ (say the splitting field of its minimal polynomial).
+There is a map $\phi: \text{Gal}(K|k) \to \prod \text{Gal}(L|k)$ over all finite Galois extensions $L|k$, which for any $k$-automorphism $\sigma$ of $\text{Gal}(K|k)$ sends it to the direct product of its restrictions to each extension $L$.
+Since each $L$ is Galois, we have that the restriction of $\sigma$ to $L$ is also an automorphism of $L$ hence $\phi$ is well-defined.
+Now first note that $\phi$ is injective, as if an automorphism $\sigma$ of $K|k$ does not fix an element $x$ of $K$, then it does not fix some finite Galois subextenion containing $x$ (for example the splitting field of its minimal polynomial).
 Now the image of $\phi$ must lie in $\varprojlim \text{Gal}(L|k)$ as  $\sigma_{L_2} = \phi_{L_1 L_2} \sigma_{L_1}$ as both simply restrict $\sigma$ to $L_2$.
 Finally, we show that the map is surjective.
 For any $(\sigma_L) \in \varprojlim \text{Gal}(L|k)$ we can form a $k$-automorphism  $\sigma$ of $k$ by letting $\sigma(x) = \sigma_L(x)$ for a finite Galois subextension $L$ containing $x$. 
 This is well-defined as $(\sigma_L)$ is by assumption a compatible system, and hence there is a $\sigma$ such that $\phi(\sigma) = (\sigma_L)$ as we want to show.
 \end{proof}
 
-
-
-
+We may give the statement of Krull's theorem, which covers the case of infinite Galois extensions.
+The bijection from the finite case fails as not all subgroups arise as one fixing a subextension, but thankfully the set of such subgroups has a nice description using the topology on the Galois group.
 \begin{theorem}[Krull]\thlabel{Krull}
 	Let $K | k$ be a Galois extension.
 	If $k \subseteq L \subseteq K$ is a subestension, then $\text{Gal}(K|L)$ is a closed subgroup of $\text{Gal}(K|k)$.
@@ -200,8 +235,7 @@ In particular, finite separable extensions $L|k$ have a natural correspondence t
 \end{proof}
 
 \subsection{The Topological Fundamental Group}
-\todo{Fill in some exposition in this section, maybe add pictures}
-We now begin a brief journey into topology and define the topological fundamental group.
+We now begin a brief journey into topology by first defining the topological fundamental group, and then exploring its relation to covering spaces.
 From here on out we will refer to topological spaces as simply \textit{spaces} for brevity.
 
 
@@ -223,33 +257,36 @@ Of particular interest to us, any two paths starting and ending at the same poin
 
 This is a straightforward check. 
 In particular, the identity is the homotopy class of the constant loop $s: [0,1] \to x \in X$ and the inverse of a homotopy class of the loop $s: [0,1] \to X$ is the homotopy class of the "backwards" path $s(1-t)$.
-
-\begin{definition}[Fundamental Group]
+This already allows us to define the topological fundamental group.
+\begin{definition}[Topological Fundamental Group]
 	For a space $X$ with basepoint $x$, the (topological) \textit{fundamental group} $\pi^{\text{top}}_1(X,x)$	is the group of homotopy classes of loops with origin in $x$.
 	The group operation is the same composition of loops defined previously.
 \end{definition}
 
-\begin{examples} \text{} \todo{clarify examples}
+\begin{examples} \text{} 
 	\begin{enumerate}
 		\item The circle $S^1$ has fundamental group $\Z$. 
 			Picking a basepoint of $S^1$ the identification $\pi_1^{\text{top}}(S^1,x)$ identifies a loop with the number of times it winds around.
-			Which loops correspond to positive numbers or negative correspond to a choice of orientation of $S^1$ (an identification of clockwise or counterclockwise).
+			Which loops correspond to positive numbers or negative correspond to a choice of orientation of $S^1$ (an identification of clockwise or counterclockwise). \todo{picture?}
 		\item For any $n$, $\R^n$ has trivial fundamental group, such spaces are called \textit{simply connected}.
 			Indeed, any loop $s: [0,1] \to \R^n$ with end $x $can be "drawn in" to $x$ by the homotopy $s_t(y) = (1-t)s(y) + tx$.
 	\end{enumerate}
 	
 \end{examples}
 
-The fundamental group is intimately connected to the theory of covering spaces. 
-When we eventually try and  
-\todo{Clarify}
+As mentioned, it is not immediately clear how to generalize this definition of the fundamental group to the scheme case.
+It is intead from the viewpoint of coverings that we will eventually develop it for schemes, hence we begin to establish its relation with the topological fundamental group.
+
 \begin{definition}[Covering Spaces]
-	A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that satisfies the following property. 
+A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that satisfies the following property. 
 	For all $x \in X$ there exists an open neighborhood $U$ of $x$ where $p^{-1}(U)$ decomposes into a nonempty disjoint union of open subsets $V_i$ of $X$ such that each map homeomorphically onto $U$ under $p$.
 \end{definition}
 
+\todo{add picture}
 Under the above conditions we may also call $Y$ a \textit{covering} of $X$.
 We will be interested in the case when the fibers $p^{-1}(x)$ of a cover are finite for all $x \in X$ which we will call $Y$ a \textit{finite cover} or \textit{finite covering} of $X$.
+A \textit{trivial cover} of $X$ is the natural projection $X \times I \to X$ for $I$ a discrete set, which looks like multiple copies of $X$ each mapping homeomorphically onto $X$.
+With this in mind, the condition in the definition of Covering Spaces may be phrased as locally trivial, in that the map when restricted to a small enough neighborhood looks like a trivial cover.
 Note that some authors require a covering space to be connected, we will not follow this convention and will explicitly state whenever $Y$ is connected.
 
 \begin{example} Suppose that a topological group $G$ acts discretely on a space $Y$, that is, every $y \in Y$ has an open neighborhood $V$ such that the open sets $gV$ are pairwise disjoint for all $g  \in G$.
@@ -278,7 +315,7 @@ Now deck transformations must map fibers $p$ bijectively onto each other, which 
 \end{definition}
 
 We will not immediately make use of this definition, but it will be handy to keep in mind.
-The following lemma is very useful.
+The following lemma will be necessary in relating the topological fundamental group with covers.
 
 \begin{proposition}[Lifting Paths and Homotopies]	
 	Let $p: Y \to X$ be a covering. 
@@ -287,7 +324,8 @@ The following lemma is very useful.
 \end{proposition}
 
 \begin{proof}
-	See \cite{FomenkoFuchs}, Lecture 6.5.
+	The local triviality allows us to explicitly construct the lift of the path, for a full proof of the two statements see \cite{FomenkoFuchs}, Lecture 6.5.
+	There you may also find stronger lifting theorems, but for our purposes this is all we need.
 \end{proof}
 		
 Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$ an element of the fiber $p^{-1}(x)$.
@@ -296,18 +334,22 @@ Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$
 	Since $\widetilde{s}(1)$ is the same for homotopic paths, this action is well-defined by the last part of the previous proposition.
 	We will call this (left) continuous action on $p^{-1}(x)$ the \textit{monodromy action}.\\
 	\indent There is then a functor $\text{Fib}_x$, which takes a cover $Y \to X$ to the finite fiber $p^{-1}(x)$ of the basepoint.
-The culmination of the work in this section is to describe the following theorem, which one should compare with.
+The culmination of the work in this section is to describe the following theorem.
+We require some niceness conditions on the space $X$, one of which is that of \textit{locally simply connectedness}, which requires that for every $x \in X$ a neighorhood which is simply connected.
 
 	\begin{theorem}\thlabel{coverfunctor}
-	For a space $X$ with base point $x$, the functor $\text{Fib}_x$ induces an equivalence between the category of finite covers of $X$ and the category of finite continuous left $\widehat{\pi_1(X,s)}$-sets.
+	For a connected and locally simply connected space $X$ with base point $x$, the functor $\text{Fib}_x$ induces an equivalence between the category of finite covers of $X$ and the category of finite continuous left $\widehat{\pi_1(X,x)}$-sets.
 	Connected covers correspond to finite $\widehat{\pi_1(X,s)}$-sets with transitive action and Galois covers correspond to space of open normal subgroups.
 \end{theorem}
 \begin{proof}
-	See \cite{Szamuely}
+	The proof first shows an equivalence between $\pi_1(X,x)$ sets and arbitrary covers of $X$ by showing that the functor is in fact representable by an aptly named \textit{universal cover} $\widetilde{X} \to X$.
+The profinite completion of $\pi_1(X,x)$ arises in the case of finite covers as its corresponding actions factor through some finite quotient.
+	For all the details see Theorem 2.3.5 and Corollary 2.3.9 in \cite{Szamuely}.
 \end{proof}
 
 
-In comparison with \thref{grothendiecksformulation}, one may already conjecture the below relations
+Compare with \thref{grothendiecksformulation}.
+One may already conjecture the below relations
 \begin{center}
 \begin{tabular}{ |c c c| } 
 \hline
@@ -324,6 +366,8 @@ One way to resolve this is with the notion of a \textit{Galois category} (see \c
 As one may speculate, any Galois category is equivalent to a category of finite $G$-sets for a profinite group $G$.
 In our cases so far Galois extensions and regular coverings as well as separable extensions and connected coverings are respectively instances of \textit{Galois objects} and \textit{connected objects} in a Galois category.
 We will not go over these treatments, but it may be useful to keep in mind the parallels especially as we begin develop another Galois category but in the context of schemes.
+
+\todo{Give motivations}
 
 
 \section{The Algebraic Fundamental Group}
@@ -379,6 +423,7 @@ Since $f'$ exhibits $B'$ as a finitely generated $A'$-module, every element of $
 However, since $R$ is a valuation ring it is closed in its field of fractions $K$, hence the image of $B'$ under $d$ must be contained in $R$.
 This precisely says that $d$ factors through the inclusion $R \hookrightarrow K$, giving us our desired unique map.
 \end{proof}
+
 
 For a map $f: X \to Y$ of schemes the map $f^{\flat}: \mc{O}_Y \to f_*\mc{O}_X$ exhibits the direct image sheaf $f_* \mc{O}_X$ as an $\mc{O}_Y$-algebra.
 In particular, $f_* \mc{O}_X$ is also an $\mc{O}_Y$-module.
@@ -518,7 +563,7 @@ We are now in a similar situation as when we defined the topological fundamental
 Let $\text{Fet}_S$ denote the category of finite \'etale covers of $S$.
 Fix a geometric point $\overline{s}$ of $S$, there is a natural functor to the category of finite sets \textbf{FinSet} by taking the geometric fiber over $\overline{s}$. 
 The analogy of the monodromy action, on the other hand, is not immediately obvious.
-Instead consider the following.
+We instead consider the following.
 
 \begin{definition}[The \'Etale Fundamental Group]
 	For a scheme $S$ and a geometric point $\widetilde{s}: \text{Spec}(K) \to S$, we define the \textit{\'etale fundamental group} $\pi_1(S, \widetilde{s})$ as the automorphism group of the fiber functor $\text{Fib}_{\overline{s}}$ from $\text{Fet}_{S}$ to $\textbf{FinSet}$.
@@ -650,7 +695,7 @@ Just working from the definition of the \'etale fundamental group, it is very di
 As we saw at the end of the previous section that even for simple maps of field valued points given by field extensions, it is equivalent to computing their corresponding Galois groups!
 However, \thref{riemannexistence} now introduces the ability to immediately begin computing certain \'etale fundamental groups using their topological analogue as we will highlight.
 
-\begin{examples} \text{}
+\begin{examples} \thlabel{Examples}\text{}
 	\begin{enumerate} 	\item Consider $\textbf{A}_{\C}^1 - \{0\} \cong \text{Spec}(\C[x^{\pm 1}])$. 
 		It's associated analytic space is simply $\C - \{0\}$, which has fundamental group $\Z$ for any choice of basepoint, so for any geometric point $\overline{x}$ of $\textbf{A}_{\C}^1 - \{0\}$ we conclude
 		\[\pi_1(\textbf{A}_{\C}^1 - \{0\}, \overline{x}) \cong \widehat{\Z}\]
@@ -717,7 +762,7 @@ Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective
 Although there is a involved for the middle isomorphism, the resulting is still unique up to an inner automorphism.
 This gives us a map relating the two fibers above a discrete valuation ring, its main use is in the below proof.
 
-\begin{theorem}[Grothendieck]
+\begin{theorem}[Grothendieck] \thlabel{groth}
 	Keep the same notations and assumptions as above.
 	Assume that $f$ is proper and smooth with geometrically connected fibers.
 	Then the specialization map induces an isomorphism 
@@ -731,8 +776,7 @@ This gives us a map relating the two fibers above a discrete valuation ring, its
 	 Also long and involved \todo{Try and give a proof?}
  \end{proof}
  
-
- We now outline the proof of Grothendieck's main result below.
+ The main result due to Grothendieck is as follows.
 \begin{theorem}
 	Let $k$ be an algebraically closed field of characterstic $p \geq 0$, and let $X$ be an integral proper normal curve of genus $g$ over $k$.
 	For every geometric point $\overline{x}$ of $X$, the group $\pi_1(X, \overline{x})$ has its maximal prime to $p$-quotient $\pi_1(X, \overline{x})^{(p')}$ is isomorphic to the profinite $p'$-compleiton of the group
@@ -740,16 +784,33 @@ This gives us a map relating the two fibers above a discrete valuation ring, its
 	where $[a_i, b_i]$ denotes the commutator $a_i b_i a_i^{-1} b_i^{-1}$.
 \end{theorem}
 
-\begin{proof}
+\begin{proof} We give an outline of how to proceeed.
 	\begin{enumerate}
-		\item We first construct a complete discrete valuation ring $A$ whose fie
-		\item 
+		\item We first construct a discrete valuation ring $A$ whose fraction field $K$ has characteristic 0 and whose residue field is isomorphic to $k$.
+	One way is found in \todo{cite}, and we may also assume that it is complete, otherwise we may just take the completion. 
+\item We then find a smooth proper scheme $Y \to \text{Spec}(A)$ such that $Y_{s} = X$ and $Y_{\eta}$ a smooth proper curve over $K$.
+	There are several ways to go about this \todo{finish later}
+\item Finally, we may apply \thref{groth}, as well as \thref{Examples} which gives us our desired result. 
 	\end{enumerate}
 	
 \end{proof}
 
 Just as above, one often finds that in the characteristic $p$ case that the "non-$p$" part is the same as in the charateristic zero.
-We give the reader a taste of more results in this area (a good exposition can be found in  \cite{abhyankar}), but whose explanations are out of scope of this paper, 
+We give the reader a taste of more results in this area (a good exposition can be found in  \cite{abhyankar}), but whose explanations are out of scope of this paper.
+For a group $G$, let $p(G)$ denote the subgroup generating by all $p$-subgroups (subgroups of order a power of $p$).
+One major result in this area is as follows.
+
+\todo{cite/italicize?}
+\begin{conjecture}[Abhyankar's Conjecture]
+	Let $X$ be a smooth projective curve of genus $g$ defined over an algebraically closed field $k$ of characteristic $p > 0$.
+	Let $B$ be a non-empty set of points of $X$ having cardinality $r$ and let $U = X - B$.
+	Then a finite group $G$ is a Galois group of an unramified cover of $U$ if and only if $G/p(G)$ has a generating set of size at most $2g + r -1$.
+\end{conjecture}
+
+This conjecture is in fact now a theorem, whose proof was given by Raynaud, involving the work of Serre and Harbater.
+Note that in the case when $X$ is  
+
+
 
 
 \newpage
