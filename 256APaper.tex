@@ -519,9 +519,13 @@ There is a lot involved in the formulation of finite \'etale morphisms so we giv
 	See 6.9 Proposition in \cite{Lenstra}
 \end{proof}
 
+\begin{remark}
+	There are many potential motivations we could delve into for these choice of definitions, from local isomorphisms of manifolds to unramified extensions in algebraic number theory.
+While we will briefly touch on the latter topic, we won't be able to fully touch on all of these connections.
+For an interested reader however, \cite{milneLEC} provides a good discussion on flat and unramified maps. 
+\end{remark}
 
-
-We now record some basic (but very useful!) results one would expect of any reasonable morphism.
+We now record some basic (but very useful!) results one would expect of any reasonable morphism of schemes.
 
 \begin{proposition}\thlabel{basicresults}
 The following hold for finite \'etale morphisms: 
@@ -659,16 +663,23 @@ We now give a vital proposition, which is an analog of the fact that every finit
 	See \cite{Szamuely}, Proposition 5.3.9
 \end{proof}
 
+In the topological case the functor $\text{Fib}_x$ was in fact representable by the so called universal cover, and our functor in \thref{grothendiecksformulation} by the separable closure $k^s$.
+However $k^s$ need not be a finite separable extension less a finite \'etale $k$-algebra so it is not representable as in the sense of the topological group.
+Despite this, there is a somewhat weaker notion of representability called \textit{pro-representability} which is satisfied.
+
+
 \begin{definition}[Pro-representable functors]
 	Let $C$ be a category and $F: C \to \text{Set}$ a set-valued functor.
 	We will say that $F$ is \textit{pro-representable} if it is the colimit of an inverse system $(P_{\alpha}, \phi_{\alpha \beta})$ in the category $\text{Set}^C$ of set valued-functors with indexing objects representable presheaves, in which case we will write 
-	\[F \cong \varinjlim \text{Hom}(P_{\alpha}, _)\]
+\[F \cong \varinjlim \text{Hom}(P_{\alpha}, -)\]
 \end{definition} 
 
 Note that as opposed to an inverse limit, we are instead taking the colimit as opposed to the limit.
 Since the colimit takes values in presheaves, it is in fact defined termwise.
 This says that for any object $C$, restricting the functors to $C$ preserves colimits; we know what colimits look like in Set, they are the disjoint union of sets in the diagram, modulo the equivalence where two elements are identified if they are mapped to some common element in the diagram. 
 With this in mind we now begin to develop some necessary background regarding the \'etale fundamental group.
+Recall that $k^s$ can be thought of as the union of its finite Galois subextensions.
+In fact, the functor to \textbf{FinSet} associated to each Galois category is pro-represented by its Galois objects; we outline this below for $\text{Fib}_{\overline{s}}$.
 
 \todo{Fill in below proofs}
 \begin{proposition}\thlabel{prorepresentation}
@@ -678,15 +689,16 @@ With this in mind we now begin to develop some necessary background regarding th
 
 \begin{proof}
 	We will give a detailed outline of the proof.
-	There is a partially ordered set consisting of all finite \'etale Galois covers $P_{\alpha} \to S$, and where we let $P_{\alpha} \leq P_{\beta}$ if there is a morphism of covers $P_{\beta} \to P_{\alpha}$, one can show it is directed by constructing a map using \thref{unigal}.\\
+	There is a partially ordered set consisting of all finite \'etale Galois covers $P_{\alpha} \to S$, and where we let $P_{\alpha} \leq P_{\beta}$ if there is a morphism of covers $P_{\beta} \to P_{\alpha}$.
+	One can show it is directed by constructing a map using \thref{unigal}.\\
 	\indent There is no immediate choice of maps in our inverse system.
 	However, if for every $P_{\alpha}$ in our partially ordered set we fix an element $p_{\alpha}$ in the geometric fiber $\text{Fib}_{\overline{s}}(P_{\alpha})$ there are such maps.
 	In particular, since the covers are Galois and automorphisms act transitively on the fibers, if $P_{\alpha} \leq P_{\beta}$ there exists a unique map $\phi_{\alpha \beta}: P_{\beta} \to P_{\alpha}$ such that $\text{Fib}_{\overline{s}}(\phi_{\alpha \beta})(p_{\beta}) = p_{\alpha}$, so the maps respect the chosen geometric points.
 	Then for any finite \'etale cover $P_{\alpha}$, there exists by Yoneda Lemma a unique natural transformation $\text{Hom}(P_{\alpha}, -)$ to $\text{Fib}_{\overline{s}}$ sending $\text{id}_{P_{\alpha}} \in \text{Hom}(P_{\alpha}, P_{\alpha})$ to $p_{\alpha} \in \text{Fib}_{\overline{s}}(P_{\alpha})$.
-	By the uniqueness of these natural transformations, they must commute with the natural transformations $\text{Hom}(P_{\alpha}, -) \to \text{Hom}(P_{\beta}, -)$ given by pre-composing with $\phi_{\alpha \beta}$, and hence define a natural transformation
+	By the uniqueness of these natural transformations, they must commute with the natural transformations $\text{Hom}(P_{\alpha}, -) \to \text{Hom}(P_{\beta}, -)$ given by pre-composing with $\phi_{\alpha \beta}$, and hence in total define a natural transformation from the colimit
 	\[\varinjlim \text{Hom}(P_{\alpha}, -) \to \text{Fib}_{\overline{s}}\]
 	To define the inverse natural transformation, for any finite \'etale cover $X \to S$ and $x \in \text{Fib}_{\overline{s}}(X)$ we consider the promised finite \'etale Galois cover $P$ from \thref{unigal}.
-	Since $P$ is Galois it is some $P_{\delta}$ in our inverse system and so in addition there exists a unique map $\varphi: P \to X$ mapping $p_{\delta}$ to $x$.
+	Since $P$ is Galois it is some $P_{\delta}$ in our inverse system and so in addition there exists a unique map $\varphi: P_{\delta} \to X$ mapping $p_{\delta}$ to $x$.
 The inverse map sends $x$ back to the representative of $\varphi$ in $\varinjlim \text{Hom}(P_{\alpha}, X)$.
 
 \end{proof}
@@ -740,9 +752,9 @@ and so we must have $\pi_1(S, \overline{s}) \cong \text{Gal}(k^s|k)$.
 
 	The topological fundamental group is functorial in that base-point preserving maps of topological spaces induce corresponding maps of their fundmantal groups, the same is in fact true in the \'etale case.
 If $S, S'$ are connected schemes with $\overline{s}, \overline{s'}$ respective geometric points, a morphism $\phi: S' \to S$ such that $\phi \circ \overline{s'} = \overline{s}$ induces a functor
-\[\text{BaseChange}: \text{Fet}_S \to \text{Get}_{\overline{S}}\]
+\[\text{BC}: \text{Fet}_S \to \text{Get}_{\overline{S}}\]
 sending a cover $X$ to its basechange $X \times_S S'$, as well as morphisms $X \to Y$ to the natural morphisms $X \times_S S' \to Y \times_S S'$.
-Since $\phi \circ \overline{s'} = \overline{s}$, we have $\text{Fib}_{\overline{s}} = \text{BaseChange} \circ \text{Fib}_{\overline{s'}}$, in which case every automorphism of $\text{Fib}_{\overline{s'}}$ induces an automorphism of $\text{Fib}_{\overline{s}}$ by pre-composition with BaseChange.
+Since $\phi \circ \overline{s'} = \overline{s}$, we have $\text{Fib}_{\overline{s}} = \text{BC} \circ \text{Fib}_{\overline{s'}}$, in which case every automorphism of $\text{Fib}_{\overline{s'}}$ induces an automorphism of $\text{Fib}_{\overline{s}}$ by pre-composition with BC.
 This gives us our natural map $\pi_1(S', \overline{s'}) \to \pi_1(S, \overline{s})$ induced by $\phi$.\\
 
 
@@ -773,8 +785,8 @@ We will first make use of \textbf{Proposition 5.4.9} from \cite{Szamuely}
 Let us apply the above theorem to $\text{Spec}(\Z)$.
 It is integral and normal as $\Z$ is a domain which is integrally closed in its field of fractions (\todo{cite}). 
 Then we simply need to find all finite subextensions $L$ of its fraction field $\Q$ which is \'etale over $\Z$.
-However, $L$ is by definition a number field, and the normalization of $Z$ its corresponding number ring, so we are looking for finite \'etale maps $\text{Spec}(\mc{O}_L) \to \text{Spec}(Z)$ given by the unique map $\Z \to \mc{O}_L $
-for its corresponding 
+However, $L$ is by definition a number field, and the normalization of $Z$ its corresponding number ring, so we are looking for finite \'etale maps $\text{Spec}(\mc{O}_L) \to \text{Spec}(Z)$ given by the unique map $\Z \to \mc{O}_L$.
+
 
 
 \section{The Riemann Existence Theorem}
