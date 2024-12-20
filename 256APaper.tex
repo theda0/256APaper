@@ -26,11 +26,9 @@
 \newtheorem{theorem}{Theorem}[section]
 
 \theoremstyle{definition}
+\newtheorem{definition2}[theorem]{Definition}
 \newtheorem{lemma}[theorem]{Lemma}
-
 \newtheorem{corollary}[theorem]{Corollary}
-
-
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{examples}[theorem]{Examples}
@@ -124,7 +122,7 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	
 \begin{proposition}
 	Let $G = \varprojlim G_i$ be a profinite group and consider the topology mentioned above.
-	Then the following hold:
+	The following hold:
 	\begin{enumerate}
 		\item $G$ is a closed subgroup of $\prod G_i$.
 		\item $G$ is compact and totally disconnected.
@@ -467,7 +465,7 @@ This precisely says that $d$ factors through the inclusion $R \hookrightarrow K$
 \end{proof}
 
 
-For a map $f: X \to Y$ of schemes the map $f^{\flat}: \mc{O}_Y \to f_*\mc{O}_X$ exhibits the direct image sheaf $f_* \mc{O}_X$ as an $\mc{O}_Y$-algebra.
+For a morphism $f: X \to Y$ of schemes the map $f^{\flat}: \mc{O}_Y \to f_*\mc{O}_X$ exhibits the direct image sheaf $f_* \mc{O}_X$ as an $\mc{O}_Y$-algebra.
 In particular, $f_* \mc{O}_X$ is also an $\mc{O}_Y$-module.
 This allows us to make the next definition.
 
@@ -490,24 +488,51 @@ There is a lot involved in the formulation of finite \'etale morphisms so we giv
 	The pre-image of an affine open $\text{Spec}(A)$ of $X$ is $\coprod_{i \in I} \text{Spec}(A)$.
 	When the indexing set $I$ is finite we have $\coprod_{i \in I} \text{Spec}(A) \cong \text{Spec}(A \times \dots \times A)$.
 	Hence it is then readily verified that $p$ is a finite \'etale cover.
-	\item 
-    \end{enumerate}	
+\item  Let $B = A[x]/(f)$  for some ring $A$ and monic polynomial $f \in A[x]$ of degree $d$.
+	Then the natural map $\phi: \text{Spec}(B) \to \text{Spec}(A)$ is finite \'etale if $(f, f') = (1)$.
+	Indeed, $\phi$ is trivially affine, and is both finite and locally free as $B$ is freely generated as an $A$-module by the elements $1,x, \dots x^{d-1}$.
+	And for $\mk{p} \in \text{Spec}(A)$, the corresponding fiber is $B \otimes_A \kappa(\mk{p}) \cong \kappa(\mk{p})[x]/(\overline{f})$ for $\overline{f})$ the image of $f$ in $\kappa(\mk{p})[x]$.
+	When $(f, f') = (1)$ the roots are simple, and so define a finite \'etale $\kappa(\mk{p})$-algebra hence $\phi$ is finite \'etale.
+    \end{enumerate}	 
 \end{examples}
 
-\begin{proposition}\thlabel{basechangecomp}
-Finite \'etale morphisms are closed under base change and composition
-\end{proposition}
+\begin{remark}
+	As is very often the case in algebraic geometry, there are often many equivalent formulations of some concept.
+	This is indeed the case for finite \'etale morphisms as well and we will quickly give a separate definition as well which will be more useful later on.
+	As one may expect, finite \'etale is equivalent to some finiteness condition and a notion of being \textit{\'etale} which we will begin to define.
 
+\end{remark}
+
+\begin{definition2}[Unramified morphisms]
+	A morphism $f: X \to Y$ which is locally of fintie type is also said to be \textit{unramified} at $x \in X$ if $\mc{O}_{X,x}/\mk{m}_{f(x)} \mc{O}_{X,x}$ is a finite separable field extension of $\mc{O}_{X, f(x)}/\mk{m}_{f(x)}$.
+\end{definition2}
+
+
+\begin{definition2}[\'Etale morphisms]
+	A morphism $f: X \to Y$ is called \textit{\'etale} if it is flat and unramified.
+\end{definition2}
+
+\begin{proposition}
+	A morphism $f: X \to Y$ of schemes is finite \'etale if and only if it is finitely presented and \'etale.
+\end{proposition}
 \begin{proof}
-	\todo{Prove or cite}
+	See 6.9 Proposition in \cite{Lenstra}
 \end{proof}
 
-\begin{proposition}\thlabel{etalediagonal}
-	If $f: X \to S$ is an \'etale morphism, then ths diagonal morphism $X \to X \times_S X$ induced by $f$ is an isomorphism of $f$ onto an open and closed subscheme of $X \times_S X$.
+
+
+We now record some basic (but very useful!) results one would expect of any reasonable morphism.
+
+\begin{proposition}\thlabel{basicresults}
+The following hold for finite \'etale morphisms: 
+\begin{enumerate}
+	\item Finite \'etale morphisms are closed under base change and composition
+	\item If $f: X \to S$ is an \'etale morphism, then ths diagonal morphism $X \to X \times_S X$ induced by $f$ is an isomorphism of $f$ onto an open and closed subscheme of $X \times_S X$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-	See \cite{Szamuely}, Proposition 5.2.7.
+	See \cite{Szamuely}, Proposition 5.2.7. and Proposition and Remarks 5.2.3
 \end{proof}
 
 \begin{proposition}\thlabel{cancellation}
@@ -522,9 +547,9 @@ Finite \'etale morphisms are closed under base change and composition
 
 \begin{proof}	
 	For the first statement, since $f$ is separated, it diagonal $\Delta_f$ is a closed immersion, and so also finite. 
-	Since finite morphisms are closed under composition and base change, the Cancellation Lemma \todo{cite} gives us that $g$ must be finite as well.\\
-\indent The second proposition follows similarly, since $f$ is finite \'etale \thref{etalediagonal} tells us that its diagonal $\Delta_f$ is an immersion onto on open and closed subscheme, which is also finite \'etale.
-As \thref{basechangecomp} tells us that finite 'etale morphisms are closed under composition and basechange, the Cancellation Lemma tells us that $g$ is also finite \'etale.
+	Since finite morphisms are closed under composition and base change, the Cancellation Theorem (11.21 \cite{therisingsea}) gives us that $g$ must be finite as well.\\
+\indent The second proposition follows similarly, since $f$ is finite \'etale \thref{basicresults} tells us that its diagonal $\Delta_f$ is an immersion onto on open and closed subscheme, which is also finite \'etale.
+As \thref{basicresults} tells us that finite 'etale morphisms are closed under composition and basechange, the Cancellation Lemma tells us that $g$ is also finite \'etale.
 \end{proof}
 
 \begin{proposition}
@@ -537,6 +562,8 @@ As \thref{basechangecomp} tells us that finite 'etale morphisms are closed under
 	\[(f_* \mc{O}_X)|_U \cong (\mc{O}_Y|_U)^{\oplus n}\]
 	But this says that $U$ must be contained in the image of $f$, hence its image must also be open.
 \end{proof}
+
+With all most of the technical details behind us, we can begin to construct the correct analog of fibers from the topological case.
 
 \begin{definition}[Geometric Point]
 	Let $X$ be a scheme and consider a map $\overline{x}: \text{Spec}(k) \to X$ for $k$ a field.
@@ -576,7 +603,7 @@ As $\lambda$ is an isomorphism, so is the induced map on the geometric fiber $\t
 	Let $S$ be a connected scheme, and $f\colon X \to S$ an affine surjective morphism.
 	Then $f$ is a finite \'etale cover if and only if there is a finite, locally free and surjective morphism $g: Y \to S$ such that $X \times_S Y$ is a trivial cover of $Y$.
 \end{proposition}
-\todo{Check if prop is necessary}
+\todo{Probably not necessary}
 
 \begin{lemma}
 	Let $X, Z$ be two $S$-schemes where $Z$ is connected and $X$ finite \'etale (over $S$). 
@@ -587,7 +614,7 @@ As $\lambda$ is an isomorphism, so is the induced map on the geometric fiber $\t
 	\todo{Fill in}
 \end{proof}
 
-It is an easily-proven theorem that automorphisms of covering spaces in the topological case are uniquely determined by the image of a single point; this is due to certain lifting properties \todo{cite}.
+It is an easily-proven theorem that automorphisms of covering spaces in the topological case are uniquely determined by the image of a single point; this is due to certain lifting properties (see Proposition 1, Lecture 6.8, \cite{FomenkoFuchs}).
 In this spirit,we obtain as a corollary of the above that automorphisms of connected finite \'etale covers are determined uniquely by their images on geometric points.
 \begin{corollary}\thlabel{finitepoints}
 	If $f: X \to S$ is a connected finite \'etale cover, then nontrivial elements of $\text{Aut}(X|S)$ act without any fixed points on any geometric fiber.
@@ -702,14 +729,16 @@ Since our pro-representation was represented by $\text{Hom}(P_{\alpha}, -)$, the
 To show that the action is continuous, note that  
 \end{proof}
 
+\begin{remark}
 As a corollary we now give the promised proof of \thref{grothendiecksformulation}.
 Let $S = \text{Spec}(k)$ for $k$ a field; a finite \'etale cover corresponds to the affine scheme of a finite dimensional \;etale $k$-algebra $L$.
 For a geometric point $\text{Spec}(\Omega) \to S$, the corresponding geometric fiber is the pullback of affine schemes $\text{Spec}(\Omega \otimes_k L)$, which as a set it is indexed by all $k$-algebra homomorphisms from $L$ to $\Omega$ \todo{Elaborate with primitive element theorem}.
 Since the image of every map must lie in the separable closure of $k$ within $\Omega$, we have an isomorphism 
 \[\text{Fib}_{\overline{s}}(\text{Spec}(L)) \cong \text{Hom}_k(L, k^s)\]
 and so we must have $\pi_1(S, \overline{s}) \cong \text{Gal}(k^s|k)$.
+\end{remark}
 
-The topological fundamental group is functorial in that base-point preserving maps of topological spaces induce corresponding maps of their fundmantal groups, the same is in fact true in the \'etale case.
+	The topological fundamental group is functorial in that base-point preserving maps of topological spaces induce corresponding maps of their fundmantal groups, the same is in fact true in the \'etale case.
 If $S, S'$ are connected schemes with $\overline{s}, \overline{s'}$ respective geometric points, a morphism $\phi: S' \to S$ such that $\phi \circ \overline{s'} = \overline{s}$ induces a functor
 \[\text{BaseChange}: \text{Fet}_S \to \text{Get}_{\overline{S}}\]
 sending a cover $X$ to its basechange $X \times_S S'$, as well as morphisms $X \to Y$ to the natural morphisms $X \times_S S' \to Y \times_S S'$.
@@ -717,10 +746,21 @@ Since $\phi \circ \overline{s'} = \overline{s}$, we have $\text{Fib}_{\overline{
 This gives us our natural map $\pi_1(S', \overline{s'}) \to \pi_1(S, \overline{s})$ induced by $\phi$.\\
 
 
+In the topological case, two different choices of a basepoint for the underlying space $X$ only affected its topological fundamental group up to some inner automorphism: in particular they are still isomorphic.
+
+
 We shall show what one may have to go through to calculate $\pi_1(\text{Spec}(\Z), x_0)$.
 We it will require some number theoretic notions and tools, which we shall outlines as needed.
-\todo{Outline}
 
+\begin{definition}
+	A \textit{number field} is a finite extension of $\Q$.
+\end{definition}
+
+\begin{definition}
+	If $K$ is a number field, its corresponding \textit{number ring} is the integral closure (normalization) \todo{same thing?} of $\Z \subset K$.
+\end{definition}
+
+It turns out that all number rings are examples of \textit{Dedekind domains}, which are \todo{Dedekind}
 We will first make use of \textbf{Proposition 5.4.9} from \cite{Szamuely}
 
 \begin{proposition}
@@ -729,6 +769,12 @@ We will first make use of \textbf{Proposition 5.4.9} from \cite{Szamuely}
 	Then $K_S|K$ is a Galois extension, and $\text{Gal}(K_S|K)$ is canonically isomorphic to the fundamental group $\pi_1(S, \overline{s})$ for the geometric point $\overline{s}: \text{Spec}(\overline{K} ) \to S$ where $\overline{K}$ is the algebraic closure of $K$ containing $K_s$.
 
 \end{proposition}
+
+Let us apply the above theorem to $\text{Spec}(\Z)$.
+It is integral and normal as $\Z$ is a domain which is integrally closed in its field of fractions (\todo{cite}). 
+Then we simply need to find all finite subextensions $L$ of its fraction field $\Q$ which is \'etale over $\Z$.
+However, $L$ is by definition a number field, and the normalization of $Z$ its corresponding number ring, so we are looking for finite \'etale maps $\text{Spec}(\mc{O}_L) \to \text{Spec}(Z)$ given by the unique map $\Z \to \mc{O}_L $
+for its corresponding 
 
 
 \section{The Riemann Existence Theorem}
@@ -775,7 +821,7 @@ However, \thref{riemannexistence} now introduces the ability to immediately begi
 	with $2g$ generators, and the only relations that the commutators $[a_i, b_i] = a_i b_i a_i^{-1} b_i^{-1}$ is trivial.
 \end{enumerate}
 \end{examples}
-
+\todo{picture?}
 And while we have only give examples for schemes over $\C$, the below result allows us to extend it to a slightly larger class of schemes. 
 \begin{proposition}
 	Let $K \supset k$ be an extension of algebraically closed fields, and let $X$ be a proper integral scheme over $k$.
@@ -864,7 +910,6 @@ We give the reader a taste of more results in this area (a good exposition can b
 For a group $G$, let $p(G)$ denote the subgroup generating by all $p$-subgroups (subgroups of order a power of $p$).
 One major result in this area is as follows.
 
-\todo{cite/italicize?}
 \begin{conjecture}[Abhyankar's Conjecture]
 	Let $X$ be a smooth projective curve of genus $g$ defined over an algebraically closed field $k$ of characteristic $p > 0$.
 	Let $B$ be a non-empty set of points of $X$ having cardinality $r$ and let $U = X - B$.
@@ -872,7 +917,10 @@ One major result in this area is as follows.
 \end{conjecture}
 
 This conjecture is in fact now a theorem, whose proof was given by Raynaud, involving the work of Serre and Harbater.
-Note that in the case when $X$ is  
+Note that in the case when $X$ is $\textbf{P}_k^1$ and $B$ is the point of infinity, then $U$ is the affine line over $k$.
+Since $g = 0, r = 1$ in this case, the above theorem tells us that the Galois groups of unramified covers are precisely the \textit{quasi-p groups}, those groups which are generated by its $p$-subgroups.
+
+
 
 
 
