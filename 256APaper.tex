@@ -77,7 +77,7 @@ Every scheme has an associated topological space, so one may naively apply the d
 A more fruitful approach instead uses the fundamental group's relation to theory of covers, of which there is a satisfactory schematic analog in finite \'etale covers which we lay out in Section 3.\\
 
 What may not be immediately obvious is that the \'etale fundamental group is intimately related to that of Galois theory for field extensions. 
-In fact, as an easy corollary at the end of Section 3 we will prove \thref{grothendiecksformulation}, a (albeit slightly different) formulation of Krull's theorem for Galois extensions.
+In fact, as a corollary at the end of Section 3 we will prove \thref{grothendiecksformulation}, a (albeit slightly different) formulation of Krull's theorem for Galois extensions.
 Before, this however, we will establish some necessary foundation in Galois Theory and the topological fundamental group. 
 And although we may initially have cautioned against a relation between the topological and \'etale fundamental group, there are still contexts where one can say a lot about the other.
 Near the end, we will look at one possibility in \thref{RiemannExistence}, which relates the two in the case of finite type schemes over $\C$ and see some immediate uses.\\
@@ -96,7 +96,7 @@ Following the notation of \cite{Szamuely} we will denote a field extension $K \s
 Now as we know, for finite Galois extensions $K|k$ there is an inclusion-reversing bijection between subfields $K \supseteq L \supseteq k$ and subgroups $H \subset \text{Gal}(K|k)$.
 In particular, a subfield $L$ is assigned the subgroup $\text{Aut}(K|L) \subset \text{Gal}(K|k)$ fixing $L$ and a subgroup $H$ is assigned its fixed field $K^H$.
 Unfortunately, for infinite Galois extensions this correspondence breaks down.
-However, there is still a satisfactory correspondence which we will look at.\\
+However, there is still a satisfactory correspondence which we will lay out.\\
 
 For preliminaries, first note that any partially ordered set $(\Lambda, \leq)$ can be viewed as a category where the objects are elements of $\Lambda$, and there is a morphism between $a,b \in \Lambda$ if and only if $a \leq b$.
 Call a partially ordered set $(\Lambda, \leq)$ \textit{directed} if for all $c_1, c_2 \in \Lambda$ there exists a $d \in \Lambda$ such that $c_1 \leq d, c_2 \leq d$.
@@ -107,7 +107,7 @@ Call a partially ordered set $(\Lambda, \leq)$ \textit{directed} if for all $c_1
 
 If the limit of an inverse system $F: J^{\text{op}} \to \mc{C}$ exists, we will call it an \textit{inverse limit}.
 It will be denoted as $\varprojlim C_{j}$, where $\{C_j\}_{j \in J}$ are the objects in $\mc{C}$ indexed by $J$.
-When $\mc{C}$ is the category of groups, the limit always exists and it is the subgroup of $\prod_{j \in J} G_j$ consisting of sequences $(g_i)$ such that $Fk(g_i) = g_j$ if there is a morphism $k: i  \to j$ in $\Lambda$.
+When $\mc{C}$ is the category of groups, the limit always exists and it has the explicit description as the subgroup of $\prod_{j \in J} G_j$ consisting of sequences $(g_j)_{j \in J}$ such that $Fk(g_i) = g_k$ if there is a morphism $f: i  \to k$ in $\Lambda$.
 
 \begin{definition}
 	A profinite group is the inverse limit of an inverse system whose objects are all finite groups.
@@ -130,19 +130,19 @@ When $\mc{C}$ is the category of groups, the limit always exists and it is the s
 	\end{enumerate}
 	
 	\begin{proof}
-		We first show that $G$ is closed in $\prod G_i$.
+		We first show that $G$ is closed in $\prod_{i \in I} G_i$.
 		Let $G$ be the inverse limit of groups $\{G_i\}_{i \in I}$ with maps $\phi_{\alpha \beta}: G_{\beta} \to G_{\alpha}$. 
-		If $x \notin G$, then it is a sequence $(g_i)_{i \in I} \subset \prod G_i$ such that $\phi_{\alpha \beta} (g_{\beta}) \neq g_{\alpha}$for some finite groups $G_{\alpha}$ and $G_{\beta}$.
-Then consider the following subset of $\prod G_i$
-\[S  = \{(h_i) \,|\, h_{\beta} = g_{\beta}, h_{\alpha} \neq g_{\alpha}\}\]
-If $\pi_{\alpha}$ and $\pi_{\beta}$ are the natural projections of $\prod G_i$ onto $G_{\alpha}$ and $G_{\beta}$, $S$ is the intersection of $\pi_{\alpha}^{-1}(G_{\alpha} - g_{\alpha})$ and $\pi_{\beta}^{-1}(g_{\beta})$, which are open by continuity of the projection maps and the discrete topology on each $G_i$.
+		If $x \notin G$, then it is a sequence $(g_i)_{i \in I} \subset \prod_{i \in I} G_i$ such that $\phi_{\alpha \beta} (g_{\beta}) \neq g_{\alpha}$for some finite groups $G_{\alpha}$ and $G_{\beta}$.
+		Then consider the following subset of $\prod_{i \in I} G_i$
+		\[S  = \{(h_i)_{i \in I} \,|\, h_{\beta} = g_{\beta}, h_{\alpha} \neq g_{\alpha}\}\]
+		If $\pi_{\alpha}$ and $\pi_{\beta}$ are the natural projections of $\prod_{i \in I} G_i$ onto $G_{\alpha}$ and $G_{\beta}$, then $S$ is the intersection of $\pi_{\alpha}^{-1}(G_{\alpha} - g_{\alpha})$ and $\pi_{\beta}^{-1}(g_{\beta})$, which are open by continuity of the projection maps and the discrete topology on each $G_i$.
 Hence $S$ is an open subset containing $x$ but not intersecting $G$, hence $G$ is closed.\\
 \indent For the second statement, since each $G_i$ is finite, it is compact with the discrete topology.
 By Tychonoff's theorem $\prod G_i$ is also compact, hence $G$ is compact being a closed subset of a compact space.
-To show that $G$ is totally disconnected, consider any two distinct points $(f_i)_{i \in I}, (g_i)_{i \in I} \in \prod G_i$.
+To show that $G$ is totally disconnected, consider any two distinct points $(f_i)_{i \in I}, (g_i)_{i \in I} \in \prod_{i \in I} G_i$.
 Then $f_{\alpha} \neq g_{\alpha}$ for some $\alpha \in I$.
 Using the same notation as in the first part of the proof, $\pi_{\alpha}^{-1}(f_{\alpha})$ and $\pi_{\alpha}^{-1}(G_{\alpha} - f_{\alpha})$ are both open and closed by the discrete topology on $G_{\alpha}$, which separate both $(f_i)_{i \in I}$ and $(g_i)_{i \in I}$.
-Therefore any subset with more than 2 elements cannot be disconnected, hence the only connected subsets must trivially be the singeletons, hence $G$ is totally disconnected.\\
+Therefore any subset with more than 2 elements cannot be disconnected, hence the only connected subsets must trivially be the singeletons so $G$ is totally disconnected.\\
 \indent Finally, we prove the third statement.
 Since the maps $U \to gU$ are continuous for any topological group, each left coset $gU$ is open in $G$.
 Since they partition $G$, $U$ must also be closed as its complement is a union of its open left cosets.
@@ -165,11 +165,10 @@ Conversely, by similar reasoning a closed group of finite index has its compleme
 
 \begin{proposition}
 	If $K|k$ is a Galois field extension then $\text{Gal}(K|k)$ is a profinite group.
-	In particular, it is the inverse limit of an inverse system consisting of the groups $\text{Gal}(L|k)$ for finite Galois subextensions $K \supset L \supset k$.
+	In particular, it is the inverse limit of an inverse system consisting of the groups $\text{Gal}(L|k)$ for finite Galois subextensions $K \supseteq L \supseteq k$.
 \end{proposition}
-\begin{proof}
-	The inverse system consists of the Galois groups $\text{Gal}(L|k)$ for $L$ finite Galois subextensions of $K|k$.
-	There are homomorphisms $\phi_{L_1L_2}: \text{Gal}(L_1|k) \to \text{Gal}(L_2|k)$ for subextensions whenever $L_1 \supset L_2 \supset k$ obtained by restricting the $k$ automorphisms of $L_2$ to $L_1$; this system is directed as the compositum $L_1 L_2$ of Galois extensions is also Galois.\\
+\begin{proof}	
+	There are homomorphisms $\phi_{L_1L_2}: \text{Gal}(L_1|k) \to \text{Gal}(L_2|k)$ for Galois subextensions whenever $L_1 \supset L_2 \supset k$ obtained by restricting the $k$ automorphisms of $L_2$ to $L_1$; this system is directed as the compositum $L_1 L_2$ of Galois extensions is also Galois.\\
 \indent We construct the isomorphisms as follows.
 There is a map $\phi: \text{Gal}(K|k) \to \prod \text{Gal}(L|k)$ over all finite Galois extensions $L|k$, which for any $k$-automorphism $\sigma$ of $\text{Gal}(K|k)$ sends it to the direct product of its restrictions to each extension $L$.
 Since each $L$ is Galois, we have that the restriction of $\sigma$ to $L$ is also an automorphism of $L$ hence $\phi$ is well-defined.
@@ -177,19 +176,20 @@ Now first note that $\phi$ is injective, as if an automorphism $\sigma$ of $K|k$
 Now the image of $\phi$ must lie in $\varprojlim \text{Gal}(L|k)$ as  $\sigma_{L_2} = \phi_{L_1 L_2} \sigma_{L_1}$ as both simply restrict $\sigma$ to $L_2$.
 Finally, we show that the map is surjective.
 For any $(\sigma_L) \in \varprojlim \text{Gal}(L|k)$ we can form a $k$-automorphism  $\sigma$ of $k$ by letting $\sigma(x) = \sigma_L(x)$ for a finite Galois subextension $L$ containing $x$. 
-This is well-defined as $(\sigma_L)$ is by assumption a compatible system, and hence there is a $\sigma$ such that $\phi(\sigma) = (\sigma_L)$ as we want to show.
+This is well-defined as $(\sigma_L)$ is by assumption a compatible system, and hence there is a $\sigma$ such that $\phi(\sigma) = (\sigma_L)$ as we wanted to show.
 \end{proof}
 
 \begin{example}\thlabel{finitefield}
 	Let $\mathbb{F}_p$ be a field of characteristic $p$ and fix an algebraic closure $\mathbb{F}_p^s$ of it.
-	Then for any integer $n$ there is a unique Galois extension of degree $n$, whose Galois group is cyclic and generated by the Frobenius $x \to x^p$.
+	Then for any integer $n$ there is a unique Galois extension of degree $n$, whose Galois group is cyclic is and generated by the Frobenius automorphism $\phi: x \to x^p$.
 	In addition, a subextension $K$ contains $L$ if and only if the degree $K$ divides $L$ (For a detailed expose of these results, see Chapter 5, \S 5 \cite{langalgebra}).
-	Hence the absolute Galois group $\text{Gal}(\mathbb{F}_p^s| \mathbb{F}_P)$ is the inverse limit of the finite quotients of $\Z$, which is its profinite completion $\widehat{\Z}$.
+	Hence the absolute Galois group $\text{Gal}(\mathbb{F}_p^s| \mathbb{F}_p)$ is the inverse limit of the finite quotients of $\Z$, which is its profinite completion $\widehat{\Z}$.
 	
 
 \end{example}
-We may give the statement of Krull's theorem, which covers the case of infinite Galois extensions.
-The bijection from the finite case fails as not all subgroups arise as one fixing a subextension, but thankfully the set of such subgroups has a nice description using the topology on the Galois group.
+This allows us to give the statement of Krull's theorem, which also covers the case of infinite Galois extensions.
+The difference in the infinite case as compared with the finite case is that not all subgroups arise as one fixing a subextension.
+Thankfully though, the set of such subgroups has a nice description using the topology on the Galois group.
 \begin{theorem}[Krull]\thlabel{Krull}
 	Let $K | k$ be a Galois extension.
 	If $k \subseteq L \subseteq K$ is a subestension, then $\text{Gal}(K|L)$ is a closed subgroup of $\text{Gal}(K|k)$.
@@ -203,11 +203,12 @@ The bijection from the finite case fails as not all subgroups arise as one fixin
 
 \begin{remark}
 	One may note just from the statement of the above theorem that this will only differs from the case with finite extensions if there exist nonclosed subgroups for some Galois group.
-	The first one to construct such an example was Dedekind, who worked with the extension of $\Q$ adjoining all $p$-poewr roots of unity.
-	In fact, it is also possible to show in \thref{finitefield}  that $\Z$ is a nontrivial dense subgroup of $\widehat{\Z}$ and hence can't be closed.
+	The first one to construct such an example was Dedekind, who worked with the extension of $\Q$ adjoining all $p$-power roots of unity.
+	In fact, it is also possible to show in \thref{finitefield}  that $\Z$ is a nontrivial dense subgroup of $\widehat{\Z}$ and hence can't be a closed subgroup.
 \end{remark}
 
-We will rephrase \thref{Krull} in a more useful form by putting it in a categorical context, the next notion will be important in this regard, as well as in the construction of the \'etale fundamental group.
+We will rephrase \thref{Krull} in a more useful form for later uses by putting it in a categorical context.
+The next notion will be important in this regard, as well as in the construction of the \'etale fundamental group.
 
 \begin{definition} \thlabel{etalealgebra}
 	A finite-dimensional $k$-algebra $A$ is \textit{\'etale} (over $k$) if it is isomorphic to the finite direct product of separable extensions of $k$.
@@ -227,10 +228,10 @@ We will rephrase \thref{Krull} in a more useful form by putting it in a categori
 
 Now let $k^s \subset \overline{k}$ be the some separable closure of $k$ lying in an algebraically closed field $\overline{k}$.
 We may view a finite separable extension $L|k$ as a $k$-algebra homomorphism $L \hookrightarrow \overline{k}$. Since any separable extension must lie in $k^s$, we may think of $k^s$ as the "largest" possible Galois extension.
-In particular, finite separable extensions $L|k$ have a natural correspondence to the finite set $k$-algebra homomorphisms $\text{Hom}_k(L, k^s)$
- which defines a contravariant functor from the category of finite separable field extensions of $k$.
- Even more can be said though, the absolute Galois group $\text{Gal}(k^s|k)$ has a natural action on $k^s$, and thus define on action on each object $\text{Hom}_k(L, k^s)$, which for any $\lambda \in \text{Gal}(k^s|k)$ and $\phi \in \text{Hom}_k(L, k^s)$ acts by sending $\phi \to \lambda \circ \phi$.
- Hence, $\text{Hom}_k(_, k^s)$ is in fact a functor to the category of $\text{Gal}(k^s|k)$-sets.\\
+In particular, finite separable extensions $L|k$ have a natural correspondence to the finite set $k$-algebra homomorphisms $\text{Hom}_k(L, k^s)$.
+ This defines a contravariant functor from the category of finite separable field extensions of $k$ to the category of Sets.
+ Even more can be said though; the absolute Galois group $\text{Gal}(k^s|k)$ has a natural action on $k^s$, and thus define on action on each object $\text{Hom}_k(L, k^s)$, which for any $\lambda \in \text{Gal}(k^s|k)$ and $\phi \in \text{Hom}_k(L, k^s)$ acts by sending $\phi \to \lambda \circ \phi$.
+ Hence, $\text{Hom}_k(_, k^s)$ is additionally a functor to the category of $\text{Gal}(k^s|k)$-sets.\\
 \indent In fact, in lieu of \thref{etalealgebra} the functor $\text{Hom}_k(-,k^s)$ extends to the category of finite \'etale $k$-algebras, which gives us the following reformulation.
 
 \begin{theorem}\thlabel{grothendiecksformulation}
@@ -255,8 +256,9 @@ From here on out we will refer to topological spaces as simply \textit{spaces} f
 	The two endpoints are $s(0)$ and $s(1)$, and if they coincide we may also call the path a \textit{loop}.
 \end{definition}
 
-We will call two paths $f,g: [0,1] \to X$ \textit{homotopic} if $f(0) = g(0), f(1), g(1)$ and there exists a continuous map $h: [0,1] \times [0,1] \to X$ such that $h(0,t) = f(t), h(1,t) = g(t), h(t,0) = f(0)$ and $g(t,1) = f(1)$ for all $t \in [0,1]$.
-Intuitively, we may think of a homotopy between two paths $f$ and $g$ as a continuous deformation moving $f$ to $g$ in $X$, keeping the endpoints fixed. 
+We will call two paths $f,g: [0,1] \to X$ \textit{homotopic} if $f(0) = g(0), f(1) = g(1)$ and there exists a continuous map $h: [0,1] \times [0,1] \to X$ such that $h(0,t) = f(t), h(1,t) = g(t), h(t,0) = f(0)$ and $g(t,1) = f(1)$ for all $t \in [0,1]$.
+Intuitively, we may think of a homotopy between two paths $f$ and $g$ as a continuous deformation moving $f$ to $g$ in $X$, keeping the endpoints fixed.
+From this viewpoint, for $\lambda \in [0,1]$ there are interpolatory paths $s_{\lambda}(t) = h(\lambda, t)$ depicted in the figure below.
 It is straightforward to check that homotopies define an equivalence relation on the set of paths in $X$.\\
 
 \begin{figure}[!h]
@@ -284,18 +286,17 @@ It is straightforward to check that homotopies define an equivalence relation on
 \end{figure}
 
 \indent Additionally, for any two paths $f,g: [0,1] \to X$ where $f(1) = g(0)$ we can define their composition $f \circ g: [0,1] \to X$ where $(f \circ g )(t) = f(t)$ for $0 \leq t \leq \frac{1}{2}$ and $(f \circ g)(t) = g(2t - 1)$ for $ \frac{1}{2} < t \leq 1$ which we may think of as concatenating the two paths.
-Of particular interest to us, any two paths starting and ending at the same point can be composed.
+Of particular interest to us, any two loops starting and ending at the same point can be composed.
 
 \begin{proposition}
 	For a topological space $X$ and a choice of a basepoint $x \in X$, concatenation of loops which start and end at $x$ forms a group when restricted to homotopy classes.
 \end{proposition}
 
-This is a straightforward check. 
-In particular, the identity is the homotopy class of the constant loop $s: [0,1] \to x \in X$ and the inverse of a homotopy class of the loop $s: [0,1] \to X$ is the homotopy class of the "backwards" path $s(1-t)$.
-This already allows us to define the topological fundamental group.
+This is also a straightforward check. 
+In particular one can verify that the identity is the homotopy class of the constant loop $s: [0,1] \to x \in X$ and the inverse of a homotopy class of the loop $s: [0,1] \to X$ is the homotopy class of the "backwards" path $s(1-t)$.
+All of this already allows us to define the topological fundamental group.
 \begin{definition}[Topological Fundamental Group]
-	For a space $X$ with basepoint $x$, the (topological) \textit{fundamental group} $\pi^{\text{top}}_1(X,x)$	is the group of homotopy classes of loops with origin in $x$.
-	The group operation is the same composition of loops defined previously.
+	For a space $X$ with basepoint $x$, the \textit{(topological) fundamental group} $\pi^{\text{top}}_1(X,x)$	is the group of homotopy classes of loops with origin in $x$ whose group operation is concatenation of loops.
 \end{definition}
 
 \begin{examples} \text{} 
@@ -304,13 +305,13 @@ This already allows us to define the topological fundamental group.
 			Picking a basepoint of $S^1$ the identification $\pi_1^{\text{top}}(S^1,x)$ identifies a loop with the number of times it winds around.
 			Which loops correspond to positive numbers or negative correspond to a choice of orientation of $S^1$ (an identification of clockwise or counterclockwise). 
 		\item For any $n$, $\R^n$ has trivial fundamental group, such spaces are called \textit{simply connected}.
-			Indeed, any loop $s: [0,1] \to \R^n$ with end $x $can be "drawn in" to $x$ by the homotopy $s_t(y) = (1-t)s(y) + tx$.
+			Indeed, any loop $s: [0,1] \to \R^n$ with end $x$ can be "drawn in" to $x$ by the homotopy $s_t(y) = (1-t)s(y) + tx$.
 	\end{enumerate}
 	
 \end{examples}
 
 As mentioned, it is not immediately clear how to generalize this definition of the fundamental group to the scheme case.
-It is intead from the viewpoint of coverings that we will eventually develop it for schemes, hence we begin to establish its relation with the topological fundamental group.
+It is intead from the viewpoint of coverings that we will eventually develop it for schemes.
 
 \begin{definition}[Covering Spaces]
 A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that satisfies the following property. 
@@ -320,8 +321,8 @@ A cover of $X$ consists of a topological space $Y$ and a map $p:Y \to X$ that sa
 Under the above conditions we may also call $Y$ a \textit{covering} of $X$.
 We will be interested in the case when the fibers $p^{-1}(x)$ of a cover are finite for all $x \in X$ which we will call $Y$ a \textit{finite cover} or \textit{finite covering} of $X$.
 A \textit{trivial cover} of $X$ is the natural projection $X \times I \to X$ for $I$ a discrete set, which looks like multiple copies of $X$ each mapping homeomorphically onto $X$.
-With this in mind, the condition in the definition of Covering Spaces may be phrased as locally trivial, in that the map when restricted to a small enough neighborhood looks like a trivial cover.
-Note that some authors require a covering space to be connected, we will not follow this convention and will explicitly state whenever $Y$ is connected.
+With this in mind, the condition in the definition of Covering Spaces may be phrased as locally triviality, in that the map when restricted to a small enough neighborhood looks like a trivial cover.
+Note that some authors require a covering space to be paht connected, we will not follow this convention and will explicitly state whenever $Y$ is connected.
 
 
 \begin{figure}[ht!]
@@ -367,7 +368,7 @@ The following lemma will be necessary in relating the topological fundamental gr
 
 \begin{proof}
 	The local triviality allows us to explicitly construct the lift of the path, for a full proof of the two statements see \cite{FomenkoFuchs}, Lecture 6.5.
-	There you may also find stronger lifting theorems, but for our purposes this is all we need.
+	There are also stronger lifting theorems for covering spaces found there, but for our purposes this is all we need.
 \end{proof}
 		
 Consider a covering $p: Y \to X$ and let $x \in X$ be a chosen basepoint and $y$ an element of the fiber $p^{-1}(x)$.
@@ -384,7 +385,7 @@ We require some niceness conditions on the space $X$, one of which is that of \t
 	Connected covers correspond to finite $\widehat{\pi_1(X,s)}$-sets with transitive action and Galois covers correspond to space of open normal subgroups.
 \end{theorem}
 \begin{proof}
-	The proof first shows an equivalence between $\pi_1(X,x)$ sets and arbitrary covers of $X$ by showing that the functor is in fact representable by an aptly named \textit{universal cover} $\widetilde{X} \to X$.
+	The proof first constructs an equivalence between $\pi_1(X,x)$ sets and arbitrary covers of $X$ by showing that the functor is in fact representable by an aptly named \textit{universal cover} $\widetilde{X} \to X$.
 The profinite completion of $\pi_1(X,x)$ arises in the case of finite covers as its corresponding actions factor through some finite quotient.
 	For all the details see Theorem 2.3.5 and Corollary 2.3.9 in \cite{Szamuely}.
 \end{proof}
@@ -467,14 +468,11 @@ This precisely says that $d$ factors through the inclusion $R \hookrightarrow K$
 
 For a morphism $f: X \to Y$ of schemes the map $f^{\flat}: \mc{O}_Y \to f_*\mc{O}_X$ exhibits the direct image sheaf $f_* \mc{O}_X$ as an $\mc{O}_Y$-algebra.
 In particular, $f_* \mc{O}_X$ is also an $\mc{O}_Y$-module.
-This allows us to make the next definition.
 
 \begin{definition}[Locally free morphism]	
 	A finite morphism $f: X \to S$ is \textit{locally free} if the direct image sheaf $f_* \mc{O}_X$ is locally free of finite rank.   
 \end{definition}
 
-We can now define our main morphism of interest.
-Immediately afterward we will record some basic properties we would expect.
 \begin{definition}[Finite \'etale morphism]
 	A locally free morphism $f$ where for each $s \in S$, the fiber $X_s$ is a finite \'etale $\kappa(s)$-algebra is called a \textit{finite \'etale morphism}.
 	If $f$ is also surjective (on space) we may call $f$ a \textit{finite \'etale cover}.
@@ -491,7 +489,7 @@ There is a lot involved in the formulation of finite \'etale morphisms so we giv
 \item  Let $B = A[x]/(f)$  for some ring $A$ and monic polynomial $f \in A[x]$ of degree $d$.
 	Then the natural map $\phi: \text{Spec}(B) \to \text{Spec}(A)$ is finite \'etale if $(f, f') = (1)$.
 	Indeed, $\phi$ is trivially affine, and is both finite and locally free as $B$ is freely generated as an $A$-module by the elements $1,x, \dots x^{d-1}$.
-	And for $\mk{p} \in \text{Spec}(A)$, the corresponding fiber is $B \otimes_A \kappa(\mk{p}) \cong \kappa(\mk{p})[x]/(\overline{f})$ for $\overline{f})$ the image of $f$ in $\kappa(\mk{p})[x]$.
+	And for $\mk{p} \in \text{Spec}(A)$, the corresponding fiber is $B \otimes_A \kappa(\mk{p}) \cong \kappa(\mk{p})[x]/(\overline{f})$ for $\overline{f}$ the image of $f$ in $\kappa(\mk{p})[x]$.
 	When $(f, f') = (1)$ the roots are simple, and so define a finite \'etale $\kappa(\mk{p})$-algebra hence $\phi$ is finite \'etale.
     \end{enumerate}	 
 \end{examples}
@@ -499,7 +497,7 @@ There is a lot involved in the formulation of finite \'etale morphisms so we giv
 \begin{remark}
 	As is very often the case in algebraic geometry, there are often many equivalent formulations of some concept.
 	This is indeed the case for finite \'etale morphisms as well and we will quickly give a separate definition as well which will be more useful later on.
-	As one may expect, finite \'etale is equivalent to some finiteness condition and a notion of being \textit{\'etale} which we will begin to define.
+	As one may expect, finite \'etale is equivalent to some finiteness condition and a notion of being \textit{\'etale}.
 
 \end{remark}
 
@@ -601,7 +599,7 @@ This will indeed still be the correct notion, in the case where $f$ is finite \'
 	\arrow[from=2-2, to=2-1]
 	\arrow["\lambda"{description}, from=2-3, to=2-2]
 \end{tikzcd}\]
-By definition the leftmost square and the entire rectangle, but by gluing of pullbacks this means the righthand square is also a pullback.
+By definition the leftmost square and the entire rectangle are pullbacks, but by gluing of pullbacks this means the righthand square is also a pullback.
 As $\lambda$ is an isomorphism, so is the induced map on the geometric fiber $\text{Spec}(\Omega)\times_S X$, hence $\text{Aut}(X|S)$ has a natural action on geometric fibers for a given geometric point.
 
 \begin{lemma}
@@ -644,8 +642,7 @@ We instead consider the following.
 	For a scheme $S$ and a geometric point $\widetilde{s}: \text{Spec}(K) \to S$, we define the \textit{\'etale fundamental group} $\pi_1(S, \widetilde{s})$ as the automorphism group of the fiber functor $\text{Fib}_{\overline{s}}$ from $\text{Fet}_{S}$ to $\textbf{FinSet}$.
 \end{definition}
 
-Here we are viewing the fiber functor as an object of the category consisting of functors from $\text{Fet}_S$ to $\textbf{Fin}$ in which case automorphisms consist of natural isomorphisms of functors.\\
-
+Here we are viewing the fiber functor as an object of the category consisting of functors from $\text{Fet}_S$ to $\textbf{Fin}$ in which case automorphisms consist of natural isomorphisms of functors.
 We now give a vital proposition, which is an analog of the fact that every finite separable field extension is embedded into some finite Galois extension.  
 
 
@@ -696,7 +693,7 @@ The inverse map sends $x$ back to the representative of $\varphi$ in $\varinjlim
 
 \end{proof}
 
-Notice that in the above proof, in order to specify the maps defining the inverse system of any pro-representation we had to choose geometric points for each object in our system, but is unique afterwards.
+Notice that in the above proof, in order to specify the maps defining the inverse system of any pro-representation we had to choose geometric points for each object in our system, but afterwards is unique.
 In fact, note that a natural isomorphism of $\text{Fib}_{\overline{s}}$ under the its pro-representation above must map the system of elements $p_{\alpha}$ to another system of elements $p'_{\alpha}$ consisting automorphisms for each $P_{\alpha}$.
 As each $P_{\alpha}$ is Galois over $S$, there is a unique $ \lambda \in \text{Aut}(P_{\alpha}|S)$ such that $\text{Fib}_{\overline{s}}(\lambda)(p_a) = p'_a$.
 By uniqueness these then also form an inverse system and so define a pro-representation of $\text{Fib}_{\overline{s}}$ giving us the following corollary.
@@ -705,7 +702,8 @@ By uniqueness these then also form an inverse system and so define a pro-represe
 	Every automorphism of the functor $\text{Fib}_{\overline{s}}$ comes from a unique automorphism of the inverse system constructed in the above proof.
 \end{corollary}
 
-With this in hand, we can finally get our hands on a somewhat more concrete description of the \'etale fundamental group.
+The endgoal here is to be able to find some examples of \'etale fundamental groups in the wild.
+As of now, it is defined rather abstractly, but now we can finally begin to get our hands on a more concrete description of the \'etale fundamental group.
 
 \begin{corollary}
 	The automorphism groups $\text{Aut}(P_{\alpha})^{\text{op}}$ form an inverse system whose limit is isomorphic to $\pi_1(S, \overline{s})$.
@@ -732,10 +730,10 @@ Since our pro-representation was represented by $\text{Hom}(P_{\alpha}, -)$, the
 	There is a pro-representation by a system $(P_{\alpha}, \phi_{\alpha \beta})$  by \thref{prorepresentation}.
 	As we showed that automorphism groups are finite from \thref{finitepoints}, the previous corollary gives us that $\pi_1(S, \overline{s})$ is profinite from definition.
 	The left action of $\pi_1(S, \overline{s})$ is induced by the automorphism of the inverse system $(P_{\alpha}, \phi_{\alpha \beta})$ on $\varinjlim(P_{\alpha}, X) \cong \text{Fib}_{\overline{s}}(X)$.\\	
-\indent 	With this in mind we now prove continuity of the action.
+\indent 	We now prove continuity of the action.
 Recall we give each fiber the discrete topology, so to show continuity it suffices to show that the stabilizer of the action on any point is open in $\pi_1(S, \overline{s})$.
 	Consider any $x \in \text{Fib}_{\overline{s}}(X)$. 
-	It arises from a class of $\text{Hom}(P_{\alpha}, X)$ hence the set of automorphisms only depends on the automorphisms of $P_{\alpha}$ or in other words the action of $\pi_1(S, \overline{s}) $ factors through the natural projection to $\text{Aut}(P_{\alpha}|S)^{\text{op}}$.
+	It arises as a class of some $\text{Hom}(P_{\alpha}, X)$ hence set of automorphisms only depends on the automorphisms of $P_{\alpha}$ or in other words the action of $\pi_1(S, \overline{s}) $ factors through the natural projection to $\text{Aut}(P_{\alpha}|S)^{\text{op}}$.
 	Now $\text{Aut}(P_{\alpha}|S)^{\text{op}}$ has the discrete topology, hence the preimage of any set must be open in $\pi_1(S, \overline{s})$ as we wanted to show.
  \end{proof}
 
@@ -748,10 +746,12 @@ For a geometric point $\text{Spec}(\Omega) \to S$, the corresponding geometric f
 Since the image of every map must lie in the separable closure of $k$ within $\Omega$, we have an isomorphism 
 \[\text{Fib}_{\overline{s}}(\text{Spec}(L)) \cong \text{Hom}_k(L, k^s)\]
 and so we must have $\pi_1(S, \overline{s}) \cong \text{Gal}(k^s|k)$.
-Along with \thref{finitefield} this gives us our first explicit \'etale fundamental group, that is $\pi_1(\mathbb{F}_p) = \widehat{\Z}$.
+Along with \thref{finitefield} this gives us our first explicit \'etale fundamental group, which is $\pi_1(\text{Spec}(\mathbb{F}_p)) = \widehat{\Z}$.
 \end{remark}
 
 	We will now carry over some basic results from the topological fundamental group over to the \'etale case.
+As you may have noticed at the end of the last remark, we abused notation a bit and did not explicitly refer to a given basepoint for the scheme in hand.
+If we only care about the isomorphism class of this group, it in fact does not matter.
 	To first set up some context, if $S, S'$ are connected schemes with $\overline{s}, \overline{s}'$ respective geometric points, a morphism $\phi: S' \to S$ such that $\phi \circ \overline{s}' = \overline{s}$ induces a functor
 \[\text{BC}: \text{Fet}_S \to \text{Fet}_{\overline{S}}\]
 sending a cover $X$ to its basechange $X \times_S S'$, as well as morphisms $X \to Y$ to the natural morphisms $X \times_S S' \to Y \times_S S'$.
@@ -776,9 +776,9 @@ Since $\phi \circ \overline{s}' = \overline{s}$, consider the following diagram
 	\arrow["{\overline{s}'}", from=2-1, to=2-2]
 	\arrow["\phi", from=2-2, to=2-3]
 \end{tikzcd}\]
- where both sqaures are pullbacks. 
+ where both individual squares are pullbacks. 
  Since pullbacks glue the entire rectangle is a pullback, hence $\text{Spec}(\Omega) \times_s (X \times_S S')$ is the geometric fiber corresponding to $\overline{s} = \phi \circ \overline{s}'$.
-This tells us that $\text{Fib}_{\overline{s}} = \text{BC} \circ \text{Fib}_{\overline{s}'}$ in which case every automorphism of $\text{Fib}_{\overline{s}'}$ induces an automorphism of $\text{Fib}_{\overline{s}}$ by pre-composition with BC, hence our natural map $\pi_1(S', \overline{s}') \to \pi_1(S, \overline{s})$.
+This tells us that $\text{Fib}_{\overline{s}} = \text{BC} \circ \text{Fib}_{\overline{s}'}$ in which case every automorphism of $\text{Fib}_{\overline{s}'}$ induces an automorphism of $\text{Fib}_{\overline{s}}$ by pre-composition with BC, hence a natural map $\pi_1(S', \overline{s}') \to \pi_1(S, \overline{s})$.
 \end{proof}
 
 In addition, we have in the topological case that two different choices of a basepoint for the underlying space $X$ only affect its topological fundamental group up to some inner automorphism: in particular they are still isomorphic.
@@ -799,7 +799,7 @@ This is also remains true in the \'etale case when the base is connected.
 
 Our remark after \thref{etalefunctor} gives us our first explicit examples of fundamental groups, but only for affine schemes of fields.
 There are a wide variety of schemes one could conjure in their mind, we shall in this section show what one may have to go through to calculate a fundamental group for $\text{Spec}(\Z)$.
-We will very briefly got outline some number theoretic notions and tools which will be required.
+It is far from trivil, and we will very briefly got outline some number theoretic notions and tools which will be required.
 All the results below can be found in standard algebraic geometry textbook such as \cite{langnumbertheory}.
 
 \begin{definition}
@@ -821,18 +821,17 @@ It turns out that for $K$ = $\Q(\sqrt{d})$ we have that
 	\Z[ \frac{1+\sqrt{d}}{2}] & \mbox{if } d \equiv 1 (\text{mod } 4)
 	\end{array}
 \right.\]
-It turns out that all number rings are examples of \textit{Dedekind domains}.
+All number rings are examples of \textit{Dedekind domains}.
 
 \begin{definition}[Dedekind Domains]
 	A domain $A$ is a \textit{Dedekind Domain} if $A$ is noetherian, integrally closed in its field of fractions, and every nonzero prime ideal is maximal.
 \end{definition}
 
 Unique factorization into irreducible elements does not necesssarily hold in general number rings as it does in, say, $\Z$.
-The most commonly cited examples is the two distinct factorizations 
+The most commonly cited example is the two distinct factorizations 
 \[6 = 2\cdot3 = (1 - \sqrt{-5})\cdot (1 + \sqrt{-5})\]
-in $\Z[\sqrt{-5}]$.
-However, this can be remedied when looking instead at prime ideals.
-
+in $\Z[\sqrt{-5}]$, the number ring of $\Q[\sqrt{-5}]$.
+However, many prayers may be asnwered as prime factorization is recovered when moving instead to the world of ideals.
 
 \begin{proposition}\thlabel{uniquefactorization}
 
@@ -848,7 +847,7 @@ We will also make use of the following result.
 	Then $\mc{O}_K$ is finitely generated is a free abelian of rank equal to the degree of $K$ (as a $\Q$ extension).
 \end{proposition}
 
-We first make use of \textbf{Proposition 5.4.9} from \cite{Szamuely}
+Our calculations are based off \textbf{Proposition 5.4.9} from \cite{Szamuely}
 
 \begin{proposition}
 	Let $S$ be an integral normal scheme.
@@ -859,18 +858,19 @@ We first make use of \textbf{Proposition 5.4.9} from \cite{Szamuely}
 
 Let us apply the above theorem with $S = \text{Spec}(\Z)$.
 First note that $\text{Spec}(\Z)$ is integral since $\Z$ ia a domain.
-In addition, it is normal as $\Z$ is an UFD and hence integrally closed in its field of fractions.
-Then we wish to find all finite subextensions $L$ of its fraction field $\Q$ which is \'etale over $\Z$.
+In addition, it is normal as $\Z$ is an unique factorization domain and hence integrally closed in its field of fractions.
+Then our wish is to find all finite subextensions $L$ of its fraction field $\Q$ which is \'etale over $\Z$.
 However, $L$ is a finite extension of $\Q$, which is a number field.
 The normalization of $\Z$ in $L$ corresponds to taking its integral closure, and hence corresponds to morphisms
 \[\phi_L: \text{Spec}(\mc{O}_L) \to \text{Spec}(\Z)\]
 corresponding to the unique map $\Z \hookrightarrow \mc{O}_L$ for a number ring $\mc{O}_L$.
-To figure out which such morphisms are finite \'etale, we shall use the formulation in \thref{secondform}, which requires $\phi_L$ to be finitely presented and \'etale.
+To figure out which such morphisms are finite \'etale covers, we shall use the formulation in \thref{secondform}, which requires $\phi_L$ to be finitely presented and \'etale.
 Now \thref{abeliangroup} tells us that $\Z \hookrightarrow \mc{O}_L$ exhibits $\mc{O}_L$ as a free $\Z$-module, hence $\phi_L$ is both finitely presented and flat.
 In addition, by Theorem 5.10 in \cite{atiyah} for any integral extension $\phi: A \hookrightarrow B$ and prime ideal $\mk{p}$ of $A$, there is a prime ideal $\mk{q}$ of $B$ lying over $\mk{p}$ in that $\phi^{-1}(\mk{q}) = \mk{q}$.
 For our case when $\Z \subset \mc{O}_L$, this tells us precisely that the map of affine schemes $\phi_L$ is surjective.
 Hence all that is necessary for $\phi_L$ to be finite \'etale cover is for it to be unramified.
-In other words, for all prime ideals $\mk{p} \subset \mc{O}_L$  and $\mk{p} \ic \mc{O}_L = (p) \subset \Z$, we must have that $\mc{O}_{L, (\mk{p})}/ p \mc{O}_{L, (\mk{p})}$ is a finite separable extension of $\Z_{(p)}/p \Z_{(p)} = \mathbb{F}_p$.
+In other words, for all prime ideals $\mk{p} \subset \mc{O}_L$  with $\mk{p} \ic \mc{O}_L = (p) \subset \Z$, we must have that $\mc{O}_{L, (\mk{p})}/ p \mc{O}_{L, (\mk{p})}$ is a finite separable extension of $\Z_{(p)}/p \Z_{(p)} = \mathbb{F}_p$.
+Here $\mc{O}_{L, (\mk{p})}$ and $\Z_{(p)}$ denote the localizations of $\mc{O}_{L}$ and $\Z$ at $\mk{p}$ and $p$ respectively.
 Using the unique factorization $p\mc{O}_L = \mk{p}_1^{e_1} \dots \mk{p}_n^{e_n}$ into prime ideals $\mk{p}_i \subset \mc{O}_L$ from \thref{uniquefactorization}, note that 
 \begin{align*}
 	p \mc{O}_{L, (\mk{p})} = (p \mc{O}_L)_{(\mk{p})} &= (\mk{p}_1^{e_1} \dots \mk{p}_n^{e_n})_{\mk{p}}\\
@@ -878,13 +878,14 @@ Using the unique factorization $p\mc{O}_L = \mk{p}_1^{e_1} \dots \mk{p}_n^{e_n}$
 													 &= (\mk{p} \mc{O}_{L, \mk{p}})^{e_i}
 \end{align*}
 where $e_i$ is the coefficient of $\mk{p}$ in the prime factorization of $p \mc{O}_L$.
+The last equality follows as all nonzero prime ideals are maximal in a Dedekind domain so there are no nontrivial inclusions: hence $\mk{p} \mc{O}_{L, \mk{p}}$ is the only trivial such prime ideal.
 Then $\mc{O}_{L, (\mk{p})}/p \mc{O}_{L, (\mk{p})} = \mc{O}_{L, (\mk{p})}/(\mk{p} \mc{O}_{L, \mk{p}})^{e_i}$
 is only unreduced only when $e_1 = 1$, and in this case equal to $\kappa(\mk{p})$  which is a finite field extension of characteristic $p$ and hence separable.
 Hence the condition of $\phi_L$ being unramified is for any prime $\mk{p} \subset \mc{O}_L$ that its prime decomposition $\mk{p} =  \mk{p}_1^{e_1} \dots \mk{p}_n^{e_n}$ must have all $e_i = 1$.
-In the case when $\mk{p} = p\mc{O}_L$, we say that $p$ is  \textit{unramified} if it satisifes the above condition, hence the connection of unramified maps to algebraic number theory.\\
+In the case when $\mk{p} = p\mc{O}_L$, we say that $p$ is  \textit{unramified} if it satisifes the above condition, hence the connection between unramified morphisms and unramified extensions in algebraic number theory.\\
 
 But is there any way we can tell that a prime $p$ ramifies or not?
-We introduce one such way. 
+We introduce one such possible way. 
 If $n$ is the degree of a number field $K$, it turns out there are exactly $n$ embeddings $K \hookrightarrow \C$.
 
 
@@ -918,10 +919,10 @@ Indeed, when $n = 2$ the the right-hand side expression evaluates to $ \frac{\pi
 This inequality continues to hold for higher $n$ and is in fact increasing in $n$ as 
 \[ \frac{(\frac{(n+1)^{n+1}}{(n+1)!})^2 ( \frac{\pi}{4})^{n+1}}{(\frac{n^n}{n!})^2 ( \frac{\pi}{4})^n} = \frac{\pi}{4}  (1 + \frac{1}{n})^{2n} \geq \frac{3 \pi}{4} \geq 1\]
 where we used the binomial theorem for the last inequality.
-Since the discriminants are always greater than or equal 2 for nontrivial number fields there is always a nontrivial prime dividing $d_K$ and hence a ramified prime ideal.
-The only such extension is the trivial one $\Q \subset \Q$, and so by our proposition, for the geoemtric point $\overline{s}: \text{Spec}( \overline{Q}) \hookrightarrow \text{Spec}(\Z)$ we have 
+Since the discriminants are always greater than or equal 2 for nontrivial number fields there is always a nontrivial prime dividing $d_K$ and hence some ramified prime ideal of $\Z$.
+Then the only such extension is the trivial one $\Q \subset \Q$, and so by our proposition, for the geometric point $\overline{s}: \text{Spec}( \overline{\Q}) \hookrightarrow \text{Spec}(\Z)$ we have 
 \[\pi_1(\text{Spec}(\Z), \overline{s}) = \text{Gal}(\Q|\Q) = 1\]
-hence the fundamental group of $\text{Spec}(\Z)$ is trivial.
+and so the fundamental group of $\text{Spec}(\Z)$ is trivial.
 
 \section{The Riemann Existence Theorem}
 
@@ -931,7 +932,7 @@ In order to transition from the \'etale context to the topological context, we w
 \indent If $X$ is a finite type scheme over $\C$ then for an affine open $U$ of $X$, $\Gamma(\mc{O}_X, U)$ is a finite type $\C$-algebra and so can be expressed of the form $\C[x_1, \dots, x_n]/(f_1, \dots, f_n)$ for polynomials $f_1, \dots, f_n$.
 It follows $U$ is of the form $\text{Spec}(\C[x_1, \dots, x_n]/(f_1, \dots, f_n))$, of which the closed points correspond to the common zeros of $f_1, \dots, f_n$ in $\C^n$, which when viewed a subspace allows us to equip it with a natural analytic topology.
 In the same way a cover of affine opens glue together to form $X$, so do their associated subspaces, giving us an associated analytic subspace $X^{\text{an}}$.
-And as a map $X \to Y$ finite type schemes over $\C$ preserve closed points (the set of which is in fact a representable functor, see Corollary 3.36 in \cite{GW}) it induces a corresponding map $X^{\text{an}} \to Y^{\text{an}}$.
+And as a map $X \to Y$ finite type schemes over $\C$ preserve closed points (the set of which is in fact a representable functor, see Corollary 3.36 in \cite{GW}) and so induces a corresponding map $X^{\text{an}} \to Y^{\text{an}}$.
 This already allows us to state the Riemann Existence Theorem.
 
 
@@ -994,7 +995,7 @@ to the positive characteristic case.
 Thankfully results are certainly possible, albeit more difficult to formulate.
 We will outline one due to Grothendieck, which for certain schemes over a field of characteristic $p \geq 0$ gives us information on the "non-$p$" part of the \'etale fundamental group by relating it to the characteristic 0 case, where one may use results such as the ones previously outlined.\\
 
-\indent Following the notation in \cite{Szamuely} let $S$ be the affine scheme $\text{Spec}(A)$, with $\eta \colon \text{Spec}(K) \to S$ and $s \colon: \text{Spec}(\kappa) \to S$ be the generic and closed points of $S$ respectively.
+\indent Following the notation in \cite{Szamuely} let $S$ be the affine scheme $\text{Spec}(A)$, with $\eta \colon \text{Spec}(K) \to S$ and $s \colon \text{Spec}(\kappa) \to S$ be the generic and closed points of $S$ respectively.
 Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective points.
 
 \begin{theorem}[Grothendieck]
@@ -1039,7 +1040,6 @@ This gives us a map relating the two fibers above a discrete valuation ring, its
 	Let $k$ be an algebraically closed field of characterstic $p \geq 0$, and let $X$ be an integral proper normal curve of genus $g$ over $k$.
 	For every geometric point $\overline{x}$ of $X$, the group $\pi_1(X, \overline{x})$ has its maximal prime to $p$-quotient $\pi_1(X, \overline{x})^{(p')}$ is isomorphic to the profinite $p'$-completion of the group
 	\[G = \langle a_1, b_1, \dots, a_g, b_g \,|\, [a_1,b_1], \dots, [a_g, b_g] = 1\rangle\]
-	where $[a_i, b_i]$ denotes the commutator $a_i b_i a_i^{-1} b_i^{-1}$.
 \end{theorem}
 
 \begin{proof} We give an outline of how to proceeed.
@@ -1048,7 +1048,8 @@ This gives us a map relating the two fibers above a discrete valuation ring, its
 \item We then find a smooth proper scheme $Y \to \text{Spec}(A)$ such that $Y_{s} = X$ and $Y_{\eta}$ a smooth proper curve over $K$.
 	There are different ways to go about this, one may use the classifcation of curves and construct it.
 	Grothendieck's original approach first extended $X$ to a formal scheme and used an algebraization theorem.
-\item Finally, we may apply \thref{groth}, as well as \thref{Examples} which gives us our desired result. 
+\item Finally, we may apply \thref{groth}, which gives us a relation between the \'etale fundamental group of curves over fields characteristic 0 and those of positive characteristic.
+	Then the result \thref{Examples} due to Riemann existence gives us our desired result. 
 	\end{enumerate}
 	
 \end{proof}
@@ -1067,8 +1068,8 @@ One major result in this area is as follows.
 
 This conjecture is in fact now a theorem, whose proof involves the work of Harbater, Raynaud, Serre.
 Raynaud gave a proof when $X$ is $\textbf{P}_k^1$ and $B$ is the point of infinity in which case $U$ is the affine line over $k$.
-In this case $g = 0, r = 1$ and the above theorem tells us that the Galois groups of unramified covers are precisely the \textit{quasi-p groups}, those groups which are generated by its $p$-subgroups.
-
+In this case $g = 0, r = 1$ and the above theorem tells us that the Galois groups of unramified covers are precisely the \textit{quasi-p groups}, those finite groups which are generated by its $p$-subgroups.
+Then the \'etale fundamental group of this affine line staggeringly contains information about all quasi-$p$ groups!
 
 
 
