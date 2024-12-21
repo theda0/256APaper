@@ -406,9 +406,6 @@ As one may speculate, any Galois category is equivalent to a category of finite 
 In our cases so far Galois extensions and regular coverings as well as separable extensions and connected coverings are respectively instances of \textit{Galois objects} and \textit{connected objects} in a Galois category.
 We will not go over these treatments, but it may be useful to keep in mind the parallels especially as we begin develop another Galois category but in the context of schemes.
 
-\todo{Give motivations}
-
-
 \section{The Algebraic Fundamental Group}
 
 We can now start defining the scheme analogue of the fundamental group.
@@ -665,8 +662,7 @@ We now give a vital proposition, which is an analog of the fact that every finit
 
 In the topological case the functor $\text{Fib}_x$ was in fact representable by the so called universal cover, and our functor in \thref{grothendiecksformulation} by the separable closure $k^s$.
 However $k^s$ need not be a finite separable extension less a finite \'etale $k$-algebra so it is not representable as in the sense of the topological group.
-Despite this, there is a somewhat weaker notion of representability called \textit{pro-representability} which is satisfied.
-
+Despite this, there is a somewhat weaker notion of representability which is satisfied called \textit{pro-representability}.
 
 \begin{definition}[Pro-representable functors]
 	Let $C$ be a category and $F: C \to \text{Set}$ a set-valued functor.
@@ -681,7 +677,6 @@ With this in mind we now begin to develop some necessary background regarding th
 Recall that $k^s$ can be thought of as the union of its finite Galois subextensions.
 In fact, the functor to \textbf{FinSet} associated to each Galois category is pro-represented by its Galois objects; we outline this below for $\text{Fib}_{\overline{s}}$.
 
-\todo{Fill in below proofs}
 \begin{proposition}\thlabel{prorepresentation}
 	Let $X$ be a finite \'etale $S$-scheme and $\overline{s}$ a geometric point of $S$.
 	Then the fiber functor $\text{Fib}_{\overline{s}}$ is pro-representable.
@@ -708,7 +703,7 @@ In fact, note that a natural isomorphism of $\text{Fib}_{\overline{s}}$ under th
 As each $P_{\alpha}$ is Galois over $S$, there is a unique $ \lambda \in \text{Aut}(P_{\alpha}|S)$ such that $\text{Fib}_{\overline{s}}(\lambda)(p_a) = p'_a$.
 By uniqueness these then also form an inverse system and so define a pro-representation of $\text{Fib}_{\overline{s}}$ giving us the following corollary.
 
-\begin{corollary}
+\begin{corollary}\thlabel{auto}
 	Every automorphism of the functor $\text{Fib}_{\overline{s}}$ comes from a unique automorphism of the inverse system constructed in the above proof.
 \end{corollary}
 
@@ -738,38 +733,83 @@ Since our pro-representation was represented by $\text{Hom}(P_{\alpha}, -)$, the
 \begin{proof}
 	There is a pro-representation by a system $(P_{\alpha}, \phi_{\alpha \beta})$  by \thref{prorepresentation}.
 	As we showed that automorphism groups are finite from \thref{finitepoints}, the previous corollary gives us that $\pi_1(S, \overline{s})$ is profinite from definition.
-To show that the action is continuous, note that  
-\end{proof}
+	The left action of $\pi_1(S, \overline{s})$ is induced by the automorphism of the inverse system $(P_{\alpha}, \phi_{\alpha \beta})$ on $\varinjlim(P_{\alpha}, X) \cong \text{Fib}_{\overline{s}}(X)$.\\	
+\indent 	With this in mind we now prove continuity of the action.
+Recall we give each fiber the discrete topology, so to show continuity it suffices to show that the stabilizer of the action on any point is open in $\pi_1(S, \overline{s})$.
+	Consider any $x \in \text{Fib}_{\overline{s}}(X)$. 
+	It arises from a class of $\text{Hom}(P_{\alpha}, X)$ hence the set of automorphisms only depends on the automorphisms of $P_{\alpha}$ or in other words the action of $\pi_1(S, \overline{s}) $ factors through the natural projection to $\text{Aut}(P_{\alpha}|S)^{\text{op}}$.
+	Now $\text{Aut}(P_{\alpha}|S)^{\text{op}}$ has the discrete topology, hence the preimage of any set must be open in $\pi_1(S, \overline{s})$ as we wanted to show.
+	\todo{Other part?}
+ \end{proof}
 
 \begin{remark}
+
+
 As a corollary we now give the promised proof of \thref{grothendiecksformulation}.
-Let $S = \text{Spec}(k)$ for $k$ a field; a finite \'etale cover corresponds to the affine scheme of a finite dimensional \;etale $k$-algebra $L$.
+Let $S = \text{Spec}(k)$ for $k$ a field; a finite \'etale cover corresponds to the affine scheme of a finite dimensional \'etale $k$-algebra $L$.
 For a geometric point $\text{Spec}(\Omega) \to S$, the corresponding geometric fiber is the pullback of affine schemes $\text{Spec}(\Omega \otimes_k L)$, which as a set it is indexed by all $k$-algebra homomorphisms from $L$ to $\Omega$ \todo{Elaborate with primitive element theorem}.
 Since the image of every map must lie in the separable closure of $k$ within $\Omega$, we have an isomorphism 
 \[\text{Fib}_{\overline{s}}(\text{Spec}(L)) \cong \text{Hom}_k(L, k^s)\]
 and so we must have $\pi_1(S, \overline{s}) \cong \text{Gal}(k^s|k)$.
+This gives us our first example \todo{example}.
 \end{remark}
 
-	The topological fundamental group is functorial in that base-point preserving maps of topological spaces induce corresponding maps of their fundmantal groups, the same is in fact true in the \'etale case.
-If $S, S'$ are connected schemes with $\overline{s}, \overline{s'}$ respective geometric points, a morphism $\phi: S' \to S$ such that $\phi \circ \overline{s'} = \overline{s}$ induces a functor
-\[\text{BC}: \text{Fet}_S \to \text{Get}_{\overline{S}}\]
+	We will now carry over some basic results from the topological fundamental group over to the \'etale case.
+	To first set up some context, if $S, S'$ are connected schemes with $\overline{s}, \overline{s}'$ respective geometric points, a morphism $\phi: S' \to S$ such that $\phi \circ \overline{s}' = \overline{s}$ induces a functor
+\[\text{BC}: \text{Fet}_S \to \text{Fet}_{\overline{S}}\]
 sending a cover $X$ to its basechange $X \times_S S'$, as well as morphisms $X \to Y$ to the natural morphisms $X \times_S S' \to Y \times_S S'$.
-Since $\phi \circ \overline{s'} = \overline{s}$, we have $\text{Fib}_{\overline{s}} = \text{BC} \circ \text{Fib}_{\overline{s'}}$, in which case every automorphism of $\text{Fib}_{\overline{s'}}$ induces an automorphism of $\text{Fib}_{\overline{s}}$ by pre-composition with BC.
-This gives us our natural map $\pi_1(S', \overline{s'}) \to \pi_1(S, \overline{s})$ induced by $\phi$.\\
 
+\begin{proposition}
+	With the same notation as above, there is a natural map $\pi_1(S', \overline{s}') \to \pi_1(S, \overline{s})$ induced by $\phi$.
+\end{proposition}
 
-In the topological case, two different choices of a basepoint for the underlying space $X$ only affected its topological fundamental group up to some inner automorphism: in particular they are still isomorphic.
+\begin{proof}
+Since $\phi \circ \overline{s}' = \overline{s}$, consider the following diagram 
+% https://q.uiver.app/#q=WzAsNixbMiwxLCJTIl0sWzEsMSwiUyciXSxbMCwxLCJcXHRleHR7U3BlY30oXFxPbWVnYSkiXSxbMiwwLCJYIl0sWzEsMCwiWFxcdGltZXNfUyBTJyJdLFswLDAsIlxcdGV4dHtTcGVjfShcXE9tZWdhKSBcXHRpbWVzX1MgKFggXFx0aW1lcyBfUyBTJykiXSxbMiwxLCJcXG92ZXJsaW5le3MnfSJdLFsxLDAsIlxccGhpIl0sWzMsMF0sWzQsM10sWzQsMV0sWzUsMl0sWzUsNF0sWzQsMCwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzUsMSwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+\[\begin{tikzcd}
+	{\text{Spec}(\Omega) \times_S (X \times _S S')} & {X\times_S S'} & X \\
+	{\text{Spec}(\Omega)} & {S'} & S
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+	\arrow[from=1-3, to=2-3]
+	\arrow["{\overline{s}'}", from=2-1, to=2-2]
+	\arrow["\phi", from=2-2, to=2-3]
+\end{tikzcd}\]
+ where both sqaures are pullbacks. 
+ Since pullbacks glue the entire rectangle is a pullback, hence $\text{Spec}(\Omega) \times_s (X \times_S S')$ is the geometric fiber corresponding to $\overline{s} = \phi \circ \overline{s}'$.
+This tells us that $\text{Fib}_{\overline{s}} = \text{BC} \circ \text{Fib}_{\overline{s}'}$ in which case every automorphism of $\text{Fib}_{\overline{s}'}$ induces an automorphism of $\text{Fib}_{\overline{s}}$ by pre-composition with BC, hence our natural map $\pi_1(S', \overline{s}') \to \pi_1(S, \overline{s})$.
+\end{proof}
 
+In addition, we have in the topological case that two different choices of a basepoint for the underlying space $X$ only affect its topological fundamental group up to some inner automorphism: in particular they are still isomorphic.
+This is also remains true in the \'etale case when the base is connected.
 
-We shall show what one may have to go through to calculate $\pi_1(\text{Spec}(\Z), x_0)$.
-We it will require some number theoretic notions and tools, which we shall outlines as needed.
+\begin{proposition}\thlabel{twopoints}
+	Let $S$ be a connected scheme.
+	For any two geometric points $\overline{s}$ and $\overline{s}'$ of $S$ there is a continuous automorphism of profinite groups $\pi_1(S, \overline{s}') \xrightarrow{\sim} \pi_1(S, \overline{s})$. 
+\end{proposition}
+
+\begin{proof}
+	In particular there exists an isomorphism $\lambda: \text{Fib}_{\overline{s}} \xrightarrow{\sim} \text{Fib}_{\overline{s}'}$ of fiber functors made by constructing a map between their inverse systems.
+	An isomorphism of the automorphism groups can then be constructed as $\phi \to \lambda^{-1} \circ \phi \circ \lambda$.
+	For a full proof, see \cite{Szamuely}, Proposition 5.5.1 Corollary 5.5.2.
+\end{proof}
+
+\subsection{$\pi_1(\text{Spec}(Z))$}
+
+Our remark after \thref{etalefunctor} gives us our first explicit examples of fundamental groups, but only for affine schemes of fields.
+There are a wide variety of schemes one could conjure in their mind, we shall in this section show what one may have to go through to calculate a fundamental group for $\text{Spec}(\Z)$.
+We will require some use of number theoretic notions and tools, which we shall outlines as needed.
 
 \begin{definition}
 	A \textit{number field} is a finite extension of $\Q$.
 \end{definition}
 
 \begin{definition}
-	If $K$ is a number field, its corresponding \textit{number ring} is the integral closure (normalization) \todo{same thing?} of $\Z \subset K$.
+	If $K$ is a number field, its corresponding \textit{number ring} is the integral closure of $\Z \subset K$.
 \end{definition}
 
 It turns out that all number rings are examples of \textit{Dedekind domains}, which are \todo{Dedekind}
@@ -880,8 +920,8 @@ Also fix geometric points $\overline{\eta}$ and $\overline{s}$ of the respective
  Still assuming that $k$ is algebraically closed and that $s = \overline{s}$, then there is a composite map
  \[\textit{sp}: \pi_1(X_{\overline{\eta}}, \overline{x}) \to \pi_1(X, \overline{x}) \xrightarrow{\sim} \pi_1(X, \overline{y}) \xrightarrow{\sim} \pi_1(X_{\overline{s}}, \overline{y})\]
 
- The first map is from part (2) of the above theorem, the middle isomorphism coming from \todo{Paths}, and the last one is the inverse of the isomorphisms from part (1) of the theorem above.
-Although there is a involved for the middle isomorphism, the resulting is still unique up to an inner automorphism.
+ The first map is from part (2) of the above theorem, the middle isomorphism coming from \thref{twopoints}, and the last one is the inverse of the isomorphisms from part (1) of the theorem above.
+Although there is a choice involved for the middle isomorphism, the resulting is still unique up to an inner automorphism.
 This gives us a map relating the two fibers above a discrete valuation ring, its main use is in the below proof.
 
 \begin{theorem}[Grothendieck] \thlabel{groth}
